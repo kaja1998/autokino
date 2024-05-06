@@ -1,4 +1,13 @@
 .title{
-    font-size: large;
-    color: blue;
+    font-size:xx-large;
+    color: white;
+}
+
+body{
+    background-color: black;
+    color: white;
+}
+
+.container{
+    flex-wrap: nowrap;
 }
