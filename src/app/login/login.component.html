@@ -1,1 +1,84 @@
-<p>login works!</p>
+<body>
+
+<div class="login">
+  <h1>Willkommen zurück</h1>
+  <button type="button" [hidden]="showLoginButton" (click)="toggleForms()">Anmelden</button>
+</div>
+
+<div class="anmelden-form" [hidden]="!showLoginForm">
+  <form action="">
+    <label for="mail">
+      E-Mail:
+    </label>
+    <input type="text"
+           id="mail"
+           name="mail"
+           placeholder="E-Mail" required>
+
+    <label for="password">
+      Passwort:
+    </label>
+    <input type="password"
+           id="password"
+           name="password"
+           placeholder="Passwort" required>
+
+    <div class="enter-button">
+      <button type="button" onclick="solve()">Anmelden</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="trenner"></div>
+
+
+<div class="neuhier">
+  <h1>Ich bin neu hier</h1>
+  <button type="button" [hidden]="showRegisterButton" (click)="toggleForms()">Registrieren</button>
+</div>
+
+<div class="registrieren-form" [hidden]="!showRegisterForm">
+  <form action="">
+    <label for="vorname">
+      Name:
+    </label>
+    <input type="text"
+           id="vorname"
+           name="vorname"
+           placeholder="Vorname" required>
+    <label for="nachname">
+      Nachname:
+    </label>
+    <input type="text"
+           id="nachname"
+           name="nachname"
+           placeholder="Nachname" required>
+    <label for="geburtstag">
+      Geburtsdatum:
+    </label>
+    <input type="date"
+           id="geburtstag"
+           name="geburtstag"
+           placeholder="tt.mm.jjjj" required>
+    <label for="email">
+      E-Mail:
+    </label>
+    <input type="email"
+           id="email"
+           name="email"
+           placeholder="E-Mail" required>
+    <label for="password">
+      Passwort:
+    </label>
+    <input type="password"
+           id="choosepassword"
+           name="choosepassword"
+           placeholder="Passwort" required>
+    <div class="enter-button">
+      <button type="button" onclick="solve()">Registrieren</button>
+    </div>
+  </form>
+</div>
+
+</body>

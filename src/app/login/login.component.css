@@ -1,0 +1,106 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  color: white;
+  line-height: 1.5;
+  min-height: 50vh;
+  background: black;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.anmelden-form {
+  padding: 10px 20px;
+  transition: transform 0.2s;
+  width: 500px;
+  text-align: center;
+  margin: 0;
+}
+
+.registrieren-form {
+  padding: 10px 20px;
+  transition: transform 0.2s;
+  width: 500px;
+  text-align: center;
+  margin: 0;
+}
+
+label {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-align: left;
+  color: white;
+  font-weight: bold;
+}
+
+input {
+  background-color: black;
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+}
+
+input::placeholder {
+  color: grey;
+}
+
+/* Wenn Input ausgewählt wird */
+input:-webkit-autofill{
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px black inset;
+}
+
+button {
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: #6a6a6a;
+  border: 1px solid white;
+  width: 50%;
+  font-size: 16px;
+}
+
+.login button {
+  width: 100%;
+  background-color: black;
+}
+
+.login button:hover {
+  background-color: #282828;
+}
+
+.neuhier button {
+  width: 100%;
+  background-color: black;
+}
+
+.neuhier button:hover {
+  background-color: #282828;
+}
+
+.enter-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trenner {
+  width: 100%;
+  height: 1px;
+  background-color: grey;
+  margin: 20px;
+}
