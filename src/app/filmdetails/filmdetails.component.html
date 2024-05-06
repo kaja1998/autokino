@@ -1,1 +1,18 @@
 <p>filmdetails works!</p>
+<table class="table table-hover">
+    <thead>
+    <tr>
+    <td>ID</td>
+    <td>Title</td>
+    <td>Description</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="#v of videos" (click)="onSelect(v)">
+    <td>{{ v.id }}</td>
+    <td>{{ v.title }}</td>
+    <td>{{ v.desc }}</td>
+    </tr>
+    </tbody>
+    </table>
+    https://www.youtube.com/watch?v=DDU3gHk0Yys
