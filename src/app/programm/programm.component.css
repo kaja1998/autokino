@@ -1,6 +1,6 @@
 .title{
     font-size:xx-large;
-    color: white;
+    
 }
 
 body{
@@ -10,4 +10,8 @@ body{
 
 .container{
     flex-wrap: nowrap;
+}
+
+#drachen{
+   float:left;
 }
