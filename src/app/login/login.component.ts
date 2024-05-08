@@ -13,7 +13,6 @@ export class LoginComponent {
   showRegisterForm: boolean = false; // Gibt an, ob das Registrierungsformular sichtbar ist
   showLoginButton: boolean = true;
   showRegisterButton: boolean = false;
-
   toggleForms(): void {
     this.showLoginForm = !this.showLoginForm;
     this.showRegisterForm = !this.showRegisterForm;
