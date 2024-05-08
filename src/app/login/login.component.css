@@ -1,31 +1,35 @@
 body {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-family: sans-serif;
   color: white;
   line-height: 1.5;
-  min-height: 50vh;
+  min-height: 120vh;
   background: black;
-  flex-direction: column;
   padding: 0;
   margin: 0;
 }
 
 .anmelden-form {
   padding: 10px 20px;
-  transition: transform 0.2s;
-  width: 500px;
+  width: 500px;          /* Standardbreite für Desktop */
   text-align: center;
   margin: 0;
 }
 
 .registrieren-form {
   padding: 10px 20px;
-  transition: transform 0.2s;
-  width: 500px;
+  width: 500px;           /* Standardbreite für Desktop */
   text-align: center;
   margin: 0;
+}
+
+@media screen and (max-width: 600px) {      /* CSS für Bildschirme mit einer maximalen Breite von 600px (mobil) */
+  .anmelden-form, .registrieren-form {
+    width: 80%;
+    /* margin: 0 auto; */
+  }
 }
 
 label {
@@ -39,7 +43,6 @@ label {
 }
 
 input {
-  background-color: black;
   display: block;
   width: 100%;
   margin-bottom: 15px;
@@ -48,9 +51,15 @@ input {
   border: 1px solid white;
   border-radius: 5px;
   color: white;
+  background-color: black;
 }
 
 input::placeholder {
+  color: grey;
+}
+
+/* Type Date war sonst immer noch weiß... */
+input[type=date]:invalid::-webkit-datetime-edit {
   color: grey;
 }
 
@@ -65,31 +74,55 @@ button {
   border-radius: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
-  border: none;
-  color: white;
+  color: black;
   cursor: pointer;
-  background-color: #6a6a6a;
+  background-color: white;
   border: 1px solid white;
   width: 50%;
   font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #626262;
+  color: white;
+  border: 1px solid #626262;
+}
+
+.login {
+  width: 500px;           /* Standardbreite für Desktop */
+  text-align: center;
 }
 
 .login button {
-  width: 100%;
+  width: 50%;
   background-color: black;
+  color: white;
 }
 
 .login button:hover {
-  background-color: #282828;
+  background-color: #626262;
+}
+
+.neuhier {
+  width: 500px;           /* Standardbreite für Desktop */
+  text-align: center;
 }
 
 .neuhier button {
-  width: 100%;
+  width: 50%;
   background-color: black;
+  color: white;
 }
 
 .neuhier button:hover {
-  background-color: #282828;
+  background-color: #626262;
+}
+
+@media screen and (max-width: 600px) {      /* CSS für Bildschirme mit einer maximalen Breite von 600px (mobil) */
+  .neuhier, .login {
+    width: 80%;
+  }
 }
 
 .enter-button {
