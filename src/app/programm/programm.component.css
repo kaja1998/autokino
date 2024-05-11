@@ -8,10 +8,33 @@ body{
     color: white;
 }
 
-.container{
-    flex-wrap: nowrap;
+.filmplakat{
+   max-height: 388px;
+   max-width: 260px;
 }
 
-#drachen{
-   float:left;
+.filminfo{
+    display: flex;
+    flex-direction: row; 
+    justify-content:space-evenly;
 }
+
+.filmplakat{
+    flex:1;
+}
+
+.beschreibung{
+    flex: 2;
+}
+
+.dates{
+    flex:1;
+}
+
+.filmtitel{
+    font-size: x-large;
+}
+
+
+
+
