@@ -4,8 +4,7 @@
 }
 
 body{
-    background-color: black;
-    color: white;
+    margin: 2em;
 }
 
 .filmplakat{
@@ -30,6 +29,12 @@ body{
 
 .dates{
     flex:1;
+    margin: 2em;
+
+    display:flex;
+    flex-direction: column;
+    row-gap: 1em;
+    align-self: flex-end;
 }
 
 .filmtitel{
