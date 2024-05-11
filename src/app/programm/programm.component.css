@@ -28,13 +28,14 @@ body{
 }
 
 .dates{
-    flex:1;
+    /*Eigene Eigenschaften*/
     margin: 2em;
+    align-self: flex-end;
 
+    /*Eigenschaften für Kinder*/
     display:flex;
     flex-direction: column;
     row-gap: 1em;
-    align-self: flex-end;
 }
 
 .filmtitel{
