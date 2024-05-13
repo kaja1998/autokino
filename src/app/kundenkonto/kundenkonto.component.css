@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+.kundenkonto {
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+  width: 150px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #626262;
+  color: white;
+  border: 1px solid #626262;
+}
+
+.vorstellungen {
+  margin-bottom: 30px;
+}
+
+.vorstellungen h2,
+.aktionen h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 20px;
+  padding-bottom: 10px;
+}
+
+.aktionsbilder img {
+  margin-right: 10px;
+  width: 15%;
+}
+
+@media screen and (max-width: 600px) {
+  .aktionsbilder img {
+    width: 47%;
+  }
+}
