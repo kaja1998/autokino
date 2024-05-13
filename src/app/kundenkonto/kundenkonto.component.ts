@@ -10,4 +10,6 @@ import {RouterLink} from "@angular/router";
 })
 export class KundenkontoComponent {
 
+  vorname: string = "Max";
+
 }
