@@ -77,7 +77,7 @@ body{
     right: 8px;
     width: 10px;
     cursor: pointer;
-    /* visibility: hidden;   */
+    visibility: hidden;  
   }
 
   .search {
