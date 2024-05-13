@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+}
+
+.mitgliedschaftsdaten h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 20px;
+  padding-bottom: 10px;
+}
+
+.table1{
+  margin-bottom: 30px;
+}
+
+/* Stil für die Tabellenüberschrift */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;   /* Breite 50:50 */
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+  text-align: left;
+}
+
+.logindaten h2 {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 20px;
+  padding-bottom: 10px;
+}
+
+button {
+  padding: 15px;
+  margin-top: 15px;
+  color: black;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid white;
+  width: 200px;
+  font-size: 16px;
+  font-weight: bold;
+}

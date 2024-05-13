@@ -1,8 +1,53 @@
 <body>
 
-<div class="kundenkonto">
-  <h1>Hallo <span id="namePlaceholder"></span></h1>
-  <p>Willkommen in deinem Login-Bereich von MEIN AUTOKINO. Hier findest du alles rund um deinen Account und kannst deine Daten verwalten.</p>
-</div>
+  <div class="kundenkonto">
+    <h1>Mein Profil</h1>
+  </div>
+
+  <div class="mitgliedschaftsdaten">
+    <h2>Meine Mitgliedschaftsdaten im Überblick</h2>
+  </div>
+
+  <div class="table1">
+    <table class="kundendaten">
+      <tr>
+        <th>Vorname:</th>
+        <td>{{ vorname }}</td>
+      </tr>
+      <tr>
+        <th>Nachname:</th>
+        <td>{{ nachname }}</td>
+      </tr>
+      <tr>
+        <th>Straße und Hausnummer:</th>
+        <td>{{ strasse }}</td>
+      </tr>
+      <tr>
+        <th>PLZ:</th>
+        <td>{{ plz }}</td>
+      </tr>
+      <tr>
+        <th>Stadt:</th>
+        <td>{{ stadt }}</td>
+      </tr>
+      <tr>
+        <th>Geburtsdatum:</th>
+        <td>{{ geburtsdatum }}</td>
+      </tr>
+    </table>
+    <button (click)="datenbearbeiten()">Daten bearbeiten</button>
+  </div>
+
+  <div class="logindaten">
+    <h2>Meine Login-Daten</h2>
+  </div>
+
+  <table class="email">
+    <tr>
+      <th>E-Mail-Adresse:</th>
+      <td>{{ email }}</td>
+    </tr>
+  </table>
+  <button (click)="pwbearbeiten()">Passwort ändern</button>
 
 </body>
