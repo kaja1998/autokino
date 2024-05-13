@@ -1,3 +1,4 @@
+import {Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import { FilmdetailsComponent } from './filmdetails/filmdetails.component';
 import { StartComponent } from './home/start.component';
