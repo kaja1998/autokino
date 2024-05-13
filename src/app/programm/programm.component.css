@@ -1,7 +1,6 @@
 .title{
     font-size:xx-large;
-    text-align: center;
-    
+    text-align: center; 
 }
 
 body{
@@ -20,12 +19,20 @@ body{
     gap: 2em;
 }
 
+.film{
+    display:flex;
+    flex-direction: column;
+    margin: 2em;
+}
+
 .filmplakat{
     flex:1;
 }
 
 .beschreibung{
     flex: 2;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 .dates{
@@ -47,6 +54,7 @@ body{
     display: flex;
     flex-direction: row-reverse;
     gap: 1em; 
+    margin: 1em
 }
 
 .search-wrapper {
@@ -85,5 +93,17 @@ body{
     border: solid #009688;
   }
 
+  .trenner{
+    height: 1px;
+    background-color: white;
+    margin: 1em;
+    flex: 2;
+  }
 
+  .gap{
+    flex: 0.6
+  }
 
+  .trenner-container{
+    display: flex;
+  }
