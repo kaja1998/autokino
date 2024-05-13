@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './filmdetails.component.css'
 })
 export class FilmdetailsComponent {
-
 }
