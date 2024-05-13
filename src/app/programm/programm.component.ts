@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-programm',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
 })
 
 export class ProgrammComponent implements OnInit {
-  
-  ngOnInit(): void {
-    // Hier füge den JavaScript-Code ein
 
+  datum1 = new Date(2024,2,9);
+
+  ngOnInit(): void {
+//Javascript Code
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
 
