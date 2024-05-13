@@ -2,7 +2,7 @@
 
 <div class="login">
   <h1>Willkommen zurück</h1>
-  <button type="button" [hidden]="showLoginButton" (click)="toggleForms()">Anmelden</button>
+  <button type="button" [hidden]="!showLoginButton" (click)="toggleForms()">Anmelden</button>
 </div>
 
 <div class="anmelden-form" [hidden]="!showLoginForm">
@@ -35,7 +35,7 @@
 
 <div class="neuhier">
   <h1>Ich bin neu hier</h1>
-  <button type="button" [hidden]="showRegisterButton" (click)="toggleForms()">Registrieren</button>
+  <button type="button" [hidden]="!showRegisterButton" (click)="toggleForms()">Registrieren</button>
 </div>
 
 <div class="registrieren-form" [hidden]="!showRegisterForm">
@@ -54,6 +54,26 @@
            id="nachname"
            name="nachname"
            placeholder="Nachname" required>
+    <label for="straße&nr">
+      Straße und Hausnummer:
+    </label>
+    <input type="text"
+           name="straße&nr"
+           id="straße&nr"
+           placeholder="Straße und Hausnummer" required>
+      <label for="plz&stadt">
+        Postleitzahl und Stadt:
+      </label>
+    <div class="plz-stadt">
+      <input type="text"
+             name="plz"
+             id="plz&stadt"
+             placeholder="PLZ" required>
+      <input type="text"
+             name="stadt"
+             id="stadt"
+             placeholder="Stadt" required>
+    </div>
     <label for="geburtstag">
       Geburtsdatum:
     </label>

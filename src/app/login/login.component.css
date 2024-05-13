@@ -6,7 +6,6 @@ body {
   color: white;
   line-height: 1.5;
   min-height: 120vh;
-  background: black;
   padding: 0;
   margin: 0;
 }
@@ -52,6 +51,15 @@ input {
   border-radius: 5px;
   color: white;
   background-color: black;
+}
+
+.plz-stadt {
+  display: flex;
+}
+
+.plz-stadt input[type="text"] {
+  margin-right: 5px;
+  margin-bottom: 0px;
 }
 
 input::placeholder {
