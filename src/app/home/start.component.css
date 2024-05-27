@@ -1,0 +1,72 @@
+/* Ensure body and html take full height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+
+
+/* Container for the video */
+.video-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Video styling */
+video {
+    width: 100%;
+}
+
+/* content on top of video */
+.content {
+    position: absolute;
+    top: 100px;
+    right: 30%;
+    width: 100%;
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; 
+    text-align: center;
+}
+
+.font-large {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: left;
+}
+
+hr {/*Trennlinie*/
+    border: 0;
+    border-top: 1px solid white;
+    width: 20%; /* Adjust the width as needed */
+    margin-left: 0px;
+}
+
+.highlights-title {
+    font-size: 32px;
+    margin-left: 2%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 0% 10% 0% 10%;
+    
+}
+.title-cover {
+    margin: 5%;
+}
+.p-title {
+    font-size: 16px;
+    text-align: center;
+}
