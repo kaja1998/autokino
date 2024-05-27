@@ -1,0 +1,113 @@
+header {
+    height: 100px;
+    background-color: black; /*background color*/
+    color: white; /*text color*/
+    display: flex; /*start flexbox*/
+    justify-content: space-evenly; /* abstand container lins und rechts*/
+    align-items: center; /* Center content vertikal*/
+}
+
+.container-right {
+    width: 75%;
+    display: flex; /*start flex*/
+    justify-content: space-evenly; 
+    align-items: center; /* Center content vertically */
+}
+.container-left{
+    width: 25%;
+    display: flex; /*start flex*/
+    justify-content: center; 
+    align-items: center; /* Center content vertically */
+}
+
+.logo { 
+    width: 50%;
+}
+a {/*flex Items*/
+    color: white; /*text color*/
+    text-decoration: none; /*untere linie entfernen*/
+    font-size: 23px;
+    transition: font-size 0.3s; /*Smooth transition in sekunden*/
+}
+
+a:hover {/*hover effekt flex Items*/
+    font-size: 28px;
+}
+
+hr {/*Trennlinie*/
+    border: 0;
+    border-top: 1px solid white;
+    width: 70%; /* Adjust the width as needed */
+    margin-right: 0px;
+}
+
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 150px;
+}
+
+.footer-column h2, .footer-column h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin: 10px 0;
+}
+
+.footer-column ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-media {
+    display: flex;
+    gap: 10px;
+}
+
+.social-media li {
+    list-style: none;
+}
+
+.social-media li a {
+    color: #fff;
+    font-size: 1.5em;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    background-color: #333;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Add FontAwesome CDN for social media icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
