@@ -1,3 +1,7 @@
+
+/* Add FontAwesome CDN for social media icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 header {
     height: 100px;
     background-color: black; /*background color*/
@@ -109,5 +113,3 @@ footer {
     font-size: 0.9em;
 }
 
-/* Add FontAwesome CDN for social media icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
