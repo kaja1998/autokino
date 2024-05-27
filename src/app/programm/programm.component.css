@@ -1,6 +1,20 @@
+hr {/*Trennlinie*/
+  border: 0;
+  border-top: 1px solid white;
+  width: 20%; /* Adjust the width as needed */
+  margin-left: 0px;
+}
+
+.filme-title {
+  font-size: 32px;
+  margin-left: 2%;
+}
+
+
 .title{
     font-size:xx-large;
     text-align: center; 
+    border-left: thick solid #ffffff;
 }
 
 body{
