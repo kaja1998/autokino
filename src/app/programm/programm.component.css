@@ -12,10 +12,24 @@ hr {/*Trennlinie*/
 
 
 .title{
-    font-size:xx-large;
-    text-align: center; 
-    border-left: thick solid #ffffff;
+    display: flex;
+    font-size:xx-large; 
 }
+
+#programm-titel{
+  height: 10em;
+  width: 20em;
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top:10%;
+  margin-bottom: 10%;
+}
+
+/* #rechter-Balken{
+  height: 3em;
+  border-right: thick solid #ffffff;
+}  */
 
 body{
     margin: 2em;
@@ -102,6 +116,7 @@ body{
     padding: 2px 23px 2px 30px;
     outline: 0;
     background-color: black;
+    color: white;
   }
 
   .search:hover, .search:focus {
