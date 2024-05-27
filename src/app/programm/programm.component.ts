@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
 
 export class ProgrammComponent implements OnInit {
 
-  datum1 = new Date(2024,2,9);
+  datum1 = new Date(2024,1,9);
 
   ngOnInit(): void {
 //Javascript Code
