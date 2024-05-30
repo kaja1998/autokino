@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-programm',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, DatePipe],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
 })
 
 export class ProgrammComponent implements OnInit {
-  
-  ngOnInit(): void {
 
+  datum1 = new Date(2024,1,9);
+
+  ngOnInit(): void {
+//Javascript Code
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
 
