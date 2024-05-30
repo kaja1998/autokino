@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-programm',
   standalone: true,
-  imports: [DatePipe],
+  imports: [RouterOutlet, RouterLink, DatePipe],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
 })
