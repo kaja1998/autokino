@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-programm',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
 })
@@ -11,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
 export class ProgrammComponent implements OnInit {
   
   ngOnInit(): void {
-    // Hier füge den JavaScript-Code ein
 
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
