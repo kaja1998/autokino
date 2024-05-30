@@ -15,7 +15,6 @@ export class ProgrammComponent implements OnInit {
   datum1 = new Date(2024,1,9);
 
   ngOnInit(): void {
-//Javascript Code
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
 
