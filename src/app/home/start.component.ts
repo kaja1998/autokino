@@ -11,9 +11,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class StartComponent {
 
 }
-window.onload = function() {
+/*window.onload = function() {
   var video = document.querySelector('video');
   if (video !== null) {
       video.muted = true;
   }
-};
+};*/

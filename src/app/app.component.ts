@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { StartComponent } from './home/start.component';
 
 @Component({
@@ -12,4 +12,17 @@ import { StartComponent } from './home/start.component';
 
 export class AppComponent {
   title = 'auto-kino';
+
+
+  //Wenn ein Link geklickt wird, scrollt die Website bis nach oben, im Footer sonst mega nervig
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0)
+    });
+  }
 }

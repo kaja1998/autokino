@@ -14,17 +14,17 @@ header {
 .container-right {
     width: 75%;
     display: flex; /*start flex*/
-    justify-content: space-evenly; 
+    justify-content: space-evenly;
     align-items: center; /* Center content vertically */
 }
 .container-left{
     width: 25%;
     display: flex; /*start flex*/
-    justify-content: center; 
+    justify-content: center;
     align-items: center; /* Center content vertically */
 }
 
-.logo { 
+.logo {
     width: 50%;
 }
 a {/*flex Items*/
@@ -80,6 +80,8 @@ footer {
 .footer-column ul li a {
     color: #fff;
     text-decoration: none;
+    font-size: 16px;
+    transition: none;
 }
 
 .footer-column ul li a:hover {
