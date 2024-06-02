@@ -1,7 +1,35 @@
-.title{
-    font-size:xx-large;
-    text-align: center; 
+hr {/*Trennlinie*/
+  border: 0;
+  border-top: 1px solid white;
+  width: 20%; /* Adjust the width as needed */
+  margin-left: 0px;
 }
+
+.filme-title {
+  font-size: 32px;
+  margin-left: 2%;
+}
+
+
+.title{
+    display: flex;
+    font-size:xx-large; 
+}
+
+#programm-titel{
+  height: 10em;
+  width: 20em;
+  display: block;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top:10%;
+  margin-bottom: 10%;
+}
+
+/* #rechter-Balken{
+  height: 3em;
+  border-right: thick solid #ffffff;
+}  */
 
 body{
     margin: 2em;
@@ -31,8 +59,32 @@ body{
 
 .beschreibung{
     flex: 2;
+    display: flex;
+    flex-direction: column;
     margin-left: 2em;
     margin-right: 2em;
+}
+
+.mehr-Lesen-Button{
+  margin-top:auto;
+  margin-bottom: 2em;
+
+  border: 1px solid #ffffff; /* Rahmenfarbe */
+  padding: 10px; /* Innenabstand */
+  display: inline-block; /* Inline-Block, um die Größe des Inhalts anzupassen */
+  border-radius: 5px; /* Abgerundete Ecken */
+  width: fit-content;
+}
+
+a {
+  color: white; /*text color*/
+  text-decoration: none; /*untere linie entfernen*/
+  font-size: 20px;
+  transition: font-size 0.3s; /*Smooth transition in sekunden*/
+}
+
+a:hover {/*hover effekt flex Items*/
+  font-size: 28px;
 }
 
 .dates{
@@ -49,6 +101,7 @@ body{
 
 .filmtitel{
     font-size: x-large;
+    margin-bottom: 0.5em;
 }
 
 .aktionsleiste{
@@ -88,6 +141,7 @@ body{
     padding: 2px 23px 2px 30px;
     outline: 0;
     background-color: black;
+    color: white;
   }
 
   .search:hover, .search:focus {
