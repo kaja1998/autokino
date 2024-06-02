@@ -86,3 +86,12 @@ hr {/*Trennlinie*/
     font-size: 16px;
     text-align: center;
 }
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover{
+  background-color: white;
+}
