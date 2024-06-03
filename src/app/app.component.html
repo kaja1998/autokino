@@ -1,2 +1,54 @@
-<header><a routerLink="/home">HOME</a><a routerLink ="programm"> Programm</a> <a routerLink="/filmdetails">Filmdetails</a><a routerLink="/login">LOGIN</a></header>
+<link rel="stylesheet" type="text/css" href="app.component.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+
+<!-- Social Media Icons-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<header>
+    <div class="container-left">
+        <a class="logo" routerLink="/home">HOME</a>
+    </div>
+    <div class="container-right">
+        <a routerLink="/filmdetails">Filmdetails</a>
+        <a routerLink ="programm">Programm</a>
+        <a routerLink="/kundenkonto">Kundenkonto</a>
+        <a routerLink="/login">Login</a>
+        <a>Suche</a>
+    </div>
+
+</header>
+<hr>
+
 <router-outlet></router-outlet>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h2>LOGO</h2>
+        </div>
+        <div class="footer-column">
+            <h3>Information</h3>
+            <ul>
+                <li><a routerLink="programm">Programm</a></li>
+                <li><a routerLink="login">Kundenkonto</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Kontakt</h3>
+            <p>Coole straße 123123<br>Bremen 28203</p>
+            <p>Coole Nummer</p>
+        </div>
+        <div class="footer-column">
+            <h3>Social Media</h3>
+            <ul class="social-media">
+                <li><a routerLink="none" class="fa fa-facebook"></a></li>
+                <li><a routerLink="none" class="fa fa-instagram"></a></li>
+                <li><a routerLink="none" class="fa fa-twitter"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Alle Rechte sind hier und so</p>
+    </div>
+</footer>

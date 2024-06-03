@@ -48,7 +48,6 @@ input {
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid white;
-  border-radius: 5px;
   color: white;
   background-color: black;
 }
@@ -59,6 +58,11 @@ input {
 
 .plz-stadt input[type="text"] {
   margin-right: 5px;
+  margin-bottom: 0px;
+}
+
+.plz-stadt input[type="number"] {
+  margin-right: 10px;
   margin-bottom: 0px;
 }
 
@@ -79,7 +83,6 @@ input:-webkit-autofill{
 
 button {
   padding: 15px;
-  border-radius: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
   color: black;

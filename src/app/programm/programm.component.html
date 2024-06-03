@@ -1,9 +1,7 @@
 <body>
 
     <div class="title">
-
-        <p>Programm</p>
-
+        <img id="programm-titel" src="../assets/Programm.PNG"/>
     </div>
 
     <div class="aktionsleiste">
@@ -15,94 +13,111 @@
         </div>
     </div>
 
-    <div class="film">
-        <div class="filminfo">
-            <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
-            <div class="beschreibung">
-                <div class="filmtitel">Drachenzähmen leicht gemacht</div>
-                Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und Nahrung
-                stehlen.
-                Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
-                Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
-                sich zu beweisen.
-                Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
-                So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
-                Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
+    <div class="Filme">
+
+        <hr>
+        <p class="filme-title">Filme</p>
+
+        <div class="film">
+            <div class="filminfo">
+                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
+                <div class="beschreibung">
+                    <div class="filmtitel">Drachenzähmen leicht gemacht</div>
+                    Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und
+                    Nahrung
+                    stehlen.
+                    Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
+                    Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
+                    sich zu beweisen.
+                    Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
+                    So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
+                    Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
+                
+                    <div class = "mehr-Lesen-Button">
+                        <a routerLink="/filmdetails">Zum Film</a>
+                    </div>
+                </div>
+                <div class="dates">
+                    <div class="date">12.05.24</div>
+                    <div class="date">15.05.24</div>
+                    <div class="date">18.06.25</div>
+                </div>
             </div>
-            <div class="dates">
-                <div class="date">12.05.24</div>
-                <div class="date">15.05.24</div>
-                <div class="date">18.06.25</div>
+
+            <div class="trenner-container">
+                <div class="gap"></div>
+                <div class="trenner"></div>
             </div>
+
         </div>
 
-        <div class="trenner-container">
-            <div class="gap"></div>
-            <div class="trenner"></div>
+
+        <div class="film">
+            <div class="filminfo">
+                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
+                <div class="beschreibung">
+                    <div class="filmtitel">Drachenzähmen leicht gemacht</div>
+                    Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und
+                    Nahrung
+                    stehlen.
+                    Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
+                    Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
+                    sich zu beweisen.
+                    Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
+                    So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
+                    Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
+
+                    <div class = "mehr-Lesen-Button">
+                        <a routerLink="/filmdetails">Zum Film</a>
+                    </div>
+                </div>
+                <div class="dates">
+                    <div class="date">12.05.24</div>
+                    <div class="date">15.05.24</div>
+                    <div class="date">18.06.25</div>
+                </div>
+            </div>
+
+            <div class="trenner-container">
+                <div class="gap"></div>
+                <div class="trenner"></div>
+            </div>
+
+        </div>
+
+        <div class="film">
+            <div class="filminfo">
+                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
+                <div class="beschreibung">
+                    <div class="filmtitel">Drachenzähmen leicht gemacht</div>
+                    Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und
+                    Nahrung
+                    stehlen.
+                    Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
+                    Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
+                    sich zu beweisen.
+                    Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
+                    So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
+                    Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
+
+                    <div class = "mehr-Lesen-Button">
+                        <a routerLink="/filmdetails">Zum Film</a>
+                    </div>
+                </div>
+                <div class="dates">
+                  <div class="date">{{datum1 | date: "shortDate"}}</div>
+                  <div class="date">15.05.24</div>
+                  <div class="date">18.06.25</div>
+                </div>
+            </div>
+
+            <div class="trenner-container">
+                <div class="gap"></div>
+                <div class="trenner"></div>
+            </div>
+
         </div>
 
     </div>
-
-
-    <div class="film">
-        <div class="filminfo">
-            <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
-            <div class="beschreibung">
-                <div class="filmtitel">Drachenzähmen leicht gemacht</div>
-                Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und Nahrung
-                stehlen.
-                Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
-                Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
-                sich zu beweisen.
-                Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
-                So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
-                Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
-            </div>
-            <div class="dates">
-                <div class="date">12.05.24</div>
-                <div class="date">15.05.24</div>
-                <div class="date">18.06.25</div>
-            </div>
-        </div>
-
-        <div class="trenner-container">
-            <div class="gap"></div>
-            <div class="trenner"></div>
-        </div>
-
-    </div>
-
-    <div class="film">
-        <div class="filminfo">
-            <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
-            <div class="beschreibung">
-                <div class="filmtitel">Drachenzähmen leicht gemacht</div>
-                Das Wikingerdorf Berk wird seit 300 Jahren von Drachen angegriffen, die das Dorf verwüsten und Nahrung
-                stehlen.
-                Um in Berk angesehen zu werden, ist es deshalb wichtig ein guter Drachentöter zu sein.
-                Hicks, der Sohn des Stammesoberhaupts, ist jedoch nicht fürs Kämpfen gemacht und versucht vergeblich
-                sich zu beweisen.
-                Selbst als es ihm gelingt einen Nachtschatten vom Himmel zu schießen, glaubt ihm niemand.
-                So sucht er nach dem Drachen, um ihn zu töten und einen Beweis für seinen Erfolg zu bringen.
-                Doch als er den Drachen findet, kommt alles anders als ursprünglich geplant.
-            </div>
-            <div class="dates">
-                <div class="date">12.05.24</div>
-                <div class="date">15.05.24</div>
-                <div class="date">18.06.25</div>
-            </div>
-        </div>
-
-        <div class="trenner-container">
-            <div class="gap"></div>
-            <div class="trenner"></div>
-        </div>
-
-    </div>
-
-
-
-
-
 
 </body>
