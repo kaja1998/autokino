@@ -1,9 +1,12 @@
 <body>
-
-<div class="kundenkonto">
+<div class="kundenbegruessung">
   <h1>Hallo {{ vorname }}</h1>
-  <p>Willkommen in deinem Login-Bereich von MEIN AUTOKINO. Hier findest du alles rund um deinen Account und kannst deine Daten verwalten.</p>
-  <button type="button" [routerLink]="['/kundenkonto/bearbeiten']">Mein Profil</button>
+</div>
+  <div class="kundenkonto">
+    <div class="text">
+    <p class="ueberschrift">Willkommen in deinem Login-Bereich von MEIN AUTOKINO. Hier findest du alles rund um deinen Account und kannst deine Daten verwalten.</p>
+    <button type="button" [routerLink]="['/kundenkonto/bearbeiten']">Mein Profil</button>
+  </div>
 </div>
 
 <div class="vorstellungen">
