@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <div *ngFor="let film of filmService.filme">{{film.Film}}</div>
     <div class="trailer-container">
 
             <video autoplay loop [muted]="'muted'">

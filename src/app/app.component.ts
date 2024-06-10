@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { StartComponent } from './home/start.component';
+import { HttpClient } from '@angular/common/http';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  providers: [HttpClient
+  ],
   imports: [RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
