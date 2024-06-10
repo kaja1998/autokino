@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './kartenkaufen.component.css'
 })
 export class KartenkaufenComponent {
-  checkboxes = Array.from({ length: 2 }, (_, i) => `platz${i + 1}`);
+  checkboxes = Array.from({ length: 60 }, (_, i) => `platz${i + 1}`);
 }
 
