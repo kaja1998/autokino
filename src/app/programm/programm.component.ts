@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { FilmServiceService } from '../providers/film-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-programm',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, DatePipe],
+  providers: [FilmServiceService],
+  imports: [RouterOutlet, RouterLink, DatePipe, CommonModule],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
 })
+
 
 export class ProgrammComponent implements OnInit {
 

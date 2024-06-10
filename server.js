@@ -46,7 +46,6 @@ var con = mysql.createConnection({
 app.get('/filme', function (req, res) {
       con.connect(function (err) {
             if (err) throw err;
-            console.log("Connected");
 
             con.query("SELECT * FROM filme",
                   function (error, results, fields) {
@@ -55,8 +54,23 @@ app.get('/filme', function (req, res) {
 
                         con.end(function (err) {
                               if (err) throw err;
-                              console.log("Disconnected");
+                        });
+                  }
+            );
+      });
+});
 
+app.get('/filmBeschreibung', function (req, res) {
+      con.connect(function (err) {
+            if (err) throw err;
+
+            con.query("SELECT filmbeschreibung FROM filme WHERE filmtitel = 'Drachenzähmen'",
+                  function (error, results, fields) {
+                        if (error) throw error;
+                        res.send(results);
+
+                        con.end(function (err) {
+                              if (err) throw err;
                         });
                   }
             );
