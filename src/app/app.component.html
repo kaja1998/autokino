@@ -1,16 +1,26 @@
 
 <link rel="stylesheet" type="text/css" href="app.component.css">
 <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
 <header>
     <div class="container-left">
         <a class="logo" routerLink="/home">HOME</a>
     </div>
     <div class="container-right">
-        <a routerLink="/filmdetails">Filmdetails</a>
+        <!-- <a routerLink="/filmdetails">Filmdetails</a> -->
         <a routerLink ="programm">Programm</a>
-        <a routerLink="/kundenkonto">Kundenkonto</a>
-        <a routerLink="/login">Login</a>
-        <a>Suche</a>
+        <a routerLink="/kartenkaufen">Kartenkaufen</a>
+        
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+               <a routerLink="/login">Login</a>
+               <a routerLink="/kundenkonto">Details</a>
+            </div>
+          </div> 
     </div>
 
 </header>
