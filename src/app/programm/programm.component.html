@@ -22,7 +22,9 @@
                 <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
                 <div class="beschreibung">
                     <div class="filmtitel">Drachenzähmen leicht gemacht</div>
-                    <div ngIf = "filmService.filmBeschreibung">{{film.filmBeschreibung}}</div>
+
+                    <div>{{filmservice.filme[0].beschreibung}}</div>   
+                    <!-- //TODO -->
                 
                     <div class = "mehr-Lesen-Button">
                         <a routerLink="/filmdetails">Zum Film</a>

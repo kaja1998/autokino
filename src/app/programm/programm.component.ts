@@ -18,6 +18,12 @@ export class ProgrammComponent implements OnInit {
 
   datum1 = new Date(2024,1,9);
 
+  constructor(public filmService: FilmServiceService) {
+    filmService.getFilme().subscribe(data => {
+      console.log(filmService.filme);
+    });
+  }
+
   ngOnInit(): void {
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
