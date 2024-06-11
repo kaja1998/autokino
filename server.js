@@ -44,20 +44,12 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-      con.connect(function (err) {
-            if (err) throw err;
-
             con.query("SELECT * FROM filme",
                   function (error, results, fields) {
                         if (error) throw error;
                         res.send(results);
-
-                        con.end(function (err) {
-                              if (err) throw err;
-                        });
                   }
             );
-      });
 });
 
 app.get('/filmBeschreibung', function (req, res) {
