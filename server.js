@@ -59,6 +59,5 @@ app.get('/filmBeschreibung', function (req, res) {
                         res.send(results);
                   }
             );
-      });
 });
 
