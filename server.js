@@ -44,32 +44,16 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-      con.connect(function (err) {
-            if (err) throw err;
-            console.log("Connected");
-
-            con.query("SELECT * FROM filme",
-                  function (error, results, fields) {
-                        if (error) throw error;
-                        res.send(results);
-
-                        con.end(function (err) {
-                              if (err) throw err;
-                              console.log("Disconnected");
-
-                        });
-                  }
-            );
-      });
+    con.query("SELECT * FROM filme",
+        function (error, results, fields) {
+            if (error) throw error;
+            res.send(results);
+        }
+    );
 });
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
-
-    con.connect(function (err) {
-        if (err) throw err;
-        console.log("Connected");
-
         const query = "SELECT * FROM kundenkonto WHERE mail = ? AND passwort = ?";
         con.query(query, [mail, passwort], function (error, results) {
             if (error) throw error;
@@ -78,32 +62,16 @@ app.post('/loginaut', function (req, res) {
             } else {
                 res.send({ success: false, message: "Invalid email or password" });
             }
-
-            con.end(function (err) {
-                if (err) throw err;
-                console.log("Disconnected");
-            });
         });
-    });
 });
 
-app.get('/kundendaten', function (req, res) {
-  con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected");
 
+app.get('/kundendaten', function (req, res) {
     con.query("SELECT * FROM kunde",
       function (error, results, fields) {
         if (error) throw error;
         res.send(results);
-
-        con.end(function (err) {
-          if (err) throw err;
-          console.log("Disconnected");
-
-        });
       }
     );
-  });
 });
 
