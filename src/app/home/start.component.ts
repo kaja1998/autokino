@@ -12,11 +12,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './start.component.css'
 })
 export class StartComponent {
-  constructor(public filmService: FilmServiceService) {
-    filmService.getFilme().subscribe(data => {
-      console.log(filmService.filme);
-    });
-  }
+  // constructor(public filmService: FilmServiceService) {
+  //   filmService.getFilme().subscribe(data => {
+  //     console.log(filmService.filme);
+  //   });
+  // }
 }
 /*window.onload = function() {
   var video = document.querySelector('video');

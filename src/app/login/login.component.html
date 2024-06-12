@@ -6,25 +6,27 @@
 </div>
 
 <div class="anmelden-form" [hidden]="!showLoginForm">
-  <form action="">
+  <form (submit)="login()">
     <label for="mail">
       E-Mail:
     </label>
     <input type="text"
            id="mail"
            name="mail"
-           placeholder="E-Mail" required>
+           placeholder="E-Mail" required
+           [(ngModel)]="mail">
 
-    <label for="password">
+    <label for="passwort">
       Passwort:
     </label>
     <input type="password"
-           id="password"
-           name="password"
-           placeholder="Passwort" required>
+           id="passwort"
+           name="passwort"
+           placeholder="Passwort" required
+           [(ngModel)]="passwort">
 
     <div class="enter-button">
-      <button type="button" onclick="solve()">Anmelden</button>
+      <button type="submit">Anmelden</button>
     </div>
   </form>
 </div>
@@ -88,7 +90,7 @@
            id="email"
            name="email"
            placeholder="E-Mail" required>
-    <label for="password">
+    <label for="passwort">
       Passwort:
     </label>
     <input type="password"
