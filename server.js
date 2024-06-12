@@ -52,14 +52,68 @@ app.get('/filme', function (req, res) {
                   function (error, results, fields) {
                         if (error) throw error;
                         res.send(results);
+<<<<<<< Updated upstream
 
                         con.end(function (err) {
                               if (err) throw err;
                               console.log("Disconnected");
 
                         });
+=======
+>>>>>>> Stashed changes
                   }
             );
       });
 });
 
+app.get('/genre', function (req, res) {
+      con.connect(function (err) {
+            if (err) throw err;
+
+            con.query("SELECT genre FROM filme WHERE filmtitel = 'Drachenzähmen'",
+                  function (error, results, fields) {
+                        if (error) throw error;
+                        res.send(results);
+                  }
+            );
+      });
+});
+
+app.get('/laufzeit', function (req, res) {
+      con.connect(function (err) {
+            if (err) throw err;
+
+            con.query("SELECT laufzeit FROM filme WHERE filmtitel = 'Drachenzähmen'",
+                  function (error, results, fields) {
+                        if (error) throw error;
+                        res.send(results);
+                  }
+            );
+      });
+});
+
+app.get('/schauspieler', function (req, res) {
+      con.connect(function (err) {
+            if (err) throw err;
+
+            con.query("SELECT Schauspieler FROM filme WHERE filmtitel = 'Drachenzähmen'",
+                  function (error, results, fields) {
+                        if (error) throw error;
+                        res.send(results);
+                  }
+            );
+      });
+});
+
+app.get('/bewertung', function (req, res) {
+      con.connect(function (err) {
+            if (err) throw err;
+
+            con.query("SELECT bewertung FROM filme WHERE filmtitel = 'Drachenzähmen'",
+                  function (error, results, fields) {
+                        if (error) throw error;
+                        res.send(results);
+                  }
+            );
+      });
+});
