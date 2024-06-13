@@ -54,7 +54,7 @@ app.get('/filme', function (req, res) {
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
-        const query = "SELECT * FROM kundenkonto WHERE mail = ? AND passwort = ?";
+        const query = "SELECT * FROM kunden WHERE mail = ? AND passwort = ?";
         con.query(query, [mail, passwort], function (error, results) {
             if (error) throw error;
             if (results.length > 0) {
@@ -67,7 +67,7 @@ app.post('/loginaut', function (req, res) {
 
 
 app.get('/kundendaten', function (req, res) {
-    con.query("SELECT * FROM kunde",
+    con.query("SELECT * FROM kunden",
       function (error, results, fields) {
         if (error) throw error;
         res.send(results);
