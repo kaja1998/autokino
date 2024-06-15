@@ -13,7 +13,7 @@ hr {/*Trennlinie*/
 
 .title{
     display: flex;
-    font-size:xx-large; 
+    font-size:xx-large;
 }
 
 #programm-titel{
@@ -42,7 +42,7 @@ body{
 
 .filminfo{
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     justify-content:space-evenly;
     gap: 2em;
 }
@@ -107,7 +107,7 @@ a:hover {/*hover effekt flex Items*/
 .aktionsleiste{
     display: flex;
     flex-direction: row-reverse;
-    gap: 1em; 
+    gap: 1em;
     margin: 1em
 }
 
@@ -130,10 +130,10 @@ a:hover {/*hover effekt flex Items*/
     right: 8px;
     width: 10px;
     cursor: pointer;
-    visibility: hidden;  
+    visibility: hidden;
   }
 
-  .search {
+  #search {
     border: solid grey;
     border-radius: 5px;
     height: 20px;

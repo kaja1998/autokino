@@ -52,12 +52,4 @@ app.get('/filme', function (req, res) {
             );
 });
 
-app.get('/filmBeschreibung', function (req, res) {
-            con.query("SELECT filmBeschreibung FROM filme WHERE filmtitel = 'Drachenzähmen'",
-                  function (error, results, fields) {
-                        if (error) throw error;
-                        res.send(results);
-                  }
-            );
-});
 
