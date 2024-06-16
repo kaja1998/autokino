@@ -3,6 +3,7 @@ import {LoginAuthenticationService} from "../providers/login-authentication.serv
 import { Router } from '@angular/router';
 import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {RegistrierenService} from "../providers/registrieren.service";
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,14 @@ export class LoginComponent {
   showLoginButton: boolean = false;
   showRegisterButton: boolean = true;
 
-  errorMessage: string = '';
+  errorMessageLogin: string = '';
+  errorMessageRegistration: string = '';
   userForm!: FormGroup;
   registerForm!: FormGroup;
   isFormSubmitted: boolean = false;
   isFormSubmittedLogin: boolean = false;
 
-  constructor(public loginautService: LoginAuthenticationService, public router: Router) {
+  constructor(public loginautService: LoginAuthenticationService, public registrierenService: RegistrierenService, public router: Router) {
     this.userForm =  new FormGroup({
       mail: new FormControl("",[Validators.required]),
       passwort: new FormControl("",[Validators.required]),
@@ -66,23 +68,59 @@ export class LoginComponent {
         this.loginautService.setLoggedIn(true);
         this.router.navigate(['/kundenkonto']);
       } else {
-        this.errorMessage = response.message;
+        this.errorMessageLogin = response.message;
         console.log("Login failed", response.message);
       }
     });
   }
 
-  register(): void {
+  registrieren(): void {
     this.isFormSubmitted = true;
 
     if (this.registerForm.invalid) {
       return;
     }
 
-    // Handle registration logic here
-    console.log("Registration form submitted successfully!");
+    const { vorname, nachname, strasseUndNr, plz, stadt, geburtstag, email, choosepassword } = this.registerForm.value;
+
+    // Check if email is already registered
+    this.registrierenService.checkEmailExists(email).subscribe(response => {
+      if (response.exists) {
+        // Email already exists, show error message
+        this.errorMessageRegistration = response.message;
+      } else {
+        // Random ID generieren
+        const randomId = Math.floor(Math.random() * 1000) + 1;
+
+        // Assuming you have a method in your service to register the user
+        this.registrierenService.registerCustomer({
+          id: randomId,
+          vorname,
+          nachname,
+          strasseUndNr,
+          plz,
+          stadt,
+          geburtstag,
+          email,
+          passwort: choosepassword // You might want to hash this password before sending it to the backend
+        }).subscribe(registerResponse => {
+          if (registerResponse.success) {
+            console.log("Registration successful");
+            // Kunden automatisch einloggen?
+            // this.loginautService.login(email, choosepassword).subscribe(loginResponse => {
+            //   if (loginResponse.success) {
+            //     console.log("Login after registration successful");
+            //     this.loginautService.setLoggedIn(true);
+            //     this.router.navigate(['/kundenkonto']);
+            //   }
+            // });
+          } else {
+            console.log("Registration failed", registerResponse.message);
+            this.errorMessageRegistration = "Es gab ein Problem bei der Registrierung. Bitte versuche es später erneut.";
+          }
+        });
+      }
+    });
   }
-
-
 }
 

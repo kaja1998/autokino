@@ -7,7 +7,7 @@
 
 <div class="anmelden-form" [hidden]="!showLoginForm">
   <form [formGroup]="userForm" (ngSubmit)="login()">
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <div *ngIf="errorMessageLogin" class="error-message">{{ errorMessageLogin }}</div>
 
     <!-- E-Mail -->
     <label class="form-label">E-Mail</label>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="registrieren-form" [hidden]="!showRegisterForm">
-  <form [formGroup]="registerForm" (ngSubmit)="register()">
+  <form [formGroup]="registerForm" (ngSubmit)="registrieren()">
 
     <!-- Vorname -->
     <label class="form-label">Vorname</label>
@@ -51,7 +51,7 @@
     <!-- Nachname -->
     <label class="form-label">Nachname</label>
     <div class="text-danger" *ngIf="registerForm.controls['nachname'].invalid && (isFormSubmitted || registerForm.controls['nachname'].touched || registerForm.controls['nachname'].dirty)">
-      <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle das Feld aus.</span>
+      <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle die Felder aus.</span>
     </div>
     <input type="text" id="nachname" formControlName="nachname" placeholder="Nachname">
 
