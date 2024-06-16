@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import {LoginAuthenticationService} from "../providers/login-authentication.service";
 import { Router } from '@angular/router';
 import {NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [NgIf, FormsModule],
+  imports: [NgIf, FormsModule, ReactiveFormsModule],
   providers: [LoginAuthenticationService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -20,11 +20,28 @@ export class LoginComponent {
   showLoginButton: boolean = false;
   showRegisterButton: boolean = true;
 
-  mail: string = '';
-  passwort: string = '';
   errorMessage: string = '';
+  userForm!: FormGroup;
+  registerForm!: FormGroup;
+  isFormSubmitted: boolean = false;
+  isFormSubmittedLogin: boolean = false;
 
   constructor(public loginautService: LoginAuthenticationService, public router: Router) {
+    this.userForm =  new FormGroup({
+      mail: new FormControl("",[Validators.required]),
+      passwort: new FormControl("",[Validators.required]),
+    })
+
+    this.registerForm = new FormGroup({
+      vorname: new FormControl("", [Validators.required]),
+      nachname: new FormControl("", [Validators.required]),
+      strasseUndNr: new FormControl("", [Validators.required]),
+      plz: new FormControl("", [Validators.required]),
+      stadt: new FormControl("", [Validators.required]),
+      geburtstag: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      choosepassword: new FormControl("", [Validators.required]),
+    });
   }
 
   toggleForms(): void {
@@ -35,16 +52,37 @@ export class LoginComponent {
   }
 
   login(): void {
-    this.loginautService.login(this.mail, this.passwort).subscribe(response => {
+    this.isFormSubmittedLogin = true;
+
+    if (this.userForm.invalid) {
+      return;
+    }
+
+    const { mail, passwort } = this.userForm.value;
+
+    this.loginautService.login(mail, passwort).subscribe(response => {
       if (response.success) {
         console.log("Login successful");
         this.loginautService.setLoggedIn(true);
         this.router.navigate(['/kundenkonto']);
       } else {
-        this.errorMessage = "Achtung: Die E-Mail-Adresse oder das Passwort stimmen nicht mit den bei uns hinterlegten Daten überein. Bitte überprüfe deine Eingaben und versuche es noch mal.";
+        this.errorMessage = response.message;
         console.log("Login failed", response.message);
       }
     });
   }
+
+  register(): void {
+    this.isFormSubmitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    // Handle registration logic here
+    console.log("Registration form submitted successfully!");
+  }
+
+
 }
 

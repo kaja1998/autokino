@@ -156,3 +156,9 @@ button:hover {
   padding: 10px; /* Fügt etwas Innenabstand hinzu, damit der Text nicht direkt an der Umrandung klebt */
   background-color: red;
 }
+
+.text-danger {
+  color: red;
+  text-align: left;
+  margin-bottom: 10px;
+}

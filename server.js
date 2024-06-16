@@ -60,7 +60,7 @@ app.post('/loginaut', function (req, res) {
             if (results.length > 0) {
                 res.send({ success: true, user: results[0] });
             } else {
-                res.send({ success: false, message: "Invalid email or password" });
+                res.send({ success: false, message: "Achtung: Die E-Mail-Adresse oder das Passwort stimmen nicht mit den bei uns hinterlegten Daten überein. Bitte überprüfe deine Eingaben und versuche es noch mal." });
             }
         });
 });

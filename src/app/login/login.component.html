@@ -6,25 +6,22 @@
 </div>
 
 <div class="anmelden-form" [hidden]="!showLoginForm">
-  <form (submit)="login()">
+  <form [formGroup]="userForm" (ngSubmit)="login()">
     <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <label for="mail">
-      E-Mail:
-    </label>
-    <input type="text"
-           id="mail"
-           name="mail"
-           placeholder="E-Mail" required
-           [(ngModel)]="mail">
 
-    <label for="passwort">
-      Passwort:
-    </label>
-    <input type="password"
-           id="passwort"
-           name="passwort"
-           placeholder="Passwort" required
-           [(ngModel)]="passwort">
+    <!-- E-Mail -->
+    <label class="form-label">E-Mail</label>
+    <div class="text-danger" *ngIf="userForm.controls['mail'].invalid && (isFormSubmittedLogin || userForm.controls['mail'].touched || userForm.controls['mail'].dirty)">
+      <span *ngIf="userForm.controls['mail'].errors?.['required']">Bitte trage eine gültige E-Mail-Adresse ein.</span>
+    </div>
+    <input type="text" id="mail" formControlName="mail" placeholder="E-Mail">
+
+    <!-- Passwort -->
+    <label class="form-label">Passwort</label>
+    <div class="text-danger" *ngIf="userForm.controls['passwort'].invalid && (isFormSubmittedLogin || userForm.controls['passwort'].touched || userForm.controls['passwort'].dirty)">
+      <span *ngIf="userForm.controls['passwort'].errors?.['required']">Bitte trage dein aktuelles Passwort ein.</span>
+    </div>
+    <input type="password" id="passwort" formControlName="passwort" placeholder="Passwort">
 
     <div class="enter-button">
       <button type="submit">Anmelden</button>
@@ -42,64 +39,63 @@
 </div>
 
 <div class="registrieren-form" [hidden]="!showRegisterForm">
-  <form action="">
-    <label for="vorname">
-      Name:
-    </label>
-    <input type="text"
-           id="vorname"
-           name="vorname"
-           placeholder="Vorname" required>
-    <label for="nachname">
-      Nachname:
-    </label>
-    <input type="text"
-           id="nachname"
-           name="nachname"
-           placeholder="Nachname" required>
-    <label for="straße&nr">
-      Straße und Hausnummer:
-    </label>
-    <input type="text"
-           name="straße&nr"
-           id="straße&nr"
-           placeholder="Straße und Hausnummer" required>
-      <label for="plz&stadt">
-        Postleitzahl und Stadt:
-      </label>
-    <div class="plz-stadt">
-      <input type="number"
-             name="plz"
-             id="plz&stadt"
-             placeholder="PLZ" required>
-      <input type="text"
-             name="stadt"
-             id="stadt"
-             placeholder="Stadt" required>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+
+    <!-- Vorname -->
+    <label class="form-label">Vorname</label>
+    <div class="text-danger" *ngIf="registerForm.controls['vorname'].invalid && (isFormSubmitted || registerForm.controls['vorname'].touched || registerForm.controls['vorname'].dirty)">
+      <span *ngIf="registerForm.controls['vorname'].errors?.['required']">Bitte fülle das Feld aus.</span>
     </div>
-    <label for="geburtstag">
-      Geburtsdatum:
-    </label>
-    <input type="date"
-           id="geburtstag"
-           name="geburtstag"
-           placeholder="tt.mm.jjjj" required>
-    <label for="email">
-      E-Mail:
-    </label>
-    <input type="email"
-           id="email"
-           name="email"
-           placeholder="E-Mail" required>
-    <label for="passwort">
-      Passwort:
-    </label>
-    <input type="password"
-           id="choosepassword"
-           name="choosepassword"
-           placeholder="Passwort" required>
+    <input type="text" id="Vorname" formControlName="vorname" placeholder="Vorname">
+
+    <!-- Nachname -->
+    <label class="form-label">Nachname</label>
+    <div class="text-danger" *ngIf="registerForm.controls['nachname'].invalid && (isFormSubmitted || registerForm.controls['nachname'].touched || registerForm.controls['nachname'].dirty)">
+      <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <input type="text" id="nachname" formControlName="nachname" placeholder="Nachname">
+
+    <!-- Straße und Hausnummer -->
+    <label class="form-label">Straße und Hausnummer</label>
+    <div class="text-danger" *ngIf="registerForm.controls['strasseUndNr'].invalid && (isFormSubmitted || registerForm.controls['strasseUndNr'].touched || registerForm.controls['strasseUndNr'].dirty)">
+      <span *ngIf="registerForm.controls['strasseUndNr'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <input type="text" id ="strasseUndNr" formControlName="strasseUndNr" placeholder="Straße und Hausnummer">
+
+    <!-- PLZ und Stadt -->
+    <label class="form-label">Postleitzahl und Stadt</label>
+    <div class="text-danger" *ngIf="registerForm.controls['plz'].invalid && (isFormSubmitted || registerForm.controls['plz'].touched || registerForm.controls['plz'].dirty)">
+      <span *ngIf="registerForm.controls['plz'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <div class="plz-stadt">
+      <input type="number" id ="plz" formControlName="plz" placeholder="PLZ">
+      <input type="text" id ="stadt" formControlName="stadt" placeholder="Stadt">
+    </div>
+
+    <!-- Geburtsdatum -->
+    <label class="form-label">Geburtsdatum</label>
+    <div class="text-danger" *ngIf="registerForm.controls['geburtstag'].invalid && (isFormSubmitted || registerForm.controls['geburtstag'].touched || registerForm.controls['geburtstag'].dirty)">
+      <span *ngIf="registerForm.controls['geburtstag'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <input type="date" id ="geburtstag" formControlName="geburtstag" placeholder="tt.mm.jjjj">
+
+    <!-- E-Mail -->
+    <label class="form-label">E-Mail</label>
+    <div class="text-danger" *ngIf="registerForm.controls['email'].invalid && (isFormSubmitted || registerForm.controls['email'].touched || registerForm.controls['email'].dirty)">
+      <span *ngIf="registerForm.controls['email'].errors?.['required']">Bitte fülle das Feld aus.</span>
+      <span *ngIf="registerForm.controls['email'].errors?.['email']">Ungültiges Email-Format</span>
+    </div>
+    <input type="email" id ="email" formControlName="email" placeholder="E-Mail">
+
+    <!-- Passwort -->
+    <label class="form-label">Passwort</label>
+    <div class="text-danger" *ngIf="registerForm.controls['choosepassword'].invalid && (isFormSubmitted || registerForm.controls['choosepassword'].touched || registerForm.controls['choosepassword'].dirty)">
+      <span *ngIf="registerForm.controls['choosepassword'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <input type="password" id ="choosepassword" formControlName="choosepassword" placeholder="Passwort">
+
     <div class="enter-button">
-      <button type="button" onclick="solve()">Registrieren</button>
+      <button type="submit">Registrieren</button>
     </div>
   </form>
 </div>
