@@ -6,9 +6,8 @@ import { CommonModule } from '@angular/common';
 
 function getUserInput(): string {
   // Lese den Wert des Eingabefelds aus
-  const searchInputElement = document.getElementById('search') as HTMLInputElement;
+  const searchInputElement = document.querySelector('.search') as HTMLInputElement;
   const userInput: string = searchInputElement.value;
-
   // Gebe den Wert in der Konsole aus
   return userInput;
 }
@@ -30,12 +29,16 @@ export class ProgrammComponent implements OnInit {
     filmService.getFilme().subscribe(data => {
     });
     filmService.getCertainFilme(getUserInput()).subscribe( data => {
+      // if(filmService.certainFilme != null){
+      //   console.log(filmService.certainFilme);
+      // }
+
     });
   }
 
   ngOnInit(): void {
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
-    const searchBar = document.getElementById("search") as HTMLInputElement;
+    const searchBar = document.querySelector(".search") as HTMLInputElement;
     const searchIcon = document.querySelector(".search-icon")as HTMLInputElement;
 
     searchBar.addEventListener("keyup", () => {

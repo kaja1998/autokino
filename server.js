@@ -52,8 +52,11 @@ app.get('/filme', function (req, res) {
             );
 });
 
+
+// TODO Filme oder certainFilme?
 app.get('/certainFilme', function (req, res) {
-  con.query("SELECT * FROM filme WHERE filmtitel = "userInput",
+  const { userInput } = req.body;
+  con.query("SELECT * FROM filme WHERE filmtitel = ?",
     function (error, results, fields) {
       if (error) throw error;
       res.send(results);
