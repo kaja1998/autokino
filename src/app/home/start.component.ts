@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { FilmServiceService } from '../providers/film-service.service';
+import { FilmService } from '../providers/film.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-start',
   standalone: true,
-  providers: [FilmServiceService],
+  providers: [FilmService],
   imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './start.component.html',
   styleUrl: './start.component.css'
 })
 export class StartComponent {
-  constructor(public filmService: FilmServiceService) {
+  constructor(public filmService: FilmService) {
     filmService.getFilme().subscribe(data => {
       console.log(filmService.filme);
     });

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FilmServiceService } from './film-service.service';
+import { FilmService } from './film.service';
 
 describe('FilmServiceService', () => {
-  let service: FilmServiceService;
+  let service: FilmService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FilmServiceService);
+    service = TestBed.inject(FilmService);
   });
 
   it('should be created', () => {

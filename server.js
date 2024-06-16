@@ -52,4 +52,13 @@ app.get('/filme', function (req, res) {
             );
 });
 
+app.get('/certainFilme', function (req, res) {
+  con.query("SELECT * FROM filme WHERE filmtitel = "userInput",
+    function (error, results, fields) {
+      if (error) throw error;
+      res.send(results);
+    }
+  );
+});
+
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { FilmServiceService } from '../providers/film-service.service';
+import { FilmService } from '../providers/film.service';
 import { CommonModule } from '@angular/common';
 
 function getUserInput(): void {
@@ -16,7 +16,7 @@ function getUserInput(): void {
 @Component({
   selector: 'app-programm',
   standalone: true,
-  providers: [FilmServiceService],
+  providers: [FilmService],
   imports: [RouterOutlet, RouterLink, DatePipe, CommonModule],
   templateUrl: './programm.component.html',
   styleUrl: './programm.component.css'
@@ -26,10 +26,10 @@ export class ProgrammComponent implements OnInit {
 
   datum1 = new Date(2024,1,9);
 
-  constructor(public filmService: FilmServiceService) {
+  constructor(public filmService: FilmService) {
     filmService.getFilme().subscribe(data => {
-      console.log(filmService.filme);
     });
+
   }
 
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class ProgrammComponent implements OnInit {
     });
 
     searchIcon.addEventListener("click",() =>{
-      getUserInput();
+      let userInput = getUserInput();
     })
 
     clearIcon.addEventListener("click", () => {

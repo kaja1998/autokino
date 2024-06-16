@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {ProgrammComponent} from "../programm/programm.component";
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class FilmServiceService {
+export class FilmService {
   filme: Array<any> = [];
-  filmBeschreibung: String = "";
   constructor(private http: HttpClient) { }
 
   public getFilme() {
@@ -23,4 +23,16 @@ export class FilmServiceService {
       })
     })
   }
+  // public getCertainFilme(userInput:string){
+  //   return new Observable(observer => {
+  //     this.http.get(`http://127.0.0.1:8080/filme?suchbegriff=${this.suchbegriff}`).subscribe((data: any) => {
+  //
+  //       observer.next()
+  //       observer.complete()
+  //     }, err => {
+  //       observer.error()
+  //       observer.complete()
+  //     })
+  //   })
+  // }
 }
