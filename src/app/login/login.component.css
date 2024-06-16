@@ -151,7 +151,7 @@ button:hover {
 
 .error-message {
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   border: 1px solid red;
   padding: 10px; /* Fügt etwas Innenabstand hinzu, damit der Text nicht direkt an der Umrandung klebt */
   background-color: red;
