@@ -23,16 +23,15 @@ export class FilmService {
       })
     })
   }
-  // public getCertainFilme(userInput:string){
-  //   return new Observable(observer => {
-  //     this.http.get(`http://127.0.0.1:8080/filme?suchbegriff=${this.suchbegriff}`).subscribe((data: any) => {
-  //
-  //       observer.next()
-  //       observer.complete()
-  //     }, err => {
-  //       observer.error()
-  //       observer.complete()
-  //     })
-  //   })
-  // }
+  public getCertainFilme(userInput:string){
+    return new Observable(observer => {
+      this.http.get(`http://127.0.0.1:8080/certainFilme'${userInput}).subscribe((data: any) => {
+        observer.next()
+        observer.complete()
+      }, err => {
+        observer.error()
+        observer.complete()
+      })
+    })
+  }
 }

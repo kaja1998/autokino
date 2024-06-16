@@ -4,13 +4,13 @@ import { DatePipe } from '@angular/common';
 import { FilmService } from '../providers/film.service';
 import { CommonModule } from '@angular/common';
 
-function getUserInput(): void {
+function getUserInput(): string {
   // Lese den Wert des Eingabefelds aus
   const searchInputElement = document.getElementById('search') as HTMLInputElement;
   const userInput: string = searchInputElement.value;
 
   // Gebe den Wert in der Konsole aus
-  console.log('User Input:', userInput);
+  return userInput;
 }
 
 @Component({
@@ -29,7 +29,8 @@ export class ProgrammComponent implements OnInit {
   constructor(public filmService: FilmService) {
     filmService.getFilme().subscribe(data => {
     });
-
+    filmService.getCertainFilme(getUserInput()).subscribe( data => {
+    });
   }
 
   ngOnInit(): void {
