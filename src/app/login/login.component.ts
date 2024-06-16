@@ -83,16 +83,15 @@ export class LoginComponent {
 
     const { vorname, nachname, strasseUndNr, plz, stadt, geburtstag, email, choosepassword } = this.registerForm.value;
 
-    // Check if email is already registered
+    // Gibt es ein Konto mit dieser Mail schon?
     this.registrierenService.checkEmailExists(email).subscribe(response => {
       if (response.exists) {
-        // Email already exists, show error message
+        // E-Mail gibt es schon
         this.errorMessageRegistration = response.message;
       } else {
         // Random ID generieren
         const randomId = Math.floor(Math.random() * 1000) + 1;
 
-        // Assuming you have a method in your service to register the user
         this.registrierenService.registerCustomer({
           id: randomId,
           vorname,
@@ -102,7 +101,7 @@ export class LoginComponent {
           stadt,
           geburtstag,
           email,
-          passwort: choosepassword // You might want to hash this password before sending it to the backend
+          passwort: choosepassword
         }).subscribe(registerResponse => {
           if (registerResponse.success) {
             console.log("Registration successful");
