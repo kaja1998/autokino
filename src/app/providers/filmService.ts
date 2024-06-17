@@ -27,7 +27,7 @@ export class FilmService {
 
   public getCertainFilme(userInput: string): Observable<any> {
     return new Observable(observer => {
-      this.http.get('http://127.0.0.1:8080/certainFilme').subscribe((data: any) => {
+      this.http.post<any>('http://127.0.0.1:8080/certainFilme', {userInput}).subscribe((data: any) => {
         this.certainFilme = data;
         observer.next()
         observer.complete()
