@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { FilmService } from '../providers/film.service';
+import { FilmService } from '../providers/filmService';
 import { CommonModule } from '@angular/common';
 
 @Component({
