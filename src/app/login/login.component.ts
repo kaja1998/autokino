@@ -72,7 +72,6 @@ export class LoginComponent {
     this.loginautService.login(mail, passwort).subscribe(response => {
       if (response.success) {
         console.log("Login erfolgreich");
-        this.loginautService.setLoggedIn(true);
         this.router.navigate(['/kundenkonto']);
       } else {
         this.errorMessageLogin = response.message;

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {LoginAuthenticationService} from "../providers/login-authentication.service";
 
 @Component({
   selector: 'app-kundenkonto',
@@ -10,6 +11,6 @@ import {RouterLink} from "@angular/router";
 })
 export class KundenkontoComponent {
 
-  vorname: string = "Max";
+  vorname: string = "";
 
 }
