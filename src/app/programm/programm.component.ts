@@ -5,10 +5,8 @@ import { FilmService } from '../providers/film.service';
 import { CommonModule } from '@angular/common';
 
 function getUserInput(): string {
-  // Lese den Wert des Eingabefelds aus
   const searchInputElement = document.querySelector('.search') as HTMLInputElement;
   const userInput: string = searchInputElement.value;
-  // Gebe den Wert in der Konsole aus
   return userInput;
 }
 
