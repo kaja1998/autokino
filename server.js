@@ -56,7 +56,8 @@ app.get('/filme', function (req, res) {
 // TODO Filme oder certainFilme?
 app.post('/certainFilme', function (req, res) {
   const userInput = req.body;
-  con.query("SELECT * FROM filme WHERE filmtitel = ?", [userInput],
+  const query = "SELECT * FROM filme WHERE filmtitel = ?"
+  con.query(query, [userInput],
     function (error, results, fields) {
       if (error) throw error;
       res.send(results);
