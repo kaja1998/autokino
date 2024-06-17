@@ -26,14 +26,13 @@ export class ProgrammComponent implements OnInit {
   datum1 = new Date(2024,1,9);
 
   constructor(public filmService: FilmService) {
-    filmService.getFilme().subscribe(data => {
-    });
-    filmService.getCertainFilme(getUserInput()).subscribe( data => {
-      // if(filmService.certainFilme != null){
-      //   console.log(filmService.certainFilme);
-      // }
-
-    });
+    // filmService.getFilme().subscribe(data => {
+    // });
+    // filmService.getCertainFilme(getUserInput()).subscribe( data => {
+    //   // if(filmService.certainFilme != null){
+    //   //   console.log(filmService.certainFilme);
+    //   // }
+    // });
   }
 
   ngOnInit(): void {
