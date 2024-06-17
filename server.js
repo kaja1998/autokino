@@ -53,8 +53,6 @@ app.get('/filme', function (req, res) {
             );
 });
 
-
-// TODO Filme oder certainFilme?
 app.post('/certainFilme', function (req, res) {
   const userInput  = req.body.userInput;
   const query = 'SELECT * FROM filme WHERE filmtitel = ?'
