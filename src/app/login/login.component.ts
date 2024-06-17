@@ -21,6 +21,7 @@ export class LoginComponent {
   showLoginButton: boolean = false;
   showRegisterButton: boolean = true;
 
+  successMessageRegistration: string = '';
   errorMessageLogin: string = '';
   errorMessageRegistration: string = '';
   userForm!: FormGroup;
@@ -40,7 +41,8 @@ export class LoginComponent {
       strasseUndNr: new FormControl("", [Validators.required]),
       plz: new FormControl("", [Validators.required]),
       stadt: new FormControl("", [Validators.required]),
-      geburtstag: new FormControl("", [Validators.required]),
+      geburtsdatum: new FormControl("", [Validators.required]),
+      zahlungsmittel: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       choosepassword: new FormControl("", [Validators.required]),
     });
@@ -51,6 +53,11 @@ export class LoginComponent {
     this.showRegisterForm = !this.showRegisterForm;
     this.showLoginButton = !this.showLoginButton;
     this.showRegisterButton = !this.showRegisterButton;
+
+    // Fehlermeldungen und Erfolgsmeldungen zurücksetzen, wenn getoggelt wird
+    this.errorMessageLogin = '';
+    this.successMessageRegistration = '';
+    this.errorMessageRegistration = '';
   }
 
   login(): void {
@@ -64,62 +71,66 @@ export class LoginComponent {
 
     this.loginautService.login(mail, passwort).subscribe(response => {
       if (response.success) {
-        console.log("Login successful");
+        console.log("Login erfolgreich");
         this.loginautService.setLoggedIn(true);
         this.router.navigate(['/kundenkonto']);
       } else {
         this.errorMessageLogin = response.message;
-        console.log("Login failed", response.message);
+        console.log("Login fehlgeschlagen");
       }
     });
   }
 
-  registrieren(): void {
-    this.isFormSubmitted = true;
+    registrieren(): void {
+        this.isFormSubmitted = true;
 
-    if (this.registerForm.invalid) {
-      return;
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        const { vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, email, choosepassword } = this.registerForm.value;
+
+        // Gibt es ein Konto mit dieser Mail schon?
+        this.registrierenService.checkEmailExists(email).subscribe(response => {
+            if (response.exists) {
+                // E-Mail gibt es schon
+                console.log("Kunde mit dieser Mail gibt es schon.");
+                this.errorMessageRegistration = response.message;
+                this.successMessageRegistration = '';
+            } else {
+                // Random ID generieren
+                const randomId = Math.floor(Math.random() * 1000000) + 1; // Sicherstellen, dass die ID einzigartig ist
+
+                this.registrierenService.registerCustomer({
+                    id: randomId,
+                    vorname,
+                    nachname,
+                    strasseUndNr,
+                    plz,
+                    stadt,
+                    geburtsdatum,
+                    zahlungsmittel,
+                    email,
+                    choosepassword
+                }).subscribe(registerResponse => {
+                    if (registerResponse.success) {
+                        console.log("Registration erfolgreich");
+                        this.successMessageRegistration = registerResponse.message;
+                        this.resetForm();
+                    } else {
+                        console.log("Registration fehlgeschlagen");
+                        this.errorMessageRegistration = registerResponse.message;
+                    }
+                });
+            }
+        });
     }
 
-    const { vorname, nachname, strasseUndNr, plz, stadt, geburtstag, email, choosepassword } = this.registerForm.value;
+    resetForm(): void {
+        this.registerForm.reset();
+        this.isFormSubmitted = false;
+        this.errorMessageRegistration = '';
+    }
 
-    // Gibt es ein Konto mit dieser Mail schon?
-    this.registrierenService.checkEmailExists(email).subscribe(response => {
-      if (response.exists) {
-        // E-Mail gibt es schon
-        this.errorMessageRegistration = response.message;
-      } else {
-        // Random ID generieren
-        const randomId = Math.floor(Math.random() * 1000) + 1;
-
-        this.registrierenService.registerCustomer({
-          id: randomId,
-          vorname,
-          nachname,
-          strasseUndNr,
-          plz,
-          stadt,
-          geburtstag,
-          email,
-          passwort: choosepassword
-        }).subscribe(registerResponse => {
-          if (registerResponse.success) {
-            console.log("Registration successful");
-            // Kunden automatisch einloggen?
-            // this.loginautService.login(email, choosepassword).subscribe(loginResponse => {
-            //   if (loginResponse.success) {
-            //     console.log("Login after registration successful");
-            //     this.loginautService.setLoggedIn(true);
-            //     this.router.navigate(['/kundenkonto']);
-            //   }
-            // });
-          } else {
-            console.log("Registration failed", registerResponse.message);
-            this.errorMessageRegistration = "Es gab ein Problem bei der Registrierung. Bitte versuche es später erneut.";
-          }
-        });
-      }
-    });
-  }
 }
 

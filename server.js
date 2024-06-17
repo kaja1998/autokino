@@ -65,6 +65,31 @@ app.post('/loginaut', function (req, res) {
         });
 });
 
+app.post('/checkEmailExists', function (req, res) {
+    const { email } = req.body;
+    const query = "SELECT * FROM kunden WHERE mail = ?";
+    con.query(query, [email], function (error, results) {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.send({ exists: true, message: "Diese E-Mail-Adresse ist bereits registriert." });
+        } else {
+            res.send({ exists: false });
+        }
+    });
+});
+
+app.post('/registerCustomer', function (req, res) {
+    const { id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, email, choosepassword } = req.body;
+    const query = "INSERT INTO kunden (id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, mail, passwort) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    con.query(query, [id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, email, choosepassword], function (error, results) {
+        if (error) {
+            res.send({ success: false, message: "Registrierung fehlgeschlagen" });
+        } else {
+            res.send({ success: true, message: "Registrierung erfolgreich." });
+        }
+    });
+});
+
 
 app.get('/kundendaten', function (req, res) {
     con.query("SELECT * FROM kunden",

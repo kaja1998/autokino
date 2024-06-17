@@ -40,6 +40,8 @@
 
 <div class="registrieren-form" [hidden]="!showRegisterForm">
   <form [formGroup]="registerForm" (ngSubmit)="registrieren()">
+    <div *ngIf="errorMessageRegistration" class="error-message">{{ errorMessageRegistration }}</div>
+    <div *ngIf="successMessageRegistration" class="success-message">{{ successMessageRegistration }}</div>
 
     <!-- Vorname -->
     <label class="form-label">Vorname</label>
@@ -74,10 +76,17 @@
 
     <!-- Geburtsdatum -->
     <label class="form-label">Geburtsdatum</label>
-    <div class="text-danger" *ngIf="registerForm.controls['geburtstag'].invalid && (isFormSubmitted || registerForm.controls['geburtstag'].touched || registerForm.controls['geburtstag'].dirty)">
-      <span *ngIf="registerForm.controls['geburtstag'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    <div class="text-danger" *ngIf="registerForm.controls['geburtsdatum'].invalid && (isFormSubmitted || registerForm.controls['geburtsdatum'].touched || registerForm.controls['geburtsdatum'].dirty)">
+      <span *ngIf="registerForm.controls['geburtsdatum'].errors?.['required']">Bitte fülle das Feld aus.</span>
     </div>
-    <input type="date" id ="geburtstag" formControlName="geburtstag" placeholder="tt.mm.jjjj">
+    <input type="date" id ="geburtsdatum" formControlName="geburtsdatum" placeholder="tt.mm.jjjj">
+
+    <!-- Zahlungsmittel -->
+    <label class="form-label">Zahlungsmittel</label>
+    <div class="text-danger" *ngIf="registerForm.controls['zahlungsmittel'].invalid && (isFormSubmitted || registerForm.controls['zahlungsmittel'].touched || registerForm.controls['zahlungsmittel'].dirty)">
+      <span *ngIf="registerForm.controls['zahlungsmittel'].errors?.['required']">Bitte fülle das Feld aus.</span>
+    </div>
+    <input type="text" id ="zahlungsmittel" formControlName="zahlungsmittel" placeholder="Zahlungsmittel">
 
     <!-- E-Mail -->
     <label class="form-label">E-Mail</label>
