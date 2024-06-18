@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginAuthenticationService} from "../providers/login-authentication.service";
 import { Router } from '@angular/router';
 import {NgIf} from "@angular/common";
@@ -14,7 +14,7 @@ import {RegistrierenService} from "../providers/registrieren.service";
   styleUrl: './login.component.css'
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   showLoginForm: boolean = true; // Gibt an, ob das Anmeldeformular sichtbar ist
   showRegisterForm: boolean = false; // Gibt an, ob das Registrierungsformular sichtbar ist
@@ -29,7 +29,9 @@ export class LoginComponent {
   isFormSubmitted: boolean = false;
   isFormSubmittedLogin: boolean = false;
 
-  constructor(public loginautService: LoginAuthenticationService, public registrierenService: RegistrierenService, public router: Router) {
+  constructor(public loginautService: LoginAuthenticationService, public registrierenService: RegistrierenService, public router: Router) {}
+
+  ngOnInit() {
     this.userForm =  new FormGroup({
       mail: new FormControl("",[Validators.required]),
       passwort: new FormControl("",[Validators.required]),
