@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnChanges} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {LoginAuthenticationService} from "../providers/login-authentication.service";
 
@@ -9,11 +9,11 @@ import {LoginAuthenticationService} from "../providers/login-authentication.serv
   templateUrl: './kundenkonto.component.html',
   styleUrl: './kundenkonto.component.css'
 })
-export class KundenkontoComponent implements OnInit {
+export class KundenkontoComponent implements AfterViewInit {
 
   user: any = "";
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.user = localStorage.getItem('user');
   }
 
