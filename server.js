@@ -60,8 +60,8 @@ app.post('/certainFilme', function (req, res) {
     function (error, results, fields) {
       if (error) throw error;
       res.send(results);
-    }
-  );
+    });
+});
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
