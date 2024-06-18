@@ -4,6 +4,7 @@ var app = express();                               // create our app w/ express
 var path = require('path');
 var mysql = require('mysql');
 var cors = require('cors');
+const string_decoder = require("string_decoder");
 const allowCrossDomain = (req, res, next) => {
       res.header(`Access-Control-Allow-Origin`, `*`);
       res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
@@ -44,13 +45,23 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-    con.query("SELECT * FROM filme",
-        function (error, results, fields) {
-            if (error) throw error;
-            res.send(results);
-        }
-    );
+  con.query("SELECT * FROM filme",
+    function (error, results, fields) {
+    if (error) throw error;
+    res.send(results);
+    }
+  );
 });
+
+app.post('/certainFilme', function (req, res) {
+  const userInput  = '%' + req.body.userInput +'%';
+  const query = "SELECT * FROM filme WHERE filmtitel LIKE ? "
+  con.query(query, [userInput],
+    function (error, results, fields) {
+      if (error) throw error;
+      res.send(results);
+    }
+  );
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
@@ -99,4 +110,5 @@ app.get('/kundendaten', function (req, res) {
       }
     );
 });
+
 
