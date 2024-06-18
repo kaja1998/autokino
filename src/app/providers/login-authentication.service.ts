@@ -35,4 +35,9 @@ export class LoginAuthenticationService {
     });
   }
 
+  logout(): void {
+    this.isUserLoggedIn = false;
+    localStorage.removeItem('isUserLoggedIn');
+  }
+
 }
