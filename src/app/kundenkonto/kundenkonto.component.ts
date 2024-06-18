@@ -11,12 +11,12 @@ import {RouterLink} from "@angular/router";
 export class KundenkontoComponent implements OnInit {
 
   user: any = "";
-  vorname: any = "";
 
   ngOnInit(): void {
-    this.user = localStorage.getItem('user');
-    this.vorname = localStorage.getItem('userVorname');
-    console.log(this.vorname);
+    const userString = localStorage.getItem('user');
+    if (userString) {     //wenn nicht null, dann parse String zurück in ein Objekt
+      this.user = JSON.parse(userString);
+    }
   }
 
 }
