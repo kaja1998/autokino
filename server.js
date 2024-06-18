@@ -55,8 +55,8 @@ app.get('/filme', function (req, res) {
 });
 
 app.post('/certainFilme', function (req, res) {
-  const userInput  = req.body.userInput;
-  const query = 'SELECT * FROM filme WHERE filmtitel = ?'
+  const userInput  = '%' + req.body.userInput +'%';
+  const query = "SELECT * FROM filme WHERE filmtitel LIKE ? "
   con.query(query, [userInput],
     function (error, results, fields) {
       if (error) throw error;

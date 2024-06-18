@@ -163,3 +163,7 @@ a:hover {/*hover effekt flex Items*/
   .trenner-container{
     display: flex;
   }
+
+  #nichtsGefundenMeldung{
+    visibility: hidden;
+  }

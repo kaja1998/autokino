@@ -10,6 +10,7 @@ import {ProgrammComponent} from "../programm/programm.component";
 export class FilmService {
   filme: Array<any> = [];
   certainFilme: Array<any> = [];
+  userInput: string = "";
   constructor(private http: HttpClient) { }
 
   public getFilme() {
@@ -29,6 +30,7 @@ export class FilmService {
     return new Observable(observer => {
       this.http.post<any>('http://127.0.0.1:8080/certainFilme', {userInput}).subscribe((data: any) => {
         this.certainFilme = data;
+        this.userInput = userInput;
         observer.next()
         observer.complete()
       }, err => {
