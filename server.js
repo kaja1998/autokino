@@ -51,16 +51,7 @@ app.get('/filme', function (req, res) {
             con.query("SELECT * FROM filme",
                   function (error, results, fields) {
                         if (error) throw error;
-                        res.send(results);
-<<<<<<< Updated upstream
-
-                        con.end(function (err) {
-                              if (err) throw err;
-                              console.log("Disconnected");
-
-                        });
-=======
->>>>>>> Stashed changes
+                        res.send(results)
                   }
             );
       });
