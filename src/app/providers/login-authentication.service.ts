@@ -7,6 +7,7 @@ import {response} from "express";
   providedIn: 'root'
 })
 export class LoginAuthenticationService {
+  isUserLoggedIn: boolean = false;
   public currentUser: any = {}; // Platzhalter für Benutzerdaten
 
   constructor(private http: HttpClient) { }
@@ -16,7 +17,10 @@ export class LoginAuthenticationService {
       this.http.post<any>('http://127.0.0.1:8080/loginaut', { mail, passwort }).subscribe(
           (response: any) => {
             if (response.success) {
+              this.isUserLoggedIn = true;
               this.currentUser = response.user; // Benutzerdaten setzen
+              localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
+              localStorage.setItem('user', this.currentUser);
               observer.next(response); // Weiterleiten der erfolgreichen Antwort
             } else {
               observer.error(response.message);
