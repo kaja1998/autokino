@@ -45,12 +45,13 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-            con.query("SELECT * FROM filme",
-                  function (error, results, fields) {
-                        if (error) throw error;
-                        res.send(results);
-                  }
-            );
+  //const query = "SELECT f.filmtitel, f.beschreibung, v.datum, v.ort FROM filme f INNER JOIN veranstaltungen v ON f.filmtitel = v.filmtitel";
+  con.query("SELECT * FROM filme",
+    function (error, results, fields) {
+    if (error) throw error;
+    res.send(results);
+    }
+  );
 });
 
 app.post('/certainFilme', function (req, res) {

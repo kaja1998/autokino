@@ -16,18 +16,18 @@
         <hr>
         <p class="filme-title">Filme</p>
 
-        <div class="film">
+        <div *ngFor="let film of filmService.filme" class="film">
             <div class="filminfo">
-                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
+                <img class="filmplakat" src="../assets/drachen.jpg" alt="'Filmplakat zu ' + film.filmtitel">
                 <div class="beschreibung">
-                    <div class="filmtitel">{{filmService.filme[0].filmtitel}}</div>
-                    <div>{{filmService.filme[0].beschreibung}}</div>
+                    <div class="filmtitel">{{film.filmtitel}}</div>
+                    <div>{{film.beschreibung}}</div>
                     <div class = "mehr-Lesen-Button">
                         <a routerLink="/filmdetails">Zum Film</a>
                     </div>
                 </div>
                 <div class="dates">
-                    <div class="date">12.05.24</div>
+                    <div class="date">{{datum1 | date: "dd.MM.yy"}}</div>
                     <div class="date">15.05.24</div>
                     <div class="date">18.06.25</div>
                 </div>
@@ -38,54 +38,6 @@
                 <div class="trenner"></div>
             </div>
 
-        </div>
-
-
-        <div class="film">
-            <div class="filminfo">
-                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
-                <div class="beschreibung">
-                    <div class="filmtitel">{{filmService.filme[1].filmtitel}}</div>
-                    <div>{{filmService.filme[1].beschreibung}}</div>
-                    <div class = "mehr-Lesen-Button">
-                        <a routerLink="/filmdetails">Zum Film</a>
-                    </div>
-                </div>
-                <div class="dates">
-                    <div class="date">12.05.24</div>
-                    <div class="date">15.05.24</div>
-                    <div class="date">18.06.25</div>
-                </div>
-            </div>
-
-            <div class="trenner-container">
-                <div class="gap"></div>
-                <div class="trenner"></div>
-            </div>
-
-        </div>
-
-        <div class="film">
-            <div class="filminfo">
-                <img class="filmplakat" src="../assets/drachen.jpg" alt="Filmplakat zu Drachenzähmen-leicht-gemacht">
-                <div class="beschreibung">
-                    <div class="filmtitel">{{filmService.filme[2].filmtitel}}</div>
-                    <div>{{filmService.filme[2].beschreibung}}</div>
-                    <div class = "mehr-Lesen-Button">
-                        <a routerLink="/filmdetails">Zum Film</a>
-                    </div>
-                </div>
-                <div class="dates">
-                  <div class="date">{{datum1 | date: "shortDate"}}</div>
-                  <div class="date">15.05.24</div>
-                  <div class="date">18.06.25</div>
-                </div>
-            </div>
-
-            <div class="trenner-container">
-                <div class="gap"></div>
-                <div class="trenner"></div>
-            </div>
         </div>
     </div>
 </body>

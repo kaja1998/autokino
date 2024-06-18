@@ -45,7 +45,7 @@ export class ProgrammComponent implements OnInit {
     searchIcon.addEventListener("click",() =>{
       this.filmService.getCertainFilme(getUserInput()).subscribe( data => {
         if(this.filmService.certainFilme != null){
-          console.log(this.filmService.certainFilme);
+          this.filmService.filme = this.filmService.certainFilme;
         }
       });
     })
