@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -8,8 +8,15 @@ import {RouterLink} from "@angular/router";
   templateUrl: './kundenkonto.component.html',
   styleUrl: './kundenkonto.component.css'
 })
-export class KundenkontoComponent {
+export class KundenkontoComponent implements OnInit {
 
-  vorname: string = "Max";
+  user: any = "";
+
+  ngOnInit(): void {
+    const userString = localStorage.getItem('user');
+    if (userString) {     //wenn nicht null, dann parse String zurück in ein Objekt
+      this.user = JSON.parse(userString);
+    }
+  }
 
 }

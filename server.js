@@ -45,7 +45,6 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-  //const query = "SELECT f.filmtitel, f.beschreibung, v.datum, v.ort FROM filme f INNER JOIN veranstaltungen v ON f.filmtitel = v.filmtitel";
   con.query("SELECT * FROM filme",
     function (error, results, fields) {
     if (error) throw error;
@@ -63,6 +62,53 @@ app.post('/certainFilme', function (req, res) {
       res.send(results);
     }
   );
+
+app.post('/loginaut', function (req, res) {
+    const { mail, passwort } = req.body;
+        const query = "SELECT * FROM kunden WHERE mail = ? AND passwort = ?";
+        con.query(query, [mail, passwort], function (error, results) {
+            if (error) throw error;
+            if (results.length > 0) {
+                res.send({ success: true, user: results[0] });
+            } else {
+                res.send({ success: false, message: "Achtung: Die E-Mail-Adresse oder das Passwort stimmen nicht mit den bei uns hinterlegten Daten überein. Bitte überprüfe deine Eingaben und versuche es noch mal." });
+            }
+        });
+});
+
+app.post('/checkEmailExists', function (req, res) {
+    const { email } = req.body;
+    const query = "SELECT * FROM kunden WHERE mail = ?";
+    con.query(query, [email], function (error, results) {
+        if (error) throw error;
+        if (results.length > 0) {
+            res.send({ exists: true, message: "Diese E-Mail-Adresse ist bereits registriert." });
+        } else {
+            res.send({ exists: false });
+        }
+    });
+});
+
+app.post('/registerCustomer', function (req, res) {
+    const { id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, email, choosepassword } = req.body;
+    const query = "INSERT INTO kunden (id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, mail, passwort) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    con.query(query, [id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, email, choosepassword], function (error, results) {
+        if (error) {
+            res.send({ success: false, message: "Registrierung fehlgeschlagen" });
+        } else {
+            res.send({ success: true, message: "Registrierung erfolgreich." });
+        }
+    });
+});
+
+
+app.get('/kundendaten', function (req, res) {
+    con.query("SELECT * FROM kunden",
+      function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+      }
+    );
 });
 
 

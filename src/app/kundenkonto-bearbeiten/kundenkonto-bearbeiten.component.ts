@@ -1,13 +1,22 @@
 import { Component } from '@angular/core';
+import {KundendatenService} from "../providers/kundendaten.service";
 
 @Component({
   selector: 'app-kundenkonto-bearbeiten',
   standalone: true,
+  providers: [KundendatenService],
   imports: [],
   templateUrl: './kundenkonto-bearbeiten.component.html',
   styleUrl: './kundenkonto-bearbeiten.component.css'
 })
+
 export class KundenkontoBearbeitenComponent {
+
+  constructor(public kundendatenService: KundendatenService) {
+    kundendatenService.getKundendaten().subscribe(data => {
+      console.log(kundendatenService);
+    });
+  }
 
   vorname: string = "Max";
   nachname: string = "Mustermann";

@@ -18,6 +18,7 @@ export class StartComponent {
     });
   }
 }
+
 /*window.onload = function() {
   var video = document.querySelector('video');
   if (video !== null) {
