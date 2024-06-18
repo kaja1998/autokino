@@ -11,10 +11,12 @@ import {LoginAuthenticationService} from "../providers/login-authentication.serv
 })
 export class KundenkontoComponent implements OnInit {
 
+  user: any = "";
   vorname: any = "";
 
   ngOnInit(): void {
-    this.vorname = localStorage.getItem('user');
+    this.user = localStorage.getItem('user');
+    this.vorname = localStorage.getItem('userVorname');
     console.log(this.vorname);
   }
 
