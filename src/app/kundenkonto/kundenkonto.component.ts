@@ -15,6 +15,7 @@ export class KundenkontoComponent implements OnInit {
 
   ngOnInit(): void {
     this.vorname = localStorage.getItem('user');
+    console.log(this.vorname);
   }
 
 }
