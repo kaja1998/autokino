@@ -166,4 +166,6 @@ a:hover {/*hover effekt flex Items*/
 
   #nichtsGefundenMeldung{
     visibility: hidden;
+    text-align: center;
+    font-size: large;
   }
