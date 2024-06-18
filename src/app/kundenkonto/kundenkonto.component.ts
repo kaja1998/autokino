@@ -12,9 +12,11 @@ import {LoginAuthenticationService} from "../providers/login-authentication.serv
 export class KundenkontoComponent implements AfterViewInit {
 
   user: any = "";
+  vorname: string = "";
 
   ngAfterViewInit(): void {
     this.user = localStorage.getItem('user');
+    this.vorname = this.user.vorname;
   }
 
 }
