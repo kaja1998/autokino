@@ -21,6 +21,7 @@ export class LoginAuthenticationService {
               this.currentUser = response.user; // Benutzerdaten setzen
               localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
               localStorage.setItem('user', this.currentUser);
+              localStorage.setItem('userVorname', this.currentUser.vorname);
               observer.next(response); // Weiterleiten der erfolgreichen Antwort
             } else {
               observer.error(response.message);

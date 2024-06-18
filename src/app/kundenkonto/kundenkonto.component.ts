@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
+import {LoginAuthenticationService} from "../providers/login-authentication.service";
 
 @Component({
   selector: 'app-kundenkonto',
@@ -11,11 +12,12 @@ import {RouterLink} from "@angular/router";
 export class KundenkontoComponent implements OnInit {
 
   user: any = "";
-  vorname: string = "";
+  vorname: any = "";
 
   ngOnInit(): void {
     this.user = localStorage.getItem('user');
-    this.vorname = this.user.vorname;
+    this.vorname = localStorage.getItem('userVorname');
+    console.log(this.vorname);
   }
 
 }
