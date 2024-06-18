@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {LoginAuthenticationService} from "../providers/login-authentication.service";
 
@@ -9,8 +9,15 @@ import {LoginAuthenticationService} from "../providers/login-authentication.serv
   templateUrl: './kundenkonto.component.html',
   styleUrl: './kundenkonto.component.css'
 })
-export class KundenkontoComponent {
+export class KundenkontoComponent implements OnInit {
 
-  vorname: string = "";
+  user: any = "";
+  vorname: any = "";
+
+  ngOnInit(): void {
+    this.user = localStorage.getItem('user');
+    this.vorname = localStorage.getItem('userVorname');
+    console.log(this.vorname);
+  }
 
 }
