@@ -13,13 +13,17 @@ import { DatePipe } from '@angular/common';
   styleUrl: './programm.component.css'
 })
 
+
+
 export class ProgrammComponent implements OnInit {
 
-  constructor(filmService : FilmService){
-
-  }
+  constructor(public filmService: FilmService) {
+    filmService.getFilme().subscribe(data => {
+      this.filme = filmService.filme;
+    });
 
   datum1 = new Date(2024,1,9);
+  
 
   ngOnInit(): void {
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
