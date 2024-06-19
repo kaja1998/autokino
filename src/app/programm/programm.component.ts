@@ -15,6 +15,10 @@ import { DatePipe } from '@angular/common';
 
 export class ProgrammComponent implements OnInit {
 
+  constructor(filmService : FilmService){
+
+  }
+
   datum1 = new Date(2024,1,9);
 
   ngOnInit(): void {
