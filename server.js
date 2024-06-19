@@ -96,3 +96,12 @@ app.get('/bewertung', function (req, res) {
                   }
             );
 });
+
+app.get('/erscheinungsdatum', function (req, res) {
+      con.query("SELECT DATE_FORMAT(erscheinungsdatum, '%d.%m.%Y') AS erscheinungsdatum FROM filme WHERE filmtitel = 'Drachenzähmen'",
+            function (error, results, fields) {
+                  if (error) throw error;
+                  res.send(results);
+            }
+      );
+});
