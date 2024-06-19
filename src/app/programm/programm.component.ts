@@ -24,9 +24,7 @@ export class ProgrammComponent implements OnInit {
     filmService.getFilme().subscribe(data => {
       this.filme = filmService.filme;
     });
-
- 
-  
+  }
 
   ngOnInit(): void {
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
