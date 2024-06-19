@@ -17,12 +17,15 @@ import { DatePipe } from '@angular/common';
 
 export class ProgrammComponent implements OnInit {
 
+  datum1 = new Date(2024,1,9);
+  filme : Array<any> = [];
+
   constructor(public filmService: FilmService) {
     filmService.getFilme().subscribe(data => {
       this.filme = filmService.filme;
     });
 
-  datum1 = new Date(2024,1,9);
+ 
   
 
   ngOnInit(): void {
