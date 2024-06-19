@@ -6,9 +6,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './kartenkaufen.component.html',
-  styleUrl: './kartenkaufen.component.css'
+  styleUrls: ['./kartenkaufen.component.css']
 })
 export class KartenkaufenComponent {
-  checkboxes = Array.from({ length: 60 }, (_, i) => `platz${i + 1}`);
-}
+  zerosArray: number[] = Array(60).fill(0);
 
+  public select(index: number) {
+    this.zerosArray[index] = this.zerosArray[index] === 0 ? 1 : 0
+  }
+}
