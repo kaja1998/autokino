@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class FilmServiceService {
+export class FilmService {
   filme: Array<any> = [];
   constructor(private http: HttpClient) { }
 
