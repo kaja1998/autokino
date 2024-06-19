@@ -4,25 +4,35 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 200px;
 }
 
-.container-unten {
-    height: 250px;
+.container-oben-rechts {
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
 }
 
 .container-oben-links {
     height: 100%;
-    width: 30%;
+    width: 25%;
+}
+
+.container-img-info{
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    height: 25%;
 }
 
 .container-oben-mitte {
     height: 100%;
     width: 50%;
-
 }
 
 .container-Leinwand {
-    height: 20%;
+    height: 12%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,11 +46,17 @@
     width: 30%;
 }
 
-p {
-    text-align: center;
-    font-size: 30;
-    outline: auto;
-    padding: 1% 3% 1% 3%;
+
+.info-text{
+    width: 105px;
+    height: 21px;
+    padding-left: 15%;
+}
+.park-img-info{
+    height: 35%;
+    width: 35%;
+    margin: 5%;
+
 }
 
 .parkflaeche {
@@ -55,27 +71,14 @@ p {
 .container-oben-rechts {
     height: 100%;
     width: 20%;
-
 }
 
 .platz {
-    margin: 3%;
-    width: 100%;
-    height: 100%;
+    height: 10%;
+    width: 10%;
 }
+
 .park-img{
     height: 100%;
     width: 100%;
-}
-
-input[type="checkbox"] {
-    width: 20px;
-    /* Adjust the width */
-    height: 20px;
-    /* Adjust the height */
-    transform: scale(1.8);
-    /* Adjust the scale factor as needed */
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
 }
