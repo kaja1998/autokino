@@ -38,15 +38,15 @@ export class LoginComponent implements OnInit {
     })
 
     this.registerForm = new FormGroup({
-      vorname: new FormControl("", [Validators.required]),
-      nachname: new FormControl("", [Validators.required]),
-      strasseUndNr: new FormControl("", [Validators.required]),
-      plz: new FormControl("", [Validators.required]),
+      vorname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      nachname: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      strasseUndNr: new FormControl("", [Validators.required, Validators.minLength(5)]),
+      plz: new FormControl("", [Validators.required, Validators.min(10000)]),
       stadt: new FormControl("", [Validators.required]),
       geburtsdatum: new FormControl("", [Validators.required]),
-      zahlungsmittel: new FormControl("", [Validators.required]),
+      zahlungsmittel: new FormControl("", [Validators.required, Validators.minLength(22)]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      choosepassword: new FormControl("", [Validators.required]),
+      choosepassword: new FormControl("", [Validators.required, Validators.minLength(6)]),
     });
   }
 
