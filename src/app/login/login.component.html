@@ -71,7 +71,7 @@
     <label class="form-label">Postleitzahl und Stadt</label>
     <div class="text-danger" *ngIf="registerForm.controls['plz'].invalid && (isFormSubmitted || registerForm.controls['plz'].touched || registerForm.controls['plz'].dirty)">
       <span *ngIf="registerForm.controls['plz'].errors?.['required']">Bitte fülle das Feld aus.</span>
-      <span *ngIf="registerForm.controls['plz'].errors?.['min']">Deine Postleitzahl/Stadt muss mindestens 5 Zeichen lang sein.</span>
+      <span *ngIf="registerForm.controls['plz'].errors?.['min']">Eine Postleitzahl muss mindestens 5 Zeichen lang sein.</span>
     </div>
     <div class="plz-stadt">
       <input type="number" id="plz" formControlName="plz" placeholder="PLZ">

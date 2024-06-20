@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       nachname: new FormControl("", [Validators.required, Validators.minLength(3)]),
       strasseUndNr: new FormControl("", [Validators.required, Validators.minLength(5)]),
       plz: new FormControl("", [Validators.required, Validators.min(10000)]),
-      stadt: new FormControl("", [Validators.required]),
+      stadt: new FormControl("", [Validators.required, Validators.minLength(3)]),
       geburtsdatum: new FormControl("", [Validators.required]),
       zahlungsmittel: new FormControl("", [Validators.required, Validators.minLength(22)]),
       email: new FormControl("", [Validators.required, Validators.email]),
