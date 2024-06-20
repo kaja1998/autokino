@@ -1,54 +1,97 @@
 <body>
 
-  <div class="kundenkonto">
-    <h1>Mein Profil</h1>
-  </div>
+<div class="kundenkonto">
+  <h1>Mein Profil</h1>
+</div>
 
-  <div class="mitgliedschaftsdaten">
-    <h2>Meine Mitgliedschaftsdaten im Überblick</h2>
-  </div>
-
-  <div class="table1">
-    <table class="kundendaten">
-      <tr>
-        <th>Vorname:</th>
-        <td>{{ vorname }}</td>
-      </tr>
-      <tr>
-        <th>Nachname:</th>
-        <td>{{ nachname }}</td>
-      </tr>
-      <tr>
-        <th>Straße und Hausnummer:</th>
-        <td>{{ strasse }}</td>
-      </tr>
-      <tr>
-        <th>PLZ:</th>
-        <td>{{ plz }}</td>
-      </tr>
-      <tr>
-        <th>Stadt:</th>
-        <td>{{ stadt }}</td>
-      </tr>
-      <tr>
-        <th>Geburtsdatum:</th>
-        <td>{{ geburtsdatum }}</td>
-      </tr>
-    </table>
-    <button (click)="datenbearbeiten()">Daten bearbeiten</button>
-  </div>
-
-  <div class="logindaten">
-    <h2>Meine Login-Daten</h2>
-  </div>
-
-  <table class="email">
+<div class="table1">
+  <table class="kundendaten" *ngIf="!isEditing">
+    <h2>Login-Daten</h2>
     <tr>
-      <th>E-Mail-Adresse:</th>
-      <td>{{ email }}</td>
+      <th>E-Mail:</th>
+      <td>{{ user?.mail }}</td>
+    </tr>
+    <tr>
+      <th>Passwort:</th>
+      <td>{{ user?.passwort }}</td>
+    </tr>
+    <h2>Persönlichen Daten</h2>
+    <tr>
+      <th>Vorname:</th>
+      <td>{{ user?.vorname }}</td>
+    </tr>
+    <tr>
+      <th>Nachname:</th>
+      <td>{{ user?.nachname }}</td>
+    </tr>
+    <tr>
+      <th>Straße und Hausnummer:</th>
+      <td>{{ user?.strasseUndNr }}</td>
+    </tr>
+    <tr>
+      <th>PLZ:</th>
+      <td>{{ user?.plz }}</td>
+    </tr>
+    <tr>
+      <th>Stadt:</th>
+      <td>{{ user?.stadt }}</td>
+    </tr>
+    <tr>
+      <th>Geburtsdatum:</th>
+      <td>{{ formatDate(user?.geburtsdatum) }}</td>
+    </tr>
+    <tr>
+      <th>Zahlungsmittel:</th>
+      <td>{{ user?.zahlungsmittel }}</td>
     </tr>
   </table>
 
-  <button (click)="pwbearbeiten()">Passwort ändern</button>
+  <form *ngIf="isEditing" (ngSubmit)="kundenDatenAendern()">
+    <table class="kundendaten">
+      <h2>Login-Daten</h2>
+      <tr>
+        <th>E-Mail-Adresse:</th>
+        <td>{{ user?.mail }}</td>
+      </tr>
+      <tr>
+        <th>Passwort:</th>
+        <td><input [(ngModel)]="user.passwort" name="passwort" required></td>
+      </tr>
+      <h2>Persönlichen Daten</h2>
+      <tr>
+        <th>Vorname:</th>
+        <td><input [(ngModel)]="user.vorname" name="vorname" required></td>
+      </tr>
+      <tr>
+        <th>Nachname:</th>
+        <td><input [(ngModel)]="user.nachname" name="nachname" required></td>
+      </tr>
+      <tr>
+        <th>Straße und Hausnummer:</th>
+        <td><input [(ngModel)]="user.strasseUndNr" name="strasse" required></td>
+      </tr>
+      <tr>
+        <th>PLZ:</th>
+        <td><input [(ngModel)]="user.plz" name="plz" required></td>
+      </tr>
+      <tr>
+        <th>Stadt:</th>
+        <td><input [(ngModel)]="user.stadt" name="stadt" required></td>
+      </tr>
+      <tr>
+        <th>Geburtsdatum:</th>
+        <td>{{ formatDate(user?.geburtsdatum) }}</td>
+      </tr>
+      <tr>
+        <th>Zahlungsmittel:</th>
+        <td><input [(ngModel)]="user.zahlungsmittel" name="zahlungsmittel" required></td>
+      </tr>
+    </table>
+    <button type="submit" (click)="kundenDatenAendern()">Speichern</button>
+    <button type="button" (click)="cancelEdit()">Abbrechen</button>
+  </form>
+
+  <button *ngIf="!isEditing" (click)="datenbearbeiten()">Daten bearbeiten</button>
+</div>
 
 </body>

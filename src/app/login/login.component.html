@@ -53,14 +53,14 @@
     <!-- Nachname -->
     <label class="form-label">Nachname</label>
     <div class="text-danger" *ngIf="registerForm.controls['nachname'].invalid && (isFormSubmitted || registerForm.controls['nachname'].touched || registerForm.controls['nachname'].dirty)">
-      <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle die Felder aus.</span>
+      <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle das Feld aus.</span>
     </div>
     <input type="text" id="nachname" formControlName="nachname" placeholder="Nachname">
 
     <!-- Straße und Hausnummer -->
     <label class="form-label">Straße und Hausnummer</label>
     <div class="text-danger" *ngIf="registerForm.controls['strasseUndNr'].invalid && (isFormSubmitted || registerForm.controls['strasseUndNr'].touched || registerForm.controls['strasseUndNr'].dirty)">
-      <span *ngIf="registerForm.controls['strasseUndNr'].errors?.['required']">Bitte fülle das Feld aus.</span>
+      <span *ngIf="registerForm.controls['strasseUndNr'].errors?.['required']">Bitte fülle die Felder aus.</span>
     </div>
     <input type="text" id ="strasseUndNr" formControlName="strasseUndNr" placeholder="Straße und Hausnummer">
 

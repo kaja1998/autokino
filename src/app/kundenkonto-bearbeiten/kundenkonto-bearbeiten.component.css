@@ -7,7 +7,7 @@ body {
   margin: 0;
 }
 
-.mitgliedschaftsdaten h2 {
+.kundendaten h2 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 20px;
@@ -29,13 +29,6 @@ th, td {
   border: 1px solid white;
   padding: 8px;
   text-align: left;
-}
-
-.logindaten h2 {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 20px;
-  padding-bottom: 10px;
 }
 
 button {
