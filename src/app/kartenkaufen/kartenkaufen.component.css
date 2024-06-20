@@ -15,8 +15,18 @@ flex-direction: column;
 }
 
 .container-oben-links {
-    height: 100%;
     width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-Karten{
+    height: 100%;
+    width: 100%;
+    margin-right: 40%;
+    margin-bottom: 15%;
 }
 
 .container-img-info{
@@ -81,4 +91,8 @@ flex-direction: column;
 .park-img{
     height: 100%;
     width: 100%;
+}
+.hr{
+    width: 10%; /* Adjust the width as needed */
+    margin-right: 0px;
 }
