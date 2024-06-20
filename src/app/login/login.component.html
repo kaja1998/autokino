@@ -47,7 +47,7 @@
     <label class="form-label">Vorname</label>
     <div class="text-danger" *ngIf="registerForm.controls['vorname'].invalid && (isFormSubmitted || registerForm.controls['vorname'].touched || registerForm.controls['vorname'].dirty)">
       <span *ngIf="registerForm.controls['vorname'].errors?.['required']">Bitte fülle das Feld aus.</span>
-      <span *ngIf="registerForm.controls['vorname'].errors?.['minlength']">Dein Vorname muss mindestens 3 Zeichen lang sein.</span>
+      <span *ngIf="registerForm.controls['vorname'].errors?.['minlength']">Deine Eingabe muss mindestens 3 Zeichen lang sein.</span>
     </div>
     <input type="text" id="Vorname" formControlName="vorname" placeholder="Vorname">
 
@@ -55,7 +55,7 @@
     <label class="form-label">Nachname</label>
     <div class="text-danger" *ngIf="registerForm.controls['nachname'].invalid && (isFormSubmitted || registerForm.controls['nachname'].touched || registerForm.controls['nachname'].dirty)">
       <span *ngIf="registerForm.controls['nachname'].errors?.['required']">Bitte fülle das Feld aus.</span>
-      <span *ngIf="registerForm.controls['nachname'].errors?.['minlength']">Dein Nachname muss mindestens 3 Zeichen lang sein.</span>
+      <span *ngIf="registerForm.controls['nachname'].errors?.['minlength']">Deine Eingabe muss mindestens 3 Zeichen lang sein.</span>
     </div>
     <input type="text" id="nachname" formControlName="nachname" placeholder="Nachname">
 
@@ -89,7 +89,7 @@
     <label class="form-label">Zahlungsmittel</label>
     <div class="text-danger" *ngIf="registerForm.controls['zahlungsmittel'].invalid && (isFormSubmitted || registerForm.controls['zahlungsmittel'].touched || registerForm.controls['zahlungsmittel'].dirty)">
       <span *ngIf="registerForm.controls['zahlungsmittel'].errors?.['required']">Bitte fülle das Feld aus.</span>
-      <span *ngIf="registerForm.controls['zahlungsmittel'].errors?.['minlength']">Deine IBAN muss mindests 22 Zeichen lang sein.</span>
+      <span *ngIf="registerForm.controls['zahlungsmittel'].errors?.['minlength']">Deine IBAN muss mindestens 22 Zeichen lang sein.</span>
     </div>
     <input type="text" id ="zahlungsmittel" formControlName="zahlungsmittel" placeholder="Zahlungsmittel">
 
@@ -105,7 +105,7 @@
     <label class="form-label">Passwort</label>
     <div class="text-danger" *ngIf="registerForm.controls['choosepassword'].invalid && (isFormSubmitted || registerForm.controls['choosepassword'].touched || registerForm.controls['choosepassword'].dirty)">
       <span *ngIf="registerForm.controls['choosepassword'].errors?.['required']">Bitte fülle das Feld aus.</span>
-      <span *ngIf="registerForm.controls['choosepassword'].errors?.['minlength']">Passwort muss mindestens 6 Zeichen lang sein.</span>
+      <span *ngIf="registerForm.controls['choosepassword'].errors?.['minlength']">Dein Passwort muss mindestens 6 Zeichen lang sein.</span>
     </div>
     <input type="password" id ="choosepassword" formControlName="choosepassword" placeholder="Passwort">
 
