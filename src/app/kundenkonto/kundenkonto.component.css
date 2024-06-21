@@ -1,7 +1,4 @@
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
   line-height: 1.5;
   padding: 0;
   margin-left: 15%;
@@ -9,10 +6,9 @@ body {
 
 .kundenkonto {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin-bottom: 30px;
-   
-  text-align: links;
+  text-align: left;
 }
 
 button {
@@ -49,23 +45,6 @@ button:hover {
 .aktionsbilder img {
   margin-right: 10px;
   width: 15%;
-}
-
-.text{  
-  margin-right: 5%;
-}
-
-.text h1{  
-  font-size: 30px;
-}
-
-/* Textausrichtung Mittig */
-.kundenbegruessung h1{
-font-size: 60px;
-}
-
-.buttonausrichtung{
-  margin-top: 5%;
 }
 
 @media screen and (max-width: 600px) {
