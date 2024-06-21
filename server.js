@@ -44,7 +44,7 @@ var con = mysql.createConnection({
       password: "Password1!"
 });
 
-app.get('/filme', function (req, res) {
+app.get('/filmeMitDatum', function (req, res) {
   con.query(`
     SELECT f.filmtitel, f.beschreibung, v.datum
     FROM filme f
@@ -78,15 +78,6 @@ app.post('/certainFilme', function (req, res) {
       res.send(results);
     });
 });
-
-// app.post('/filmDates', function (req, res) {
-//   const film = req.body;
-//   const query = "SELECT * FROM veranstaltungen WHERE filmtitel = ?"
-//   con.query(query,[film],function(error, results){
-//     if (error) throw error;
-//     res.send(results);
-//   })
-// });
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;

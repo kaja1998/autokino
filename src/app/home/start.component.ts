@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class StartComponent {
   constructor(public filmService: FilmService) {
-    filmService.getFilme().subscribe(data => {
+    filmService.getFilmeMitDatum().subscribe(data => {
       console.log(filmService.filme);
     });
   }

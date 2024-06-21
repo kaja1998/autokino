@@ -14,9 +14,9 @@ export class FilmService {
 
   constructor(private http: HttpClient) { }
 
-  public getFilme(): Observable<any> {
+  public getFilmeMitDatum(): Observable<any> {
     return new Observable(observer => {
-      this.http.get('http://127.0.0.1:8080/filme').subscribe((data: any) => {
+      this.http.get('http://127.0.0.1:8080/filmeMitDatum').subscribe((data: any) => {
         this.filme = data;
         observer.next(data);
         observer.complete();

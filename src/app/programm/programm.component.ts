@@ -26,7 +26,7 @@ export class ProgrammComponent implements OnInit {
   filmDates: Array<any> = [];
 
   constructor(public filmService: FilmService) {
-    filmService.getFilme().subscribe(data => {
+    filmService.getFilmeMitDatum().subscribe(data => {
       this.filme = filmService.filme;
     });
   }
