@@ -21,14 +21,26 @@ flex-direction: column;
     justify-content: center;
     flex-direction: column;
 }
-
 .container-Karten{
     height: 100%;
     width: 100%;
     margin-right: 40%;
     margin-bottom: 15%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
 }
-
+.container-button{
+    width: 50%;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.container-info{
+    width: 50%;
+}
 .container-img-info{
     display: flex;
     justify-content: row;
@@ -66,7 +78,6 @@ flex-direction: column;
     height: 35%;
     width: 35%;
     margin: 5%;
-
 }
 
 .parkflaeche {
@@ -93,6 +104,34 @@ flex-direction: column;
     width: 100%;
 }
 .hr{
-    width: 10%; /* Adjust the width as needed */
+    width: 100%; /* Adjust the width as needed */
     margin-right: 0px;
+}
+.button{
+    border: auto;
+    border-color: white;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: black; 
+}
+
+.ticket-button{
+    display: block;
+    width: 15%;
+    border: auto;
+    border-color: white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+
+    cursor: pointer;
+    background-color: black; 
+
 }
