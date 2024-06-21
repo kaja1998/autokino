@@ -5,6 +5,7 @@ import { StartComponent } from './home/start.component';
 import { ProgrammComponent } from "./programm/programm.component";
 import {KundenkontoComponent} from "./kundenkonto/kundenkonto.component";
 import {KundenkontoBearbeitenComponent} from "./kundenkonto-bearbeiten/kundenkonto-bearbeiten.component";
+import { KartenkaufenComponent } from './kartenkaufen/kartenkaufen.component';
 
 export const routes: Routes = [
     {path: '', component: StartComponent,},
@@ -14,4 +15,5 @@ export const routes: Routes = [
     {path: 'programm', component: ProgrammComponent},
     {path: 'kundenkonto', component: KundenkontoComponent,},
     {path: 'kundenkonto/bearbeiten', component: KundenkontoBearbeitenComponent,},
+    {path: 'kartenkaufen', component: KartenkaufenComponent,},
 ];
