@@ -63,6 +63,15 @@ app.post('/certainFilme', function (req, res) {
     });
 });
 
+app.post('/filmDates', function (req, res) {
+  const film = req.body;
+  const query = "SELECT * FROM veranstaltungen WHERE filmtitel = ?"
+  con.query(query,[film],function(error, results){
+    if (error) throw error;
+    res.send(results);
+  })
+});
+
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
         const query = "SELECT * FROM kunden WHERE mail = ? AND passwort = ?";
@@ -100,7 +109,6 @@ app.post('/registerCustomer', function (req, res) {
         }
     });
 });
-
 
 app.post('/updatekundendaten', function (req, res) {
   const { id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, passwort } = req.body;
