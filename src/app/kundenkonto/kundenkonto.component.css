@@ -4,21 +4,26 @@ body {
   justify-content: left;
   line-height: 1.5;
   padding: 0;
-  margin: 0;
+  margin-left: 15%;
 }
 
 .kundenkonto {
+  display: flex;
+  flex-direction: row;
   margin-bottom: 30px;
+   
+  text-align: links;
 }
 
 button {
   padding: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
-  color: white;
+  color: black;
   cursor: pointer;
+  background-color: white;
   border: 1px solid white;
-  width: 150px;
+  width: 12rem;
   font-size: 16px;
   font-weight: bold;
 }
@@ -44,6 +49,23 @@ button:hover {
 .aktionsbilder img {
   margin-right: 10px;
   width: 15%;
+}
+
+.text{  
+  margin-right: 5%;
+}
+
+.text h1{  
+  font-size: 30px;
+}
+
+/* Textausrichtung Mittig */
+.kundenbegruessung h1{
+font-size: 60px;
+}
+
+.buttonausrichtung{
+  margin-top: 5%;
 }
 
 @media screen and (max-width: 600px) {

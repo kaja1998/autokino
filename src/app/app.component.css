@@ -11,6 +11,58 @@ header {
     align-items: center; /* Center content vertikal*/
 }
 
+/* Begin Navbar */
+
+.dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    color: white; /*text color*/
+    text-decoration: none; /*untere linie entfernen*/
+    font-size: 23px;
+    transition: font-size 0.3s; /*Smooth transition in sekunden*/ 
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    font-size: 28px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: black;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+/* Begin Containers */
 .container-right {
     width: 75%;
     display: flex; /*start flex*/
@@ -37,6 +89,8 @@ a {/*flex Items*/
 a:hover {/*hover effekt flex Items*/
     font-size: 28px;
 }
+
+
 
 hr {/*Trennlinie*/
     border: 0;
