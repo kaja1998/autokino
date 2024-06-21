@@ -22,15 +22,13 @@ function getUserInput(): string {
 export class ProgrammComponent implements OnInit {
 
   datum1 = new Date(2024,1,9);
-  filme : Array<any> = [];
+  filme :  any[] = [];
+  filmDates: Array<any> = [];
 
   constructor(public filmService: FilmService) {
     filmService.getFilme().subscribe(data => {
       this.filme = filmService.filme;
     });
-
-
-
   }
 
   ngOnInit(): void {
@@ -68,6 +66,7 @@ export class ProgrammComponent implements OnInit {
       searchBar.value = "";
       clearIcon.style.visibility = "hidden";
     });
+
   }
 
 }

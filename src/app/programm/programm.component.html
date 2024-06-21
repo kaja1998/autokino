@@ -26,10 +26,8 @@
                         <a routerLink="/filmdetails">Zum Film</a>
                     </div>
                 </div>
-                <div class="dates">
-                    <div class="date">{{datum1 | date: "dd.MM.yy"}}</div>
-                    <div class="date">15.05.24</div>
-                    <div class="date">18.06.25</div>
+                <div class="dates" *ngFor="let veranstaltung of film.veranstaltungen">
+                    <div class="datum">{{ veranstaltung.datum | date }}</div>
                 </div>
             </div>
 

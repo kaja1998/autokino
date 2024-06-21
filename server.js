@@ -45,12 +45,28 @@ var con = mysql.createConnection({
 });
 
 app.get('/filme', function (req, res) {
-  con.query("SELECT * FROM filme",
-    function (error, results, fields) {
+  con.query(`
+    SELECT f.filmtitel, f.beschreibung, v.datum
+    FROM filme f
+    LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
+  `,
+  function (error, results) {
     if (error) throw error;
-    res.send(results);
-    }
-  );
+    const filme = results.reduce((acc, row) => {
+      const film = acc.find(f => f.filmtitel === row.filmtitel);
+      if (film) {
+        film.veranstaltungen.push({ datum: row.datum });
+      } else {
+        acc.push({
+          filmtitel: row.filmtitel,
+          beschreibung: row.beschreibung,
+          veranstaltungen: row.datum ? [{ datum: row.datum }] : []
+        });
+      }
+      return acc;
+    }, []);
+    res.json(filme);
+  });
 });
 
 app.post('/certainFilme', function (req, res) {
@@ -63,14 +79,14 @@ app.post('/certainFilme', function (req, res) {
     });
 });
 
-app.post('/filmDates', function (req, res) {
-  const film = req.body;
-  const query = "SELECT * FROM veranstaltungen WHERE filmtitel = ?"
-  con.query(query,[film],function(error, results){
-    if (error) throw error;
-    res.send(results);
-  })
-});
+// app.post('/filmDates', function (req, res) {
+//   const film = req.body;
+//   const query = "SELECT * FROM veranstaltungen WHERE filmtitel = ?"
+//   con.query(query,[film],function(error, results){
+//     if (error) throw error;
+//     res.send(results);
+//   })
+// });
 
 app.post('/loginaut', function (req, res) {
     const { mail, passwort } = req.body;
