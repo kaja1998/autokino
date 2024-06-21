@@ -76,11 +76,29 @@ app.get('/filmeMitDatum', function (req, res) {
 
 app.post('/certainFilme', function (req, res) {
   const userInput  = '%' + req.body.userInput +'%';
-  const query = "SELECT * FROM filme WHERE filmtitel LIKE ? "
+  const query = `
+    SELECT f.filmtitel, f.beschreibung, v.datum
+    FROM filme f
+    LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
+    WHERE f.filmtitel LIKE ?
+  `
   con.query(query, [userInput],
     function (error, results, fields) {
       if (error) throw error;
-      res.send(results);
+      const filme = results.reduce((acc, row) => {
+        const film = acc.find(f => f.filmtitel === row.filmtitel);
+        if (film) {
+          film.veranstaltungen.push({ datum: row.datum });
+        } else {
+          acc.push({
+            filmtitel: row.filmtitel,
+            beschreibung: row.beschreibung,
+            veranstaltungen: row.datum ? [{ datum: row.datum }] : []
+          });
+        }
+        return acc;
+      }, []);
+      res.json(filme);
     });
 });
 
