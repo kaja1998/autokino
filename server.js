@@ -60,8 +60,7 @@ app.post('/certainFilme', function (req, res) {
     function (error, results, fields) {
       if (error) throw error;
       res.send(results);
-    }
-  );
+    });
 });
 
 app.post('/loginaut', function (req, res) {
@@ -103,13 +102,22 @@ app.post('/registerCustomer', function (req, res) {
 });
 
 
-app.get('/kundendaten', function (req, res) {
-    con.query("SELECT * FROM kunden",
-      function (error, results, fields) {
-        if (error) throw error;
-        res.send(results);
-      }
-    );
+app.post('/updatekundendaten', function (req, res) {
+  const { id, vorname, nachname, strasseUndNr, plz, stadt, geburtsdatum, zahlungsmittel, passwort } = req.body;
+
+  const query = `
+    UPDATE kunden
+    SET vorname = ?, nachname = ?, strasseUndNr = ?, plz = ?, stadt = ?, zahlungsmittel = ?, passwort = ?
+    WHERE id = ?
+  `;
+
+  con.query(query, [vorname, nachname, strasseUndNr, plz, stadt, zahlungsmittel, passwort, id], function (error, results) {
+    if (error) {
+      res.send({ success: false, message: "Fehler beim Aktualisieren der Kundendaten:", error });
+    } else {
+      res.send({ success: true, message: "Kundendaten erfolgreich aktualisiert." });
+    }
+  });
 });
 
 

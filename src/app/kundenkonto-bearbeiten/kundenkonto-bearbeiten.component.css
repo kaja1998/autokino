@@ -8,7 +8,7 @@ body {
   margin-right: 15%;
 }
 
-.mitgliedschaftsdaten h2 {
+.kundendaten h2 {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 20px;
@@ -32,13 +32,6 @@ th, td {
   text-align: left;
 }
 
-.logindaten h2 {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 20px;
-  padding-bottom: 10px;
-}
-
 button {
   padding: 15px;
   margin-top: 15px;
@@ -55,4 +48,10 @@ button:hover {
   background-color: #626262;
   color: white;
   border: 1px solid #626262;
+}
+
+.text-danger {
+  color: red;
+  text-align: left;
+  margin-bottom: 10px;
 }

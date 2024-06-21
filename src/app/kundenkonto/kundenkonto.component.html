@@ -1,26 +1,22 @@
 <body>
-  <div class="kundenbegruessung">
-    <h1>Hallo {{ vorname }}</h1>
+
+<div class="kundenkonto">
+  <h1>Hallo {{ user?.vorname }}</h1>
+  <p>Willkommen in deinem Login-Bereich von MEIN AUTOKINO. Hier findest du alles rund um deinen Account und kannst deine Daten verwalten.</p>
+  <button type="button" [routerLink]="['/kundenkonto/bearbeiten']">Mein Profil</button>
+</div>
+
+<div class="vorstellungen">
+  <h2>Deine nächsten Vorstellungen</h2>
+  <p>Keine Buchungen vorhanden.</p>
+</div>
+
+<div class="aktionen">
+  <h2>Deine Aktionen</h2>
+  <div class="aktionsbilder">
+    <img src="../assets/MovieDeal.png" alt="aktion1">
+    <img src="../assets/MovieDeal.png" alt="aktion2">
   </div>
-    <div class="kundenkonto">
-      <div class="text">
-      <p class="ueberschrift">Willkommen in deinem Login-Bereich von MEIN AUTOKINO. Hier findest du alles rund um deinen Account und kannst deine Daten verwalten.</p>
-      <button type="button" [routerLink]="['/kundenkonto/bearbeiten']">Mein Profil</button>
-    </div>
-  </div>
-  
-  <div class="vorstellungen">
-    <h2>Deine nächsten Vorstellungen</h2>
-    <p>Keine Buchungen vorhanden.</p>
-  </div>
-  
-  <div class="aktionen">
-    <h2>Deine Aktionen</h2>
-    <div class="aktionsbilder">
-      <img src="../assets/MovieDeal.png" alt="aktion1">
-      <img src="../assets/MovieDeal.png" alt="aktion2">
-    </div>
-  </div>
-  
-  </body>
-  
+</div>
+
+</body>
