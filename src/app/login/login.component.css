@@ -2,7 +2,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: sans-serif;
+  color: white;
   line-height: 1.5;
+  min-height: 120vh;
   padding: 0;
   margin: 0;
 }
@@ -54,6 +57,7 @@ input {
 }
 
 .plz-stadt input[type="text"] {
+  margin-right: 5px;
   margin-bottom: 0px;
 }
 
