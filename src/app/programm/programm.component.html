@@ -27,10 +27,9 @@
                     </div>
                 </div>
                 <div class="dates" *ngFor="let veranstaltung of film.veranstaltungen">
-                    <div class="datum">{{ veranstaltung.datum | date }}</div>
+                    <div class="date">{{ veranstaltung.datum | date: "dd.MM.yy" }}</div>
                 </div>
             </div>
-
             <div class="trenner-container">
                 <div class="gap"></div>
                 <div class="trenner"></div>
