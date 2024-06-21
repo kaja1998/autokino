@@ -52,7 +52,11 @@ app.get('/filmeMitDatum', function (req, res) {
   `,
   function (error, results) {
     if (error) throw error;
+    //reduce : Format für results wird festgelegt
+    //acc ist der Akkumulator, der das Ergebnis speichert.
+    //row ist das aktuelle Element, das von der Abfrage zurückgegeben wurde.
     const filme = results.reduce((acc, row) => {
+      // Für jede Zeile (row) wird geprüft, ob ein Film mit dem gleichen filmtitel bereits im Akkumulator vorhanden ist.
       const film = acc.find(f => f.filmtitel === row.filmtitel);
       if (film) {
         film.veranstaltungen.push({ datum: row.datum });
@@ -60,6 +64,7 @@ app.get('/filmeMitDatum', function (req, res) {
         acc.push({
           filmtitel: row.filmtitel,
           beschreibung: row.beschreibung,
+          //Wenn row.datum definiert ist, wird ein Objekt mit dem Datum hinzugefügt, ansonsten wird ein leeres Array erstellt.
           veranstaltungen: row.datum ? [{ datum: row.datum }] : []
         });
       }
