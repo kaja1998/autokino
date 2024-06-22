@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { StartComponent } from './home/start.component';
+import { AdminBereichComponent } from './admin-bereich/admin-bereich.component';
 import { HttpClient } from '@angular/common/http';
 
 
