@@ -11,8 +11,12 @@ hr {/*Trennlinie*/
     margin-top: 5%;
 }
 
-#filmeBearbeiten{
+.optionen{
     display: flex;
+    flex-direction: column;
+}
+
+#filmeBearbeiten{
     border-radius: 2%;
     border-color: white;
     border: solid;
@@ -21,7 +25,6 @@ hr {/*Trennlinie*/
 }
 
 #ticketStornieren{
-    display: flex;
     border-radius: 2%;
     border-color: white;
     border: solid;
@@ -30,10 +33,11 @@ hr {/*Trennlinie*/
 }
 
 #accountErstellen{
-    display: flex;
     border-radius: 2%;
     border-color: white;
     border: solid;
     justify-content: space-evenly;
     padding: 1%;
 }
+
+
