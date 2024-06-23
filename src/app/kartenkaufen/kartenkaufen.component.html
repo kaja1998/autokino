@@ -2,7 +2,7 @@
   <div class="container-oben-links">
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>1x Erwachsener 13€</p> 
+      <p>0x Erwachsener</p> 
     </div>
       <div class="container-button">
         <button class="ticket-button">+</button>
@@ -12,7 +12,7 @@
     
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>1x Ermäßigt 10€</p> 
+      <p>0x Ermäßigt</p> 
     </div>
       <div class="container-button">
         <button class="ticket-button">+</button>
@@ -22,15 +22,18 @@
 
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>1x Kind 9€</p> 
+      <p>0x Kind</p> 
     </div>
       <div class="container-button">
         <button class="ticket-button">+</button>
         <button class="ticket-button">-</button>
       </div>      
     </div>
-
-
+    <div class="container-Summe"> 
+      <div class="container-Summeinfo">
+        <p>Summe</p>
+      </div>      
+    </div>
     <div class="container-Karten"><button class="button">Kaufen</button></div>
   </div>
   <div class="container-oben-mitte">
@@ -40,7 +43,6 @@
         <div class="platz" *ngFor="let zero of zerosArray; let i = index" (click)="select(i)">
           <img *ngIf="zero == 0" class="park-img" src="../../assets/images/Parkplatz_leer.svg" alt="">
           <img *ngIf="zero == 1" class="park-img" src="../../assets/images/Parkplatz_Auswahl.svg" alt="">
-          <img *ngIf="zero == 2" class="park-img" src="../../assets/images/Parkplatz_Besetzt.svg" alt="">
         </div>
       </div>
     </div>
