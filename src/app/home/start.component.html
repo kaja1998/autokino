@@ -15,53 +15,13 @@
     </div>
     <div class="flex-container">
 
-        <span class="title-cover">
+        <span class="title-cover" *ngFor="let film of filmService.filme.slice(0, 3)">
             <a routerLink="/filmdetails" class="film-highlight">
                 <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
                 <p class="p-title">
-                    Dune Part II
+                {{film.filmtitel}}
                 </p>
             </a>
         </span>
 
-        <span class="title-cover">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
-                <p class="p-title">
-                    Dune Part II
-                </p>
-            </a>
-        </span>
-        <span class="title-cover">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
-                <p class="p-title">
-                    Dune Part II
-                </p>
-            </a>
-        </span>
-        <span class="title-cover">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
-                <p class="p-title">
-                    Dune Part II
-                </p>
-            </a>
-        </span>
-        <span class="title-cover">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
-                <p class="p-title">
-                    Dune Part II
-                </p>
-            </a>
-        </span>
-        <span class="title-cover">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="../assets/images/Dune2Poster.png" alt="Girl in a jacket" width="283" height="401">
-                <p class="p-title">
-                    Dune Part II
-                </p>
-            </a>
-        </span>
     </div>
