@@ -13,16 +13,17 @@
         <!-- <a routerLink="/filmdetails">Filmdetails</a> -->
         <a routerLink ="programm">Programm</a>
         <a routerLink="/kartenkaufen">Kartenkaufen</a>
-        
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-               <a routerLink="/login">Login</a>
-               <a routerLink="/kundenkonto">Details</a>
-            </div>
-          </div> 
+
+      <div class="dropdown">
+        <button class="dropbtn">Dropdown
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+          <a *ngIf="isLoggedIn" routerLink="/kundenkonto">Details</a>
+          <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+        </div>
+      </div>
     </div>
 
 </header>
