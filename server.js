@@ -158,4 +158,12 @@ app.post('/updatekundendaten', function (req, res) {
   });
 });
 
+app.get('/getFilme', function (req, res) {    
+      con.query("SELECT * FROM filme",
+            function (error, results, fields) {
+                  if (error) throw error;
+                  res.send(results);
+            }
+      );
+});
 
