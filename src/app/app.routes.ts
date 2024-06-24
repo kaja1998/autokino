@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import {RouterModule,Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import { FilmdetailsComponent } from './filmdetails/filmdetails.component';
 import { StartComponent } from './home/start.component';
@@ -11,7 +11,7 @@ import { AdminBereichComponent } from './admin-bereich/admin-bereich.component';
 export const routes: Routes = [
     {path: '', component: StartComponent,},
     {path: 'home', component: StartComponent},
-    {path: 'filmdetails', component: FilmdetailsComponent},
+    {path: 'filmdetails/:filmtitel', component: FilmdetailsComponent},
     {path: 'login', component: LoginComponent,},
     {path: 'programm', component: ProgrammComponent},
     {path: 'kundenkonto', component: KundenkontoComponent,},
