@@ -41,7 +41,7 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Egal!234"
+      password: "Password1!"
 });
 
 app.get('/filmeMitDatum', function (req, res) {
