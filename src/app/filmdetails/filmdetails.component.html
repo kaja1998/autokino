@@ -12,16 +12,16 @@
     <div class="container">
         <h2 class="filmtitel">{{filmtitel}}</h2>
         <div class="filmInformation">
-            <div class="spalte1"><img src="..\assets\Dune_Poster.webp" alt="Nichts Gefunden" height="450" length="300"><p class = "fsk">FSK 28</p></div>
+            <div class="spalte1"><img src="..\assets\Dune_Poster.webp" alt="Nichts Gefunden" height="450" length="300"><p class = "fsk">FSK {{film[0].fsk}}</p></div>
             <div class = "spalte2">
-                <div><h1>Genre</h1> <p>d</p></div> 
-                <div><h1>Dauer</h1><p>8</p></div>
-                <div><h1>Erscheinung</h1><p>29. Feb 2024</p></div> 
-                <div><h1>Schauspieler</h1><p>Zendaya, Javier Bardem, Timothée Chalamet, Rebecca Ferguson, Stellan Skarsgård, Florence Pugh</p></div>
+                <div><h1>Genre</h1> <p>{{film[0].genre}} </p></div> 
+                <div><h1>Dauer</h1><p>{{film[0].laufzeit}} min</p></div>
+                <div><h1>Erscheinung</h1><p>{{film[0].erscheinungsdatum | date: "dd.MM.yyyy"}}</p></div> 
+                <div><h1>Besetzung</h1><p>{{film[0].besetzung}}</p></div>
             </div>
             <div class = "spalte3">
                 <div><h1>Beschreibung</h1><p>{{film[0].beschreibung}}</p></div>
-                <div><h1>Bewertung</h1><p><strong>8.7</strong>/10</p></div>
+                <div><h1>Bewertung</h1><p><strong>{{film[0].bewertung}}</strong>/10</p></div>
             </div>
         </div>
 
