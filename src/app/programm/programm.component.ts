@@ -28,6 +28,7 @@ export class ProgrammComponent implements OnInit {
   constructor(public filmService: FilmService) {
     filmService.getFilmeMitDatum().subscribe(data => {
       this.filme = filmService.filme;
+      console.log(filmService.filme);
     });
   }
 

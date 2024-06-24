@@ -18,7 +18,7 @@
 
         <div *ngFor="let film of filmService.filme" class="film">
             <div class="filminfo">
-                <img class="filmplakat" src="../assets/drachen.jpg" alt="'Filmplakat zu ' + film.filmtitel">
+                <img class="filmplakat" src="{{film.bildpfad}}" alt="Filmplakat zu {{film.filmtitel}}">
                 <div class="beschreibung">
                     <div class="filmtitel">{{film.filmtitel}}</div>
                     <div>{{film.beschreibung}}</div>

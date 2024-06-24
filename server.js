@@ -46,7 +46,7 @@ var con = mysql.createConnection({
 
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
-    SELECT f.filmtitel, f.beschreibung, v.datum
+    SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
     FROM filme f
     LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
   `,
@@ -64,6 +64,7 @@ app.get('/filmeMitDatum', function (req, res) {
         acc.push({
           filmtitel: row.filmtitel,
           beschreibung: row.beschreibung,
+          bildpfad: row.bildpfad,
           //Wenn row.datum definiert ist, wird ein Objekt mit dem Datum hinzugefügt, ansonsten wird ein leeres Array erstellt.
           veranstaltungen: row.datum ? [{ datum: row.datum }] : []
         });
