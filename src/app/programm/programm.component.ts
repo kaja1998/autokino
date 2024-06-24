@@ -23,7 +23,6 @@ export class ProgrammComponent implements OnInit {
 
   datum1 = new Date(2024,1,9);
   filme :  any[] = [];
-  filmDates: Array<any> = [];
 
   constructor(public filmService: FilmService) {
     filmService.getFilmeMitDatum().subscribe(data => {

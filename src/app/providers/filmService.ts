@@ -11,6 +11,7 @@ export class FilmService {
   filmDates: Array<any> = [];
   userInput: string = "";
   filmtitel: string = "";
+  film: Array<any> = [];
 
   constructor(private http: HttpClient) { }
 
@@ -55,4 +56,17 @@ export class FilmService {
     })
   }
 
+  public getFilm(filmtitel: string): Observable<any> {
+    return  this.http.post<any>('http://127.0.0.1:8080/getFilm', {filmtitel});
+    // return new Observable(observer => {
+    //   this.http.post<any>('http://127.0.0.1:8080/getFilm', {filmtitel}).subscribe((data: any) => {
+    //   //   this.film = data;
+    //   //   observer.next()
+    //   //   observer.complete()
+    //   // }, err => {
+    //   //   observer.error
+    //   //   observer.complete()
+    //   // })
+    // })
+  }
 }

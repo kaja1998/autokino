@@ -158,4 +158,15 @@ app.post('/updatekundendaten', function (req, res) {
   });
 });
 
+app.post('/getFilm', function (req, res) {    
+   const filmInput  = req.body.filmtitel;
+   console.log(req.body);
+   const query = "SELECT * FROM filme WHERE filmtitel = ?";
+   con.query(query, [filmInput], 
+            function (error, results, fields) {
+                  if (error) throw error;
+                  res.send(results);
+            }
+      );
+});
 
