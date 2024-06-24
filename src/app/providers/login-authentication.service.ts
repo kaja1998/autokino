@@ -12,7 +12,7 @@ export class LoginAuthenticationService {
 
   public currentUser: any = {}; // Platzhalter für Benutzerdaten
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {  }
 
   login(mail: string, passwort: string): Observable<any> {
     return new Observable(observer => {
