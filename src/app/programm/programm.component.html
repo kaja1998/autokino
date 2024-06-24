@@ -23,7 +23,7 @@
                     <div class="filmtitel">{{film.filmtitel}}</div>
                     <div>{{film.beschreibung}}</div>
                     <div class = "mehr-Lesen-Button">
-                        <a routerLink="/filmdetails">Zum Film</a>
+                        <a [routerLink]="['/filmdetails', film.filmtitel]">Zum Film</a>
                     </div>
                 </div>
                 <div class="dates">
