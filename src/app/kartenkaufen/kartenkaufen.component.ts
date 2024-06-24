@@ -121,4 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * - Kein Parkplatz ausgewählt
  * - Kein Erwachsener / Ermäßigt ausgewählt
  * - 7 Kinder ausgewählt
+ * - Check Kunde eingeloggt
+ * - Wenn Kaufen richtig Parkplatz -> rot
+ * - Ticket auslesen
  */
