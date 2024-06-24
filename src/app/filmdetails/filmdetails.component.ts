@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-filmdetails',
   standalone: true,
@@ -18,5 +17,4 @@ export class FilmdetailsComponent {
   ngOnInit(): void {
     this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? '';
   }
-
 }
