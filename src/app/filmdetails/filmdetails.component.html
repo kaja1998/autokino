@@ -13,9 +13,9 @@
         <h2 class="filmtitel">{{filmtitel}}</h2>
         <div class="filmInformation">
             <div class="spalte1"><img src="..\assets\Dune_Poster.webp" alt="Nichts Gefunden" height="450" length="300"><p class = "fsk">FSK 28</p></div>
-            <div class = "spalte2">
+            <div *ngFor = "let film of filmService.fimle" class = "spalte2">
                 <div><h1>Genre</h1> <p>Science-Fiction</p></div> 
-                <div><h1>Dauer</h1><p>166 Minuten</p></div>
+                <div><h1>Dauer</h1><p>{{film.laufzeit}}</p></div>
                 <div><h1>Erscheinung</h1><p>29. Feb 2024</p></div> 
                 <div><h1>Schauspieler</h1><p>Zendaya, Javier Bardem, Timothée Chalamet, Rebecca Ferguson, Stellan Skarsgård, Florence Pugh</p></div>
             </div>

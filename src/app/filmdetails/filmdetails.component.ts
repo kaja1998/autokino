@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FilmService } from '../providers/filmService';
 
 @Component({
   selector: 'app-filmdetails',
@@ -10,9 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class FilmdetailsComponent {
-  constructor(private route: ActivatedRoute) { }
+  filmtitel: string = "";
+  filme: Array<any> = [];
 
-  filmtitel: string = ""
+  constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
+  filmService.getFilmeMitDatum().subscribe(data => {
+    this.filme = filmService.filme;
+  });
+}
 
   ngOnInit(): void {
     this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? '';
