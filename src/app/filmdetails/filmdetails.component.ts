@@ -1,26 +1,31 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilmService } from '../providers/filmService';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-filmdetails',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './filmdetails.component.html',
   styleUrl: './filmdetails.component.css'
 })
 
 export class FilmdetailsComponent {
   filmtitel: string = "";
-  filme: Array<any> = [];
+  film: any = {};
 
   constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
-  filmService.getFilmeMitDatum().subscribe(data => {
-    this.filme = filmService.filme;
-  });
+  
+  
 }
 
   ngOnInit(): void {
-    this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? '';
-  }
+    this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? ''
+    this.filmService.getFilm(this.filmtitel).subscribe(data => {
+    this.film = data;
+    console.log(this.film);
+  });
+}
 }

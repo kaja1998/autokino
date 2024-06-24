@@ -41,7 +41,7 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Password1!"
+      password: "Egal!234"
 });
 
 app.get('/filmeMitDatum', function (req, res) {
@@ -158,8 +158,11 @@ app.post('/updatekundendaten', function (req, res) {
   });
 });
 
-app.get('/getFilme', function (req, res) {    
-      con.query("SELECT * FROM filme",
+app.post('/getFilm', function (req, res) {    
+   const filmInput  = req.body.filmtitel;
+   console.log(req.body);
+   const query = "SELECT * FROM filme WHERE filmtitel = ?";
+   con.query(query, [filmInput], 
             function (error, results, fields) {
                   if (error) throw error;
                   res.send(results);
