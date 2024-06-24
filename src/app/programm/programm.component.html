@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="dates">
-                    <div class="date"  *ngFor="let veranstaltung of film.veranstaltungen">
+                    <div class="date"  *ngFor="let veranstaltung of film.veranstaltungen.slice(0, 3)">
                         {{ veranstaltung.datum | date: "dd.MM.yy" }}
                     </div>
                 </div>
