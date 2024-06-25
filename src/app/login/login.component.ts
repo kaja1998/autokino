@@ -9,7 +9,6 @@ import {RegistrierenService} from "../providers/registrieren.service";
   selector: 'app-login',
   standalone: true,
   imports: [NgIf, FormsModule, ReactiveFormsModule],
-  providers: [LoginAuthenticationService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
