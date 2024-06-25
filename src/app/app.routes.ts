@@ -6,6 +6,7 @@ import { ProgrammComponent } from "./programm/programm.component";
 import {KundenkontoComponent} from "./kundenkonto/kundenkonto.component";
 import {KundenkontoBearbeitenComponent} from "./kundenkonto-bearbeiten/kundenkonto-bearbeiten.component";
 import { KartenkaufenComponent } from './kartenkaufen/kartenkaufen.component';
+import { MovieDealComponent } from './movie-deal/movie-deal.component';
 
 export const routes: Routes = [
     {path: '', component: StartComponent,},
@@ -16,4 +17,5 @@ export const routes: Routes = [
     {path: 'kundenkonto', component: KundenkontoComponent,},
     {path: 'kundenkonto/bearbeiten', component: KundenkontoBearbeitenComponent,},
     {path: 'kartenkaufen', component: KartenkaufenComponent,},
+    {path: 'kundenkonto/movie-deal', component: MovieDealComponent}
 ];
