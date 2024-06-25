@@ -14,9 +14,12 @@
 <div class="aktionen">
   <h2>Deine Aktionen</h2>
   <div class="aktionsbilder">
-    <img src="../assets/MovieDeal.png" alt="aktion1">
-    <img src="../assets/MovieDeal.png" alt="aktion2">
-    <button type="button" [routerLink]="['/kundenkonto/movie-deal']">Mein Profil</button>
+    <a [routerLink]="['/kundenkonto/movie-deal']">
+      <img src="../assets/MovieDeal.png" alt="aktion1">
+    </a>
+    <a [routerLink]="['/kundenkonto/movie-deal']">
+      <img src="../assets/MovieDeal.png" alt="aktion2">
+    </a>
   </div>
 </div>
 

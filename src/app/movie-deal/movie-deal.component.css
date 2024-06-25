@@ -8,7 +8,8 @@
 
 .container p {
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    font-size: 35px;
+    color: rgb(253, 140, 2);
 }
 
 .container h1 {
@@ -39,4 +40,31 @@ ul li {
     margin-bottom: 10px;
     padding-left: 20px; /* adds space for text indentation */
     text-indent: -20px; /* negative indent to align text with bullet point */
+}
+
+.filmauswahl{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.filmauswahl p{
+    color: #ffffff;
+}
+
+.film{
+    margin: 5%;
+    justify-content: center;
+}
+
+.film p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.trenner {
+    display: flex;
+    height: 1px;
+    background-color: #ffffff;
+    margin: 1em;
 }
