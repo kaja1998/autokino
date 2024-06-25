@@ -19,12 +19,17 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          @if(!isLoggedIn | async){
-          <a routerLink="/login">Login</a>
-          } @else {
-          <a routerLink="/kundenkonto">Details</a>
-          <a (click)="logout()">Logout</a>
-          }
+          <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+          <a *ngIf="isLoggedIn" routerLink="/kundenkonto">Details</a>
+          <a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+
+<!--          So soll es eigentlich in Angular 17 sein, klappt aber auch nicht: -->
+<!--          @if(!isLoggedIn | async){-->
+<!--          <a routerLink="/login">Login</a>-->
+<!--          } @else {-->
+<!--          <a routerLink="/kundenkonto">Details</a>-->
+<!--          <a (click)="logout()">Logout</a>-->
+<!--          }-->
         </div>
       </div>
     </div>

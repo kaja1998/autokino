@@ -115,6 +115,18 @@ app.post('/loginaut', function (req, res) {
         });
 });
 
+app.post('/deletekunde', function (req, res) {
+  const { id } = req.body;
+  const query = "DELETE FROM kunden WHERE id=?";
+  con.query(query, [id], function (error, results) {
+    if (error) {
+      res.send({ success: false, message: "Fehler beim Löschen des Kontos" });
+    } else {
+      res.send({ success: true, message: "Konto erfolgreich gelöscht" });
+    }
+  });
+});
+
 app.post('/checkEmailExists', function (req, res) {
     const { email } = req.body;
     const query = "SELECT * FROM kunden WHERE mail = ?";

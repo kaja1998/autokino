@@ -35,6 +35,7 @@ th, td {
 button {
   padding: 15px;
   margin-top: 15px;
+  margin-right: 10px;
   color: black;
   cursor: pointer;
   background-color: white;

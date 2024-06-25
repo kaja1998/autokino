@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 @Component({
   selector: 'app-root',
   standalone: true,
-  providers: [HttpClient],
+  providers: [HttpClient, LoginAuthenticationService],
   imports: [RouterOutlet, RouterLink, NgIf, AsyncPipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -19,14 +19,20 @@ import {Observable} from "rxjs";
 
 export class AppComponent implements OnInit {
   title = 'auto-kino';
-  isLoggedIn: Observable<boolean>
+  isLoggedIn: Boolean = false;
+  // isLoggedIn: Observable<boolean> --> Angular 17, klappt aber auch nicht
 
   //Wenn ein Link geklickt wird, scrollt die Website bis nach oben, im Footer sonst mega nervig
   constructor(private router: Router, private authService: LoginAuthenticationService) {
-    this.isLoggedIn = this.authService.isUserLoggedIn$;
+    // this.isLoggedIn = this.authService.isUserLoggedIn$; --> Angular 17, klappt aber auch nicht
   }
 
   ngOnInit() {
+    this.authService.isUserLoggedIn$.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+      console.log("app.component sub:" + this.isLoggedIn)
+    });
+
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
