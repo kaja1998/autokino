@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.container p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+.container h1 {
+    font-size: 70px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.ueberschrift{
+    display: flex;
+    justify-content: center;
+}
+
+.banner img{
+    width: 100%;
+    margin-bottom:2rem;
+}
+
+.text{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+ul {
+    list-style-position: inside; /* ensures the bullet points are inside the padding area */
+    padding-left: 20px; /* adds space before bullet points */
+}
+ul li {
+    margin-bottom: 10px;
+    padding-left: 20px; /* adds space for text indentation */
+    text-indent: -20px; /* negative indent to align text with bullet point */
+}
