@@ -3,36 +3,36 @@
 
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>0x Erwachsener</p> 
+      <p>{{ adultTickets }}x Erwachsener {{ adultPriceDisplay }}€</p> 
     </div>
       <div class="container-button">
-        <button class="ticket-button">+</button>
-        <button class="ticket-button">-</button>
+        <button (click)="addErwachsener()" class="ticket-button">+</button>
+        <button (click)="removeErwachsener()" class="ticket-button">-</button>
       </div>      
     </div>
     
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>0x Ermäßigt</p> 
+      <p>{{ discountedTickets }}x Ermäßigt {{ discountedPriceDisplay }}€</p> 
     </div>
       <div class="container-button">
-        <button class="ticket-button">+</button>
-        <button class="ticket-button">-</button>
+        <button (click)="addErmaessigt()" class="ticket-button">+</button>
+        <button (click)="removeErmaessigt()" class="ticket-button">-</button>
       </div>      
     </div>
 
     <div class="container-Karten"> 
       <div class="container-info">
-      <p>0x Kind</p> 
+      <p>{{ childTickets }}x Kind {{ childPriceDisplay }}€</p> 
     </div>
       <div class="container-button">
-        <button class="ticket-button">+</button>
-        <button class="ticket-button">-</button>
+        <button (click)="addKind()" class="ticket-button">+</button>
+        <button (click)="removeKind()" class="ticket-button">-</button>
       </div>      
     </div>
     <div class="container-Summe"> 
       <div class="container-Summeinfo">
-        <p>Summe</p>
+        <p>Summe:  {{ sum }}€</p>
       </div>      
     </div>
     <div class="container-Karten"><button class="button">Kaufen</button></div>

@@ -11,12 +11,10 @@ import { CommonModule } from '@angular/common';
 
 
 export class KartenkaufenComponent {
-    // this.zerosArray[index] = this.zerosArray[index] === 0 ? 1 : 0
-
-
   // Start Parkplatzauswahl
   zerosArray: number[] = Array(60).fill(0);
   previousIndex: number | null = null;
+
   public select(index: number) {
     if (this.previousIndex !== null) {
       this.zerosArray[this.previousIndex] = 0;
@@ -25,96 +23,81 @@ export class KartenkaufenComponent {
     this.previousIndex = index;
   }
 
-
   // Start Kaufsystem
   adultTickets: number = 0;
+  adultPrice: number = 13;
+  adultPriceDisplay: number = 0;
   discountedTickets: number = 0;
+  discountedPrice: number = 10;
+  discountedPriceDisplay: number = 0;
   childTickets: number = 0;
+  childPrice: number = 9;
+  childPriceDisplay: number = 0;
   totalTickets: number = 0;
   maxTickets: number = 7;
+  sum: number = 0;
+  
 
-  constructor() {
-    this.initEventListeners();
-    this.updateTotalSum();
-  }
-
-  initEventListeners() {
-    document.querySelectorAll('.ticket-button').forEach((button) => {
-      button.addEventListener('click', (event) => this.handleButtonClick(event));
-    });
-  }
-
-  handleButtonClick(event: Event) {
-    const target = event.target as HTMLButtonElement;
-    const container = target.closest('.container-Karten') || target.closest('.container-info');
-
-    if (container) {
-      if (container.querySelector('p')?.textContent?.includes('Erwachsener')) {
-        this.updateCounter(target, 'adultTickets', container);
-      } else if (container.querySelector('p')?.textContent?.includes('Ermäßigt')) {
-        this.updateCounter(target, 'discountedTickets', container);
-      } else if (container.querySelector('p')?.textContent?.includes('Kind')) {
-        this.updateCounter(target, 'childTickets', container);
-      }
-    }
-    this.updateTotalSum();
-  }
-
-  updateCounter(target: HTMLButtonElement, ticketType: 'adultTickets' | 'discountedTickets' | 'childTickets', container: Element) {
-    if (target.textContent === '+') {
-      if (this.totalTickets < this.maxTickets) {
-        this[ticketType]++;
-        this.totalTickets++;
-      }
-    } else if (target.textContent === '-') {
-      if (this[ticketType] > 0) {
-        this[ticketType]--;
-        this.totalTickets--;
-      }
-    }
-    this.updateDisplay(ticketType, container);
-  }
-
-  updateDisplay(ticketType: 'adultTickets' | 'discountedTickets' | 'childTickets', container: Element) {
-    const ticketTextMap: { [key: string]: string } = {
-      adultTickets: 'Erwachsener',
-      discountedTickets: 'Ermäßigt',
-      childTickets: 'Kind',
-    };
-
-    const ticketPriceMap: { [key: string]: number } = {
-      adultTickets: 13,
-      discountedTickets: 10,
-      childTickets: 9,
-    };
-
-    const ticketCount = this[ticketType];
-    const ticketTypeText = ticketTextMap[ticketType];
-    const ticketPrice = ticketPriceMap[ticketType];
-    const totalPrice = ticketCount * ticketPrice;
-    
-    const pElement = container.querySelector('p');
-    if (pElement) {
-      if (ticketCount > 0) {
-        pElement.textContent = `${ticketCount}x ${ticketTypeText} ${totalPrice}€`;
-      } else {
-        pElement.textContent = `${ticketCount}x ${ticketTypeText}`;
-      }
+  addErwachsener() {
+    if (this.totalTickets < this.maxTickets) {
+      this.adultTickets++;
+      this.totalTickets++;
+      this.adultPriceDisplay = this.adultTickets * this.adultPrice; 
+      this.sum = this.sum + this.adultPrice; 
+      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
     }
   }
 
-  updateTotalSum() {
-    const totalSum = (this.adultTickets * 13) + (this.discountedTickets * 10) + (this.childTickets * 9);
-    const sumElement = document.querySelector('.container-Summe .container-Summeinfo p');
-    if (sumElement) {
-      sumElement.textContent = `Summe: ${totalSum}€`;
+  removeErwachsener() {
+    if (this.adultTickets > 0) {
+      this.adultTickets--;
+      this.totalTickets--;
+      this.adultPriceDisplay = this.adultPriceDisplay - this.adultPrice;
+      this.sum = this.sum - this.adultPrice;
+      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}`);
+    }
+  }
+
+  addErmaessigt() {
+    if (this.totalTickets < this.maxTickets) {
+      this.discountedTickets++;
+      this.totalTickets++;
+      this.discountedPriceDisplay = this.discountedTickets * this.discountedPrice;
+      this.sum = this.sum + this.discountedPrice;
+      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+    }
+  }
+
+  removeErmaessigt() {
+    if (this.discountedTickets > 0) {
+      this.discountedTickets--;
+      this.totalTickets--;
+      this.discountedPriceDisplay = this.discountedPriceDisplay - this.discountedPrice;
+      this.sum = this.sum - this.discountedPrice;
+      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+    }
+  }
+
+  addKind() {
+    if (this.totalTickets < this.maxTickets) {
+      this.childTickets++;
+      this.totalTickets++;
+      this.childPriceDisplay = this.childTickets * this.childPrice;
+      this.sum = this.sum + this.childPrice;
+      console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
+    }
+  }
+
+  removeKind() {
+    if (this.childTickets > 0) {
+      this.childTickets--;
+      this.totalTickets--;
+      this.childPriceDisplay = this.childPriceDisplay - this.childPrice;
+      this.sum = this.sum - this.childPrice;
+      console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
     }
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  new KartenkaufenComponent();
-});
 
 
 /** 
