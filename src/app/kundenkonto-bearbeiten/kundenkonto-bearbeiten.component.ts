@@ -3,6 +3,9 @@ import {KundendatenService} from "../providers/kundendaten.service";
 import {NgIf} from "@angular/common";
 import { formatDate } from '@angular/common';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {LoginAuthenticationService} from "../providers/login-authentication.service";
+import {Router} from "@angular/router";
+import {response} from "express";
 
 @Component({
   selector: 'app-kundenkonto-bearbeiten',
@@ -20,7 +23,7 @@ export class KundenkontoBearbeitenComponent implements OnInit {
   editForm!: FormGroup;
   isFormSubmitted = false;
 
-  constructor(private formBuilder: FormBuilder, private kundendatenService: KundendatenService) {}
+  constructor(private formBuilder: FormBuilder, private kundendatenService: KundendatenService, private loginautService: LoginAuthenticationService, private router: Router) {}
 
   ngOnInit(): void {
     this.editForm =  this.formBuilder.group({
@@ -64,6 +67,22 @@ export class KundenkontoBearbeitenComponent implements OnInit {
 
   datenBearbeiten(): void {
     this.isEditing = true;
+  }
+
+  kontoLoeschen(): void {
+    if (confirm('Möchten Sie Ihr Konto wirklich löschen?')) {
+      this.kundendatenService.deleteKunde(this.user.id).subscribe(response => {
+        if (response.success) {
+          console.error(response.message);
+          this.loginautService.logout();
+          this.router.navigate(['/login'], );
+        } else {
+          console.error(response.message);
+        }
+      }, error => {
+        console.error('Fehler beim Löschen des Kontos:', error);
+      });
+    }
   }
 
   cancelEdit(): void {
