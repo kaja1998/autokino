@@ -14,7 +14,6 @@ const allowCrossDomain = (req, res, next) => {
 
 bodyParser = require('body-parser');
 
-
 // support parsing of application/json type post data
 app.use(bodyParser.json());
 
@@ -61,6 +60,15 @@ app.post('/insertticket', function (req, res) {
   });
 });
 
+con.connect(function(err){
+  if(err) throw err;
+  const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES ?";
+  const values = [[8,8,8,3,3,3]]
+  con.query(sql,[values],function(err,res){
+    if(err)throw err;
+    console.log("sending")
+  })
+})
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
