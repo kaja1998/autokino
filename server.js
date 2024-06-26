@@ -41,7 +41,24 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Password1!"
+      password: "My3qlP@ssword"
+});
+
+
+app.post('/insertticket', function (req, res) {
+  console.log("inserting ticket");
+  const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES (?, ?, ?, ?, ?, ?)";
+  const { ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder } = req.body;
+
+  con.query(sql, [ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Server error');
+      return;
+    }
+    console.log("Records inserted");
+    res.status(200).send('Ticket inserted');
+  });
 });
 
 app.get('/filmeMitDatum', function (req, res) {

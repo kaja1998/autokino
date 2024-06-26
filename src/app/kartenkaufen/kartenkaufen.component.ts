@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { KartenkaufenService } from '../providers/kartenkaufen.service';
 @Component({
   selector: 'app-kartenkaufen',
   standalone: true,
@@ -15,6 +15,10 @@ export class KartenkaufenComponent {
   zerosArray: number[] = Array(60).fill(0);
   previousIndex: number | null = null;
 
+
+  constructor(public KartenkaufenService: KartenkaufenService){
+
+  }
   public select(index: number) {
     if (this.previousIndex !== null) {
       this.zerosArray[this.previousIndex] = 0;
@@ -22,7 +26,7 @@ export class KartenkaufenComponent {
     this.zerosArray[index] = 1;
     this.previousIndex = index;
   }
-
+  
   // Start Kaufsystem
   adultTickets: number = 0;
   adultPrice: number = 13;
@@ -37,6 +41,9 @@ export class KartenkaufenComponent {
   maxTickets: number = 7;
   sum: number = 0;
   
+  ticketkaufen(){
+    this.KartenkaufenService.getticket(1,1,1,this.adultTickets,this.discountedTickets,this.childTickets)
+  }
 
   addErwachsener() {
     if (this.totalTickets < this.maxTickets) {
