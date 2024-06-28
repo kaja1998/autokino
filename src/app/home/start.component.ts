@@ -11,10 +11,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './start.component.html',
   styleUrl: './start.component.css'
 })
+
 export class StartComponent {
+  filme: any[] = [];
   constructor(public filmService: FilmService) {
     filmService.getFilmeMitDatum().subscribe(data => {
-      console.log(filmService.filme);
+      this.filme = data;
     });
   }
 }
