@@ -173,11 +173,31 @@ app.post('/updatekundendaten', function (req, res) {
 
 app.post('/getFilm', function (req, res) {    
    const filmInput  = req.body.filmtitel;
-   const query = "SELECT * FROM filme WHERE filmtitel = ?";
+   const query = "SELECT *FROM filme f LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel WHERE f.filmtitel LIKE ?";
    con.query(query, [filmInput], 
             function (error, results, fields) {
                   if (error) throw error;
-                  res.send(results);
+                  const filme = results.reduce((acc, row) => {
+                    const film = acc.find(f => f.filmtitel === row.filmtitel);
+                    if (film) {
+                      film.veranstaltungen.push({ datum: row.datum });
+                    } else {
+                      acc.push({
+                        filmtitel: row.filmtitel,
+                        beschreibung: row.beschreibung,
+                        laufzeit: row.laufzeit,
+                        bewertung: row.bewertung,
+                        bildpfad: row.bildpfad,
+                        genre: row.genre,
+                        erscheinungsdatum: row.erscheinungsdatum,
+                        besetzung: row.besetzung,
+                        fsk: row.fsk,
+                        veranstaltungen: row.datum ? [{ datum: row.datum }] : []
+                      });
+                    }
+                    return acc;
+                  }, []);
+                  res.json(filme);
             }
       );
 });
