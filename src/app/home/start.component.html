@@ -16,8 +16,8 @@
     <div class="flex-container">
 
         <span class="title-cover" *ngFor="let film of filme.slice(0, 3)">
-            <a routerLink="/filmdetails" class="film-highlight">
-                <img src="{{film.bildpfad}}" alt="Filmplakat zu {{film.filmtitel}}" width="283" height="401">
+            <a [routerLink]="['/filmdetails', film.filmtitel]" class="film-highlight">
+                <img src="{{film.bildpfad}}" alt="Filmplakat zu {{film.filmtitel}}" width="283" height="401" >
                 <p class="p-title">
                 {{film.filmtitel}}
                 </p>
