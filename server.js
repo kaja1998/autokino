@@ -43,32 +43,30 @@ var con = mysql.createConnection({
       password: "My3qlP@ssword"
 });
 
-
 app.post('/insertticket', function (req, res) {
-  console.log("inserting ticket");
   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES (?, ?, ?, ?, ?, ?)";
   const { ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder } = req.body;
 
   con.query(sql, [ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder], function(err, result) {
     if (err) {
       console.error(err);
-      res.status(500).send('Server error');
+      res.status(500);
       return;
     }
     console.log("Records inserted");
-    res.status(200).send('Ticket inserted');
+    res.status(200);
   });
 });
 
-con.connect(function(err){
-  if(err) throw err;
-  const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES ?";
-  const values = [[8,8,8,3,3,3]]
-  con.query(sql,[values],function(err,res){
-    if(err)throw err;
-    console.log("sending")
-  })
-})
+// con.connect(function(err){
+//   if(err) throw err;
+//   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES ?";
+//   const values = [[9,8,8,3,3,3]]
+//   con.query(sql,[values],function(err,res){
+//     if(err)throw err;
+//     console.log("sending")
+//   })
+// })
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum

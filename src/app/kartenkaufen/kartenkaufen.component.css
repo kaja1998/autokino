@@ -4,7 +4,33 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 200px;
+    margin-top: 200px;
+    margin-left: 200px;
+    margin-right: 200px;
+
+}
+.container-unten {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+.fehler_a{
+    display: none;
+}
+
+.fehler_b{
+    display: none;
+}
+
+.fehler_c{
+    display: none;
+}
+
+.fehler_d{
+    display: none;
 }
 
 .container-oben-rechts {
