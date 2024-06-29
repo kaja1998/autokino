@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { KartenkaufenService } from '../providers/kartenkaufen.service';
 @Component({
   selector: 'app-kartenkaufen',
   standalone: true,
@@ -12,17 +12,24 @@ import { CommonModule } from '@angular/common';
 
 export class KartenkaufenComponent {
   // Start Parkplatzauswahl
-  zerosArray: number[] = Array(60).fill(0);
-  previousIndex: number | null = null;
+  public zerosArray: number[] = Array(60).fill(0);
+  public previousIndex: number | null = null;
+  public currentIndex: number = 0;
 
+  constructor(public KartenkaufenService: KartenkaufenService){
+
+  }
   public select(index: number) {
-    if (this.previousIndex !== null) {
+    if (this.previousIndex !== null && this.zerosArray[this.previousIndex] !== 2) {
       this.zerosArray[this.previousIndex] = 0;
     }
+    if(this.zerosArray[index] !== 2){
     this.zerosArray[index] = 1;
     this.previousIndex = index;
+    this.currentIndex = index;
+    }
   }
-
+  
   // Start Kaufsystem
   adultTickets: number = 0;
   adultPrice: number = 13;
@@ -36,7 +43,42 @@ export class KartenkaufenComponent {
   totalTickets: number = 0;
   maxTickets: number = 7;
   sum: number = 0;
+  veranstaltungs_nr: number = 1;
+
+  user: any = "";
+
+  ngOnInit(): void {
+    const userString = localStorage.getItem('user');
+    if (userString) {     //wenn nicht null, dann parse String zurück in ein Objekt
+      this.user = JSON.parse(userString);
+    }
+    // console.log(this.user.id)
+  }
   
+  ticketkaufen(){
+    if(this.previousIndex === null){
+      document.getElementById('fehler_a')!.style.display = 'flex';
+      document.getElementById('fehler_b')!.style.display = 'none';
+      document.getElementById('fehler_c')!.style.display = 'none';
+      document.getElementById('fehler_d')!.style.display = 'none';
+    }else if(this.adultTickets === 0 && this.discountedTickets === 0 && this.childTickets === 0){
+      document.getElementById('fehler_a')!.style.display = 'none';
+      document.getElementById('fehler_b')!.style.display = 'flex';
+      document.getElementById('fehler_c')!.style.display = 'none';
+      document.getElementById('fehler_d')!.style.display = 'none';
+    }else if(this.adultTickets === 0 && this.discountedTickets === 0){
+      document.getElementById('fehler_a')!.style.display = 'none';
+      document.getElementById('fehler_b')!.style.display = 'none';
+      document.getElementById('fehler_c')!.style.display = 'flex';
+      document.getElementById('fehler_d')!.style.display = 'none';
+    }
+    else{
+      const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString(); // string mit nummer _ nummer
+      this.KartenkaufenService.getticket(jointTicket_nr,this.user.id,this.veranstaltungs_nr,this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
+      this.zerosArray[this.currentIndex] = 2;
+      console.log("Kaufen erfolgreich")
+    }
+  }
 
   addErwachsener() {
     if (this.totalTickets < this.maxTickets) {
@@ -100,11 +142,15 @@ export class KartenkaufenComponent {
 }
 
 
-/** 
- * - Kein Parkplatz ausgewählt
- * - Kein Erwachsener / Ermäßigt ausgewählt
- * - 7 Kinder ausgewählt
- * - Check Kunde eingeloggt
- * - Wenn Kaufen richtig Parkplatz -> rot
- * - Ticket auslesen
+
+/**
+ *   -- Brainstorm --
+ * 1. Fehlermeldungen unter der Parkplatzauswahl / Push notification ?
+ * 2. MySql Ticket_nr zu String oder varchar.
+ * 3. Ticket_nr .toString erstellen
+ * 4. Check Kunde eingeloggt -> if false = login weiterleiten
+ * 5. Kauf erfolgreich -> neue Seite (Kauf erfolgreich message)
+ * 6. besetzte Parkplätze auslesen bei aufruf 
+ * 7. veranstaltungs_nr mit kartenkaufen verknüpfen (Isabelle oder Kaja oder Lasse fragen)
+ * 8. web sockets 
  */

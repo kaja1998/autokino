@@ -14,7 +14,6 @@ const allowCrossDomain = (req, res, next) => {
 
 bodyParser = require('body-parser');
 
-
 // support parsing of application/json type post data
 app.use(bodyParser.json());
 
@@ -41,9 +40,33 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Password1!"
+      password: "My3qlP@ssword"
 });
 
+app.post('/insertticket', function (req, res) {
+  const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES (?, ?, ?, ?, ?, ?)";
+  const { ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder } = req.body;
+
+  con.query(sql, [ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500);
+      return;
+    }
+    console.log("Records inserted");
+    res.status(200);
+  });
+});
+
+// con.connect(function(err){
+//   if(err) throw err;
+//   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES ?";
+//   const values = [[9,8,8,3,3,3]]
+//   con.query(sql,[values],function(err,res){
+//     if(err)throw err;
+//     console.log("sending")
+//   })
+// })
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
