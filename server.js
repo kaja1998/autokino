@@ -58,15 +58,18 @@ app.post('/insertticket', function (req, res) {
   });
 });
 
-// con.connect(function(err){
-//   if(err) throw err;
-//   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES ?";
-//   const values = [[9,8,8,3,3,3]]
-//   con.query(sql,[values],function(err,res){
-//     if(err)throw err;
-//     console.log("sending")
-//   })
-// })
+app.get('/loadticket', function (req, res) {
+  const query = "SELECT * FROM ticket";
+  con.query(query, function (error, results) {
+    if (error) {
+      console.error(error);
+      res.status(500).send("Error occurred during the query.");
+      return;
+    }
+    // console.log(results); 
+    res.status(200).json(results); 
+  });
+});
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
