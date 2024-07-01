@@ -101,7 +101,7 @@ app.get('/filmeMitDatum', function (req, res) {
 app.post('/certainFilme', function (req, res) {
   const userInput  = '%' + req.body.userInput +'%';
   const query = `
-    SELECT f.filmtitel, f.beschreibung, v.datum
+    SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
     FROM filme f
     LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
     WHERE f.filmtitel LIKE ?
@@ -117,6 +117,7 @@ app.post('/certainFilme', function (req, res) {
           acc.push({
             filmtitel: row.filmtitel,
             beschreibung: row.beschreibung,
+            bildpfad: row.bildpfad,
             veranstaltungen: row.datum ? [{ datum: row.datum }] : []
           });
         }
