@@ -4,8 +4,7 @@ body {
   justify-content: left;
   line-height: 1.5;
   padding: 0;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin: 5% 15%;
 }
 
 .kundendaten h2 {

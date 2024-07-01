@@ -6,7 +6,20 @@
   <button type="button" [routerLink]="['/kundenkonto/bearbeiten']">Mein Profil</button>
 </div>
 
-<div class="vorstellungen">
+<div class="vorstellungen" *ngIf="tickets.length > 0">
+  <h2>Deine nächsten Vorstellungen</h2>
+  <div class="tickets-container">
+    <div class="ticket" *ngFor="let ticket of tickets">
+      <p>Film: {{ ticket.filmtitel }}</p>
+      <p>Datum: {{ ticket.datum | date: 'dd.MM.yy' }}</p>
+      <p *ngIf="ticket.erwachsene > 0">{{ ticket.erwachsene }}x Erwachsene</p>
+      <p *ngIf="ticket.ermaessigte > 0">{{ ticket.ermaessigte }}x Ermäßigte</p>
+      <p *ngIf="ticket.kinder > 0">{{ ticket.kinder }}x Kinder</p>
+      <p>Ticket Nr: #{{ ticket.ticket_nr }}</p>
+    </div>
+  </div>
+</div>
+<div class="vorstellungen" *ngIf="tickets.length === 0">
   <h2>Deine nächsten Vorstellungen</h2>
   <p>Keine Buchungen vorhanden.</p>
 </div>
