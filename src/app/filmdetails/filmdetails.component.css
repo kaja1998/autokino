@@ -109,7 +109,9 @@ body {
     padding: 20px;
     margin-bottom: 50px;
 }
-
+.vorstellung:hover{
+    border-color: green;
+}
 .vorstellung p{
     font-size: 15px;
 }

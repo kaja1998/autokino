@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilmService } from '../providers/filmService';
 import { CommonModule, NgFor } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-filmdetails',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor,RouterLink],
   templateUrl: './filmdetails.component.html',
   styleUrl: './filmdetails.component.css'
 })
@@ -24,6 +24,7 @@ export class FilmdetailsComponent {
     this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? ''
     this.filmService.getFilm(this.filmtitel).subscribe(data => {
     this.film = data;
+    console.log(this.film)
   });
 }
 }

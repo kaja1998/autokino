@@ -38,7 +38,8 @@
             20 Uhr
             <p>69 Tickets</p>
         </div> -->
-        <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen">
+        
+        <div [routerLink]="['/kartenkaufen']" class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen">
             {{ veranstaltung.datum | date: "dd.MM.yy" }}
             <p>20 Uhr</p>
             <p>60 Tickets</p>

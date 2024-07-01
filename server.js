@@ -40,7 +40,7 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Password1!"
+      password: "My3qlP@ssword"
 });
 
 app.post('/insertticket', function (req, res) {
@@ -237,6 +237,7 @@ app.post('/getFilm', function (req, res) {
                     const film = acc.find(f => f.filmtitel === row.filmtitel);
                     if (film) {
                       film.veranstaltungen.push({ datum: row.datum });
+                      film.veranstaltungs_nr.push({veranstaltungs_nr: row.veranstaltungs_nr});
                     } else {
                       acc.push({
                         filmtitel: row.filmtitel,
@@ -248,6 +249,7 @@ app.post('/getFilm', function (req, res) {
                         erscheinungsdatum: row.erscheinungsdatum,
                         besetzung: row.besetzung,
                         fsk: row.fsk,
+                        veranstaltungs_nr: row.veranstaltungs_nr ? [{veranstaltungs_nr: row.veranstaltungs_nr}]  : [],
                         veranstaltungen: row.datum ? [{ datum: row.datum }] : []
                       });
                     }
