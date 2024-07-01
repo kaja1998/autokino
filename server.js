@@ -69,8 +69,9 @@ app.post('/insertticket', function (req, res) {
 // })
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
+  
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
-    FROM filme f
+    FROM filme f 
     LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
   `,
   function (error, results) {
@@ -96,6 +97,34 @@ app.get('/filmeMitDatum', function (req, res) {
     }, []);
     res.json(filme);
   });
+});
+
+app.get('/getfilmHighlights', function (req, res) {
+  const query = `
+    SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
+    FROM filme f
+    LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
+    WHERE f.filmtitel IN ("Dune II", "Chihiros Reise ins Zauberland", "Drachenzähmen leicht gemacht")
+  `
+  con.query(query,
+    function (error, results, fields) {
+      if (error) throw error;
+      const filme = results.reduce((acc, row) => {
+        const film = acc.find(f => f.filmtitel === row.filmtitel);
+        if (film) {
+          film.veranstaltungen.push({ datum: row.datum });
+        } else {
+          acc.push({
+            filmtitel: row.filmtitel,
+            beschreibung: row.beschreibung,
+            bildpfad: row.bildpfad,
+            veranstaltungen: row.datum ? [{ datum: row.datum }] : []
+          });
+        }
+        return acc;
+      }, []);
+      res.json(filme);
+    });
 });
 
 app.post('/certainFilme', function (req, res) {

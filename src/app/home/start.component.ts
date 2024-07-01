@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class StartComponent {
   filme: any[] = [];
   constructor(public filmService: FilmService) {
-    filmService.getFilmeMitDatum().subscribe(data => {
+    filmService.getFilmHighlights().subscribe(data => {
       this.filme = data;
     });
   }

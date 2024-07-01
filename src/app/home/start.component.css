@@ -7,8 +7,6 @@ html, body {
     color: white;
 }
 
-
-
 /* Container for the video */
 .video-container {
     position: fixed;
@@ -82,6 +80,7 @@ hr {/*Trennlinie*/
 .title-cover {
     margin: 5%;
 }
+
 .p-title {
     font-size: 16px;
     text-align: center;
