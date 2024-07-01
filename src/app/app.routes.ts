@@ -15,7 +15,7 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent,},
     {path: 'programm', component: ProgrammComponent},
     {path: 'kundenkonto', component: KundenkontoComponent,},
-    {path: 'kundenkonto/bearbeiten', component: KundenkontoBearbeitenComponent,},
-    {path: 'kartenkaufen/:v_nr', component: KartenkaufenComponent,},
+    {path: 'kundenkonto/bearbeiten', component: KundenkontoBearbeitenComponent},
+    {path: 'kartenkaufen', component: KartenkaufenComponent},
     {path: 'kundenkonto/movie-deal', component: MovieDealComponent}
 ];
