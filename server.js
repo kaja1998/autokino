@@ -66,15 +66,40 @@ app.get('/loadticket', function (req, res) {
       res.status(500).send("Error occurred during the query.");
       return;
     }
-    // console.log(results); 
-    res.status(200).json(results); 
+    // console.log(results);
+    res.status(200).json(results);
   });
 });
+
+app.post('/getusertickets', function (req, res) {
+    const userId = req.body.userId;
+
+    const query = `
+    SELECT
+      t.ticket_nr, t.kinder, t.ermaessigte, t.erwachsene, t.veranstaltungs_nr,
+      v.filmtitel, v.datum
+    FROM
+      ticket t
+    JOIN
+      veranstaltungen v ON t.veranstaltungs_nr = v.veranstaltungs_nr
+    WHERE
+      t.kunden_id = ?
+  `;
+
+    con.query(query, [userId], function (error, results) {
+        if (error) {
+            throw error;
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 app.get('/filmeMitDatum', function (req, res) {
   con.query(`
-  
+
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
-    FROM filme f 
+    FROM filme f
     LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
   `,
   function (error, results) {
@@ -227,10 +252,10 @@ app.post('/updatekundendaten', function (req, res) {
   });
 });
 
-app.post('/getFilm', function (req, res) {    
+app.post('/getFilm', function (req, res) {
    const filmInput  = req.body.filmtitel;
    const query = "SELECT *FROM filme f LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel WHERE f.filmtitel LIKE ?";
-   con.query(query, [filmInput], 
+   con.query(query, [filmInput],
             function (error, results, fields) {
                   if (error) throw error;
                   const filme = results.reduce((acc, row) => {

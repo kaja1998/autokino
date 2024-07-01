@@ -18,4 +18,8 @@ export class KundendatenService {
     return this.http.post<any>('http://127.0.0.1:8080/deletekunde', { id });
   }
 
+  public getUserTickets(userId: number): Observable<any> {
+    return this.http.post<any>('http://127.0.0.1:8080/getusertickets', { userId });
+  }
+
 }
