@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { LoginAuthenticationService } from '../providers/login-authentication.se
 })
 
 
-export class KartenkaufenComponent {
+export class KartenkaufenComponent implements OnInit {
   // Start Parkplatzauswahl
   public zerosArray: number[] = Array(60).fill(0);
   public previousIndex: number | null = null;
@@ -39,7 +39,7 @@ export class KartenkaufenComponent {
 
 
   constructor(public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
-   
+
   }
 
   public sortAndExtractTicketNr(tickets: Array<{ ticket_nr: string; [key: string]: any }>): Array<string> {
@@ -51,7 +51,7 @@ export class KartenkaufenComponent {
         return numA - numB;
       })
       .map(ticket => ticket.ticket_nr);
-      
+
   }
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
@@ -102,10 +102,10 @@ public fillParkSpots(indices: number[]): void {
     this.currentIndex = index;
     }
   }
-  
+
   // Start Kaufsystem
 
-  
+
   ticketkaufen(){
   if(this.isLoggedIn === false){
     document.getElementById('fehler_a')!.style.display = 'none';
@@ -140,8 +140,8 @@ public fillParkSpots(indices: number[]): void {
     if (this.totalTickets < this.maxTickets) {
       this.adultTickets++;
       this.totalTickets++;
-      this.adultPriceDisplay = this.adultTickets * this.adultPrice; 
-      this.sum = this.sum + this.adultPrice; 
+      this.adultPriceDisplay = this.adultTickets * this.adultPrice;
+      this.sum = this.sum + this.adultPrice;
       console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
     }
   }
@@ -206,7 +206,7 @@ public fillParkSpots(indices: number[]): void {
  * 3. Ticket_nr .toString erstellen
  * 4. Check Kunde eingeloggt -> if false = login weiterleiten
  * 5. Kauf erfolgreich -> neue Seite (Kauf erfolgreich message)
- * 6. besetzte Parkplätze auslesen bei aufruf 
+ * 6. besetzte Parkplätze auslesen bei aufruf
  * 7. veranstaltungs_nr mit kartenkaufen verknüpfen (Isabelle oder Kaja oder Lasse fragen)
- * 8. web sockets 
+ * 8. web sockets
  */
