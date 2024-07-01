@@ -1,6 +1,4 @@
-body {
-    /* background-color: rgb(21, 21, 21); */
-}
+
 
 .container {
     display: flex;
@@ -102,18 +100,24 @@ body {
 }
 
 .vorstellung{
-    width: 10%;
+    width: 20%;
     margin-right:5%;
     border: 3px solid white;
     border-radius: 3px;
-    padding: 20px;
+    /* padding: 20px; */
+    padding-top: 20px;
     margin-bottom: 50px;
     transition: font-size 0.3s; /*Smooth transition in sekunden*/
 
 }
-.vorstellung:hover{
-    border-color: green;
+.ticketbutton:hover{
+    background-color: white;
+    color: black;
     font-size: 25px;
+}
+.ticketbutton{
+    width: 101%;
+    border: 1px solid white;
 }
 .vorstellung p{
     font-size: 15px;

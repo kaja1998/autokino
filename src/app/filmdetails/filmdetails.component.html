@@ -38,15 +38,26 @@
             20 Uhr
             <p>69 Tickets</p>
         </div> -->
-        <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen ">
-            {{ veranstaltung.datum | date: 'dd.MM.yy' }}
+
+    
+
+        <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen; let j = index">
+            <div >
+              {{ veranstaltung.datum | date: 'dd.MM.yy' }}
               <p>20 Uhr</p>
               <p>60 Tickets</p>
-            </div>
-            <div *ngFor="let veranstaltungs_nr of film[0].veranstaltungs_nummern" [routerLink]="['/kartenkaufen',veranstaltungs_nr]">
+              <div class="ticketbutton" *ngIf="j < film[0].veranstaltungs_nummern.length" [routerLink]="['/kartenkaufen', film[0].veranstaltungs_nummern[j]]">
                 <p>zu den tickets</p>
               </div>
-              
+            </div>
+          </div>
+
+        <!-- <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen;let veranstaltungs_nr of film[0].veranstaltungs_nummern" [routerLink]="['/kartenkaufen',veranstaltungs_nr]">
+            {{ veranstaltung.datum | date: 'dd.MM.yy' }}
+              <p>20 Uhr</p>
+              <p>60 Tickets verfügbar</p>
+              <p>Zu den Tickets</p>
+              </div>
+            </div>  
           
-    </div>
-    
+    </div> -->
