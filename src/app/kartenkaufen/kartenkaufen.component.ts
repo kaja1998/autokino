@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { Router } from '@angular/router';
+import { LoginAuthenticationService } from '../providers/login-authentication.service';
+
 @Component({
   selector: 'app-kartenkaufen',
   standalone: true,
@@ -33,9 +35,10 @@ export class KartenkaufenComponent {
   maxTickets: number = 7;
   sum: number = 0;
   veranstaltungs_nr: number = 1;
+  isLoggedIn: Boolean = false;
 
 
-  constructor(public KartenkaufenService: KartenkaufenService,public router: Router){
+  constructor(public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
    
   }
 
@@ -70,10 +73,14 @@ public fillParkSpots(indices: number[]): void {
   user: any = "";
 
   ngOnInit(): void {
+    this.authService.isUserLoggedIn$.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+    });
     const userString = localStorage.getItem('user');
     if (userString) {     //wenn nicht null, dann parse String zurück in ein Objekt
       this.user = JSON.parse(userString);
     }
+    console.log(this.user+"AAA")
     this.KartenkaufenService.getticket().subscribe(data => {
       this.ticket = this.KartenkaufenService.tickets;
       // console.log("HALLO",KartenkaufenService.tickets);
@@ -100,7 +107,12 @@ public fillParkSpots(indices: number[]): void {
 
   
   ticketkaufen(){
-    if(this.previousIndex === null){
+  if(this.isLoggedIn === false){
+    document.getElementById('fehler_a')!.style.display = 'none';
+    document.getElementById('fehler_b')!.style.display = 'none';
+    document.getElementById('fehler_c')!.style.display = 'none';
+    document.getElementById('fehler_d')!.style.display = 'flex';
+  }else if(this.previousIndex === null){
       document.getElementById('fehler_a')!.style.display = 'flex';
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'none';
@@ -115,8 +127,7 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
-    }
-    else{
+    }else{
       const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString(); // string mit nummer _ nummer
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,this.veranstaltungs_nr,this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
