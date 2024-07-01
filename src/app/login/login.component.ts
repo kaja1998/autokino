@@ -31,6 +31,21 @@ export class LoginComponent implements OnInit {
   constructor(public loginautService: LoginAuthenticationService, public registrierenService: RegistrierenService, public router: Router) {}
 
   ngOnInit() {
+    this.router.events.subscribe(event => {
+        const fragment = this.router.url.split('#')[1];
+        if (fragment === 'register') {
+          this.showLoginForm = false;
+          this.showRegisterForm = true;
+          this.showLoginButton = true;
+          this.showRegisterButton = false;
+        } else {
+          this.showLoginForm = true;
+          this.showRegisterForm = false;
+          this.showLoginButton = false;
+          this.showRegisterButton = true;
+        }
+    });
+
     this.userForm =  new FormGroup({
       mail: new FormControl("",[Validators.required]),
       passwort: new FormControl("",[Validators.required]),
