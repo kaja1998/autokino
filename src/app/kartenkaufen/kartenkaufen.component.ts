@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
 
 @Component({
@@ -34,11 +34,12 @@ export class KartenkaufenComponent {
   totalTickets: number = 0;
   maxTickets: number = 7;
   sum: number = 0;
-  veranstaltungs_nr: number = 1;
   isLoggedIn: Boolean = false;
+  veranstaltungs_nr: number = 1;
+  veranstaltungs_nr1: string = '';
 
 
-  constructor(public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
+  constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
    
   }
 
@@ -73,6 +74,8 @@ public fillParkSpots(indices: number[]): void {
   user: any = "";
 
   ngOnInit(): void {
+    this.veranstaltungs_nr1 = this.route.snapshot.paramMap.get('n_nr') ?? ''
+    console.log(this.veranstaltungs_nr1+"aaaaaaaaaaaaaaaaaaa")
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });

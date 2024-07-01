@@ -108,9 +108,12 @@ body {
     border-radius: 3px;
     padding: 20px;
     margin-bottom: 50px;
+    transition: font-size 0.3s; /*Smooth transition in sekunden*/
+
 }
 .vorstellung:hover{
     border-color: green;
+    font-size: 25px;
 }
 .vorstellung p{
     font-size: 15px;

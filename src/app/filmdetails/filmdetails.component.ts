@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
 export class FilmdetailsComponent {
   filmtitel: string = "";
   film: any = {};
+  veranstaltungen: any = {};
 
   constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
     
@@ -24,7 +25,8 @@ export class FilmdetailsComponent {
     this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? ''
     this.filmService.getFilm(this.filmtitel).subscribe(data => {
     this.film = data;
-    console.log(this.film)
+    this.veranstaltungen = this.film[0].veranstaltungs_nummern;
+    console.log(this.veranstaltungen)
   });
 }
 }
