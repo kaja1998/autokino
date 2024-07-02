@@ -52,7 +52,7 @@
     flex-direction: column;
     gap: 1em;
     margin-left: 20px;
-    width: 15%;     
+    width: 15%;
 }
 
 .bewertung {
@@ -64,7 +64,7 @@
     flex-direction: column;
     gap: 1em;
     margin-left: 20px;
-    width: 40%;    
+    width: 40%;
 }
 
 .trenner1 {
@@ -116,7 +116,7 @@
     font-size: 25px;
 }
 .ticketbutton{
-    width: 101%;
+    width: 100%;
     border: 1px solid white;
 }
 .vorstellung p{
