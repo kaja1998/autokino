@@ -33,13 +33,6 @@
     </div>
 
     <div class="vorstellungszeiten">
-        <!-- <div class="vorstellung" href="https://www.youtube.com/watch?v=xvFZjo5PgG0">
-            Montag
-            20 Uhr
-            <p>69 Tickets</p>
-        </div> -->
-
-    
 
         <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen; let j = index">
             <div >
@@ -50,14 +43,4 @@
                 <p>zu den tickets</p>
               </div>
             </div>
-          </div>
-
-        <!-- <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen;let veranstaltungs_nr of film[0].veranstaltungs_nummern" [routerLink]="['/kartenkaufen',veranstaltungs_nr]">
-            {{ veranstaltung.datum | date: 'dd.MM.yy' }}
-              <p>20 Uhr</p>
-              <p>60 Tickets verfügbar</p>
-              <p>Zu den Tickets</p>
-              </div>
-            </div>  
-          
-    </div> -->
+        </div>
