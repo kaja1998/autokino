@@ -1,22 +1,22 @@
 
     <div class="containerVideo">
         <video height="720" width="1280" controls>
-            <source src="../assets/videos/DunePart2Trailer.mp4" type="video/mp4"> 
-            <source src="../assets/videos/DunePart2Trailer.mp4" type="video/ogg"> 
+            <source src="../assets/videos/DunePart2Trailer.mp4" type="video/mp4">
+            <source src="../assets/videos/DunePart2Trailer.mp4" type="video/ogg">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <div class="trenner1"></div>
-    
+
     <div class="container">
         <h2 class="filmtitel">{{filmtitel}}</h2>
         <div class="filmInformation">
             <div class="spalte1"><img src="{{film[0].bildpfad}}" alt="Nichts Gefunden" height="450" length="300"><p class = "fsk">FSK {{film[0].fsk}}</p></div>
             <div class = "spalte2">
-                <div><h1>Genre</h1> <p>{{film[0].genre}} </p></div> 
+                <div><h1>Genre</h1> <p>{{film[0].genre}} </p></div>
                 <div><h1>Dauer</h1><p>{{film[0].laufzeit}} min</p></div>
-                <div><h1>Erscheinung</h1><p>{{film[0].erscheinungsdatum | date: "dd.MM.yyyy"}}</p></div> 
+                <div><h1>Erscheinung</h1><p>{{film[0].erscheinungsdatum | date: "dd.MM.yyyy"}}</p></div>
                 <div><h1>Besetzung</h1><p>{{film[0].besetzung}}</p></div>
             </div>
             <div class = "spalte3">
@@ -40,7 +40,7 @@
               <p>20 Uhr</p>
               <p>60 Tickets</p>
               <div class="ticketbutton" *ngIf="j < film[0].veranstaltungs_nummern.length" [routerLink]="['/kartenkaufen', film[0].veranstaltungs_nummern[j]]">
-                <p>zu den tickets</p>
+                <p>Zu den Tickets</p>
               </div>
             </div>
         </div>
