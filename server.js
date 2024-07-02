@@ -77,7 +77,7 @@ app.post('/getusertickets', function (req, res) {
     const query = `
     SELECT
       t.ticket_nr, t.kinder, t.ermaessigte, t.erwachsene, t.veranstaltungs_nr,
-      v.filmtitel, v.datum
+      v.filmtitel, v.datum, v.ort
     FROM
       ticket t
     JOIN

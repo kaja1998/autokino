@@ -36,4 +36,9 @@ export class KundenkontoComponent implements OnInit {
       console.error('User or user ID nicht gefunden.');
     }
   }
+
+  getparkplatzNr (ticketNr: string): string {
+    const parts = ticketNr.split('_');
+    return parts.length > 1 ? parts[1] : '';
+  }
 }

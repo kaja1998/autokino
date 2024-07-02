@@ -69,3 +69,7 @@ button:hover {
   box-sizing: border-box; /* Stellt sicher, dass padding und border in die Breite eingerechnet werden */
   text-align: left;
 }
+
+.film-bold {
+  font-weight: bold;
+}
