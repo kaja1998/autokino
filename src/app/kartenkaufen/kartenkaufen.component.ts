@@ -89,7 +89,7 @@ export class KartenkaufenComponent implements OnInit {
 public fillParkSpots(indices: number[]): void {
   indices.forEach(index => {
     if (index >= 0 && index < this.zerosArray.length) {
-      this.zerosArray[index-1] = 2;
+      this.zerosArray[index] = 2;
     }
   });
 }
