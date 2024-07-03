@@ -3,10 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { FilmService } from '../providers/filmService';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 @Component({
   selector: 'app-filmdetails',
   standalone: true,
+  providers: [
+    { provide: SocketIoModule, useValue: config }
+  ],
   imports: [CommonModule, NgFor,RouterLink],
   templateUrl: './filmdetails.component.html',
   styleUrl: './filmdetails.component.css'
@@ -29,4 +34,5 @@ export class FilmdetailsComponent {
     console.log(this.veranstaltungen)
   });
 }
+
 }

@@ -4,6 +4,7 @@ var app = express();                               // create our app w/ express
 var path = require('path');
 var mysql = require('mysql');
 var cors = require('cors');
+var socket = require('socket.io');
 const string_decoder = require("string_decoder");
 const allowCrossDomain = (req, res, next) => {
       res.header(`Access-Control-Allow-Origin`, `*`);
@@ -11,6 +12,8 @@ const allowCrossDomain = (req, res, next) => {
       res.header(`Access-Control-Allow-Headers`, `Content-Type`);
       next();
 };
+
+
 
 bodyParser = require('body-parser');
 
@@ -27,9 +30,20 @@ app.use(allowCrossDomain);
 app.use(express.static(path.join(__dirname, '/dist/auto-kino/browser')));  //TODO rename to your app-name
 
 // listen (start app with node server.js) ======================================
-app.listen(8080, function () {
+var server = app.listen(8080, function () {
       console.log("App listening on port 8080");
 });
+
+//START websockets
+
+var io = socket(server)
+io.on('connection',(socket)=>{
+  socket.on('goUpdateTicketCounter',(msg)=>{// hier parameter du dummer hs
+      socket.broadcast.emit('updateTicketCounter');
+      console.log(msg)
+  });
+});
+//END websockets
 
 // application -------------------------------------------------------------
 app.get('/', function (req, res) {

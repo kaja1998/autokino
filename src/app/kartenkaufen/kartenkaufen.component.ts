@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
+import { WebSocketService } from '../providers/websocket.service';
 
 @Component({
   selector: 'app-kartenkaufen',
@@ -41,7 +42,7 @@ export class KartenkaufenComponent implements OnInit {
   user: any = "";
 
 
-  constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
+  constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService, public websocketserice: WebSocketService ){
    
 
   }
@@ -135,7 +136,9 @@ public fillParkSpots(indices: number[]): void {
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
+      // this.websocketserice.sendUpdateTicketCounterMessage('nutte')
       this.router.navigate(['/kundenkonto']);
+
     }
   }
 
