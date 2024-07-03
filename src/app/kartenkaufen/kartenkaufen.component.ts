@@ -81,7 +81,7 @@ export class KartenkaufenComponent implements OnInit {
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
       const numberPart = item.split('_')[1];
-      return parseInt(numberPart, 10) - 1;
+      return parseInt(numberPart, 10);
     });
   }
   
@@ -131,6 +131,7 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
+      
       const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString(); // string mit nummer _ nummer
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
