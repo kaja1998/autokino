@@ -81,7 +81,7 @@ export class KartenkaufenComponent implements OnInit {
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
       const numberPart = item.split('_')[1];
-      return parseInt(numberPart, 10) - 1;
+      return parseInt(numberPart, 10);
     });
   }
   
