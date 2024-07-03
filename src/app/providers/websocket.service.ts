@@ -2,21 +2,24 @@
 import { Injectable } from '@angular/core';
 // import { Socket } from 'ngx-socket-io';
 
+import { io } from "socket.io-client"
+const socket = io("ws://localhost:8080")
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
   constructor(/*private socket: Socket*/) {
-    // socket.on('connection',()=>{
-    //   console.log(`connected with socket: ${socket} `)
-    // });
-    // socket.on('updateTicketCounter',()=>{
-    //   console.log(`Koks und Nutten logik `)
-    // });
-
+     console.log('DU F NUTTE')
+      socket.on('connection',()=>{
+        console.log(`connected with socket: ${socket} `)
+      });
+      socket.on('updateTicketCounter',()=>{
+        console.log(`Koks und Nutten logik `)
+      });
+    
   }
 
-  // sendUpdateTicketCounterMessage(msg: string) {
-  //   this.socket.emit('goUpdateTicketCounter', msg);
-  // }
+   sendUpdateTicketCounterMessage(msg: string) {
+    socket.emit('goUpdateTicketCounter', msg);
+   }
 }

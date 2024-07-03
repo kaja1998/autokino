@@ -136,7 +136,7 @@ public fillParkSpots(indices: number[]): void {
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
-      // this.websocketserice.sendUpdateTicketCounterMessage('nutte')
+      this.websocketserice.sendUpdateTicketCounterMessage('nutte')
       this.router.navigate(['/kundenkonto']);
 
     }
