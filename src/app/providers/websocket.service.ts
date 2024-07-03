@@ -8,13 +8,13 @@ const socket = io("ws://localhost:8080")
   providedIn: 'root'
 })
 export class WebSocketService {
-  constructor(/*private socket: Socket*/) {
-     console.log('DU F NUTTE')
+  constructor() {
+     console.log('Provider funktioniert')
       socket.on('connection',()=>{
         console.log(`connected with socket: ${socket} `)
       });
       socket.on('updateTicketCounter',()=>{
-        console.log(`Koks und Nutten logik `)
+        console.log(`send to all dev`)
       });
     
   }

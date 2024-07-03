@@ -50,7 +50,6 @@ export class KartenkaufenComponent implements OnInit {
 
   ngOnInit(): void {
     this.veranstaltungs_nr = this.route.snapshot.paramMap.get('veranstaltungs_nr') ?? '';
-    console.log(this.veranstaltungs_nr+"a")
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
@@ -82,7 +81,7 @@ export class KartenkaufenComponent implements OnInit {
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
       const numberPart = item.split('_')[1];
-      return parseInt(numberPart, 10) - 1;
+      return parseInt(numberPart, 10);
     });
   }
   
@@ -90,7 +89,7 @@ export class KartenkaufenComponent implements OnInit {
 public fillParkSpots(indices: number[]): void {
   indices.forEach(index => {
     if (index >= 0 && index < this.zerosArray.length) {
-      this.zerosArray[index] = 2;
+      this.zerosArray[index-1] = 2;
     }
   });
 }
@@ -136,7 +135,7 @@ public fillParkSpots(indices: number[]): void {
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
-      this.websocketserice.sendUpdateTicketCounterMessage('nutte')
+      this.websocketserice.sendUpdateTicketCounterMessage('test')
       this.router.navigate(['/kundenkonto']);
 
     }
