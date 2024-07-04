@@ -26,7 +26,6 @@ export class FilmdetailsComponent {
     this.filmService.getFilm(this.filmtitel).subscribe(data => {
     this.film = data;
     this.veranstaltungen = this.film[0].veranstaltungs_nummern;
-    console.log(this.veranstaltungen)
   });
 }
 }
