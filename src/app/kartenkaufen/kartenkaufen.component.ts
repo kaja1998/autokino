@@ -23,7 +23,7 @@ export class KartenkaufenComponent implements OnInit {
   public currentIndex: number = 0;
   public ticket: Array<{ ticket_nr: string; veranstaltungs_nr: string; [key: string]: any }> = [];
   public ticket_nr: Array<any> = [];
-
+  
 
   adultTickets: number = 0;
   adultPrice: number = 13;
@@ -41,7 +41,6 @@ export class KartenkaufenComponent implements OnInit {
   veranstaltungs_nr: string = '';
   user: any = "";
 
-
   constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService, public websocketserice: WebSocketService ){
    
 
@@ -53,11 +52,14 @@ export class KartenkaufenComponent implements OnInit {
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
-  
+    
+    
+
     const userString = localStorage.getItem('user');
     if (userString) { // wenn nicht null, dann parse String zurück in ein Objekt
       this.user = JSON.parse(userString);
     }
+    
   
     this.KartenkaufenService.getticket().subscribe(data => {
       this.ticket = this.KartenkaufenService.tickets;
@@ -66,7 +68,15 @@ export class KartenkaufenComponent implements OnInit {
       this.fillParkSpots(this.ticket_nr);
     });
   }
-  
+  public countTwos(): number {
+    let count = 0;
+    for (let num of this.zerosArray) {
+      if (num === 2) {
+        count++;
+      }
+    }
+    return count;
+  }
   public sortAndExtractTicketNr(tickets: Array<{ ticket_nr: string; [key: string]: any }>, veranstaltungs_nr: string): Array<string> {
     return tickets
       .filter(ticket => ticket.ticket_nr.split('_')[0] === veranstaltungs_nr) // Filter nach veranstaltungs_nr
@@ -110,12 +120,12 @@ public fillParkSpots(indices: number[]): void {
 
 
   ticketkaufen(){
-  if(this.isLoggedIn === false){
+  /*if(this.isLoggedIn === false){
     document.getElementById('fehler_a')!.style.display = 'none';
     document.getElementById('fehler_b')!.style.display = 'none';
     document.getElementById('fehler_c')!.style.display = 'none';
     document.getElementById('fehler_d')!.style.display = 'flex';
-  }else if(this.previousIndex === null){
+  }else*/ if(this.previousIndex === null){
       document.getElementById('fehler_a')!.style.display = 'flex';
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'none';
@@ -135,7 +145,9 @@ public fillParkSpots(indices: number[]): void {
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
-      this.websocketserice.sendUpdateTicketCounterMessage('test')
+      
+      this.websocketserice.sendUpdateTicketCounterMessage(60-this.countTwos())
+
       this.router.navigate(['/kundenkonto']);
 
     }

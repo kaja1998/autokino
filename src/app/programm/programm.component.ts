@@ -32,6 +32,10 @@ export class ProgrammComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+
+
     const clearIcon = document.querySelector(".clear-icon") as HTMLElement;
     const searchBar = document.querySelector(".search") as HTMLInputElement;
     const searchIcon = document.querySelector(".search-icon")as HTMLInputElement;

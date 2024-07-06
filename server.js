@@ -38,10 +38,14 @@ var server = app.listen(8080, function () {
 
 var io = socket(server)
 io.on('connection',(socket)=>{
-  socket.on('goUpdateTicketCounter',(msg)=>{// hier parameter du dummer hs
-      socket.broadcast.emit('updateTicketCounter');
-      console.log(msg)
+  socket.on('goUpdateTicketCounter',(counter)=>{// hier parameter du dummer hs
+      io.emit('updateTicketCounter',counter);
+      console.log(counter)
   });
+  socket.on('createConnection',(msg)=>{// hier parameter du dummer hs
+    io.emit('updateTicketCounter');
+    console.log(msg)
+});
 });
 //END websockets
 

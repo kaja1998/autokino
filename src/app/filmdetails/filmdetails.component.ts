@@ -4,6 +4,8 @@ import { FilmService } from '../providers/filmService';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { TicketCounterService } from '../providers/ticket-counter.service';
+
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 @Component({
@@ -21,8 +23,8 @@ export class FilmdetailsComponent {
   filmtitel: string = "";
   film: any = {};
   veranstaltungen: any = {};
-
-  constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
+  public ticketanzahl = 0;
+  constructor(private route: ActivatedRoute, public filmService: FilmService,private ticketCounterService: TicketCounterService ) { 
     
 }
 
@@ -33,6 +35,9 @@ export class FilmdetailsComponent {
     this.veranstaltungen = this.film[0].veranstaltungs_nummern;
     console.log(this.veranstaltungen)
   });
+  this.ticketCounterService.ticketCounter$.subscribe(counter => {
+    this.ticketanzahl = counter;
+  });
+}
 }
 
-}
