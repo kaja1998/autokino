@@ -39,7 +39,8 @@
             <h3>Information</h3>
             <ul>
                 <li><a routerLink="programm">Programm</a></li>
-                <li><a routerLink="login">Kundenkonto</a></li>
+                <li><a *ngIf="!isLoggedIn" routerLink="login">Kundenkonto</a></li>
+              <li><a *ngIf="isLoggedIn" routerLink="kundenkonto">Kundenkonto</a></li>
             </ul>
         </div>
         <div class="footer-column">
