@@ -1,42 +1,44 @@
-import { Component } from '@angular/core';
+// filmdetails.component.ts
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilmService } from '../providers/filmService';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { TicketCounterService } from '../providers/ticket-counter.service';
-
-const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
+import { WebSocketService } from '../providers/websocket.service'; 
 
 @Component({
   selector: 'app-filmdetails',
   standalone: true,
-  providers: [
-    { provide: SocketIoModule, useValue: config }
-  ],
-  imports: [CommonModule, NgFor,RouterLink],
+  providers: [],
+  imports: [CommonModule, NgFor, RouterLink],
   templateUrl: './filmdetails.component.html',
-  styleUrl: './filmdetails.component.css'
+  styleUrls: ['./filmdetails.component.css']
 })
-
-export class FilmdetailsComponent {
+export class FilmdetailsComponent implements OnInit {
   filmtitel: string = "";
   film: any = {};
   veranstaltungen: any = {};
   public ticketanzahl = 0;
-  constructor(private route: ActivatedRoute, public filmService: FilmService,private ticketCounterService: TicketCounterService ) { 
-    
-}
+
+  constructor(
+    private route: ActivatedRoute,
+    public filmService: FilmService,
+    private ticketCounterService: TicketCounterService,
+    private webSocketService: WebSocketService,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.ticketCounterService.ticketCounter$.subscribe(counter => {
+      this.ticketanzahl = counter;
+      this.cdr.detectChanges();
+    });
+  }
 
   ngOnInit(): void {
-    this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? ''
+    this.filmtitel = this.route.snapshot.paramMap.get('filmtitel') ?? '';
     this.filmService.getFilm(this.filmtitel).subscribe(data => {
-    this.film = data;
-    this.veranstaltungen = this.film[0].veranstaltungs_nummern;
-  });
-  this.ticketCounterService.ticketCounter$.subscribe(counter => {
-    this.ticketanzahl = counter;
-  });
+      this.film = data;
+      this.veranstaltungen = this.film[0].veranstaltungs_nummern;
+    });
+  }
 }
-}
-

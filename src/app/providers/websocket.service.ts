@@ -2,36 +2,41 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TicketCounterService } from './ticket-counter.service';
-import { io } from "socket.io-client"
-const socket = io("ws://localhost:8080/")
+import { io } from 'socket.io-client';
+
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
+  private socket;
+
   constructor(private ticketCounterService: TicketCounterService) {
-     console.log('Provider funktioniert')
-      socket.on('connection',()=>{
-        console.log(`connected with socket: ${socket} `)
-      });
-      socket.on('updateTicketCounter',(counter)=>{
-        console.log(`send to all dev`,counter)
-        this.ticketCounterService.updateTicketCounter(counter);
-      });
-    
+    this.socket = io('ws://localhost:8080/');
+
+    this.socket.on('connection', () => {
+      console.log(`connected with socket: ${this.socket.id}`);
+    });
+
+    this.socket.on('updateTicketCounter', (counter: number) => {
+      console.log(`send to all dev`, counter);
+      this.ticketCounterService.updateTicketCounter(counter);
+    });
   }
+
   listenEvent<T>(eventName: string): Observable<T> {
     return new Observable<T>((subscriber) => {
-      socket.on(eventName, (data: T) => {
+      this.socket.on(eventName, (data: T) => {
         subscriber.next(data);
       });
 
       // Cleanup when the subscriber is destroyed
       return () => {
-        socket.off(eventName);
+        this.socket.off(eventName);
       };
     });
   }
-   sendUpdateTicketCounterMessage(counter: number) {
-    socket.emit('goUpdateTicketCounter', counter);
-   }
+
+  sendUpdateTicketCounterMessage(counter: number) {
+    this.socket.emit('goUpdateTicketCounter', counter);
+  }
 }
