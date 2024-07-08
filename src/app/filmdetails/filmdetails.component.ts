@@ -20,6 +20,7 @@ export class FilmdetailsComponent implements OnInit {
   film: any = {};
   veranstaltungen: any = {};
   public ticketanzahl = 0;
+  public veranstaltungs_nr = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,12 @@ export class FilmdetailsComponent implements OnInit {
       this.ticketanzahl = counter;
       this.cdr.detectChanges();
     });
+    this.ticketCounterService.veranstaltungsNr$.subscribe(v_nr => {
+      this.veranstaltungs_nr = v_nr;
+      this.cdr.detectChanges();
+    })
+    console.log(this.ticketanzahl)
+    console.log(this.veranstaltungs_nr)
   }
 
   ngOnInit(): void {

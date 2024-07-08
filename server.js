@@ -38,8 +38,8 @@ var server = app.listen(8080, function () {
 
 var io = socket(server)
 io.on('connection',(socket)=>{
-  socket.on('goUpdateTicketCounter',(counter)=>{
-      io.emit('updateTicketCounter',counter);
+  socket.on('goUpdateTicketCounter',(counter,v_nr)=>{
+      io.emit('updateTicketCounter',counter,v_nr);
       console.log(counter)
   });
   socket.on('createConnection',(msg)=>{

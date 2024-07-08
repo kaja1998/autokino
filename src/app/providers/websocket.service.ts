@@ -17,9 +17,9 @@ export class WebSocketService {
       console.log(`connected with socket: ${this.socket.id}`);
     });
 
-    this.socket.on('updateTicketCounter', (counter: number) => {
+    this.socket.on('updateTicketCounter', (counter: number,v_nr:number) => {
       console.log(`send to all dev`, counter);
-      this.ticketCounterService.updateTicketCounter(counter);
+      this.ticketCounterService.updateTicketCounter(counter,v_nr);
     });
   }
 
@@ -36,7 +36,7 @@ export class WebSocketService {
     });
   }
 
-  sendUpdateTicketCounterMessage(counter: number) {
-    this.socket.emit('goUpdateTicketCounter', counter);
+  sendUpdateTicketCounterMessage(counter: number,v_nr:number) {
+    this.socket.emit('goUpdateTicketCounter', counter,v_nr);
   }
 }

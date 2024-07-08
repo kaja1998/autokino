@@ -146,7 +146,7 @@ public fillParkSpots(indices: number[]): void {
       this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
       
-      this.websocketserice.sendUpdateTicketCounterMessage(60-this.countTwos())
+      this.websocketserice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
 
       this.router.navigate(['/kundenkonto']);
 
@@ -213,17 +213,3 @@ public fillParkSpots(indices: number[]): void {
     }
   }
 }
-
-
-
-/**
- *   -- Brainstorm --
- * 1. Fehlermeldungen unter der Parkplatzauswahl / Push notification ?
- * 2. MySql Ticket_nr zu String oder varchar.
- * 3. Ticket_nr .toString erstellen
- * 4. Check Kunde eingeloggt -> if false = login weiterleiten
- * 5. Kauf erfolgreich -> neue Seite (Kauf erfolgreich message)
- * 6. besetzte Parkplätze auslesen bei aufruf
- * 7. veranstaltungs_nr mit kartenkaufen verknüpfen (Isabelle oder Kaja oder Lasse fragen)
- * 8. web sockets
- */

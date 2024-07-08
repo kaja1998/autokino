@@ -6,9 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TicketCounterService {
   private ticketCounterSource = new BehaviorSubject<number>(0);
+  private veranstaltungsNrSource = new BehaviorSubject<number>(0);
   ticketCounter$ = this.ticketCounterSource.asObservable();
+  veranstaltungsNr$ = this.veranstaltungsNrSource.asObservable();
 
-  updateTicketCounter(counter: number) {
+  updateTicketCounter(counter: number,v_nr:number) {
     this.ticketCounterSource.next(counter);
+    this.veranstaltungsNrSource.next(v_nr);
   }
 }
