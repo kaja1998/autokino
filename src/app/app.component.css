@@ -3,7 +3,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
 header {
-    height: 100px;
+    padding: 10px 0px;
     background-color: black; /*background color*/
     color: white; /*text color*/
     display: flex; /*start flexbox*/
@@ -17,12 +17,12 @@ header {
     float: left;
     overflow: hidden;
   }
-  
+
   .dropdown .dropbtn {
     color: white; /*text color*/
     text-decoration: none; /*untere linie entfernen*/
     font-size: 23px;
-    transition: font-size 0.3s; /*Smooth transition in sekunden*/ 
+    transition: font-size 0.3s; /*Smooth transition in sekunden*/
     border: none;
     outline: none;
     color: white;
@@ -31,11 +31,11 @@ header {
     margin: 0;
     font-family: 'Roboto', sans-serif;
   }
-  
+
   .navbar a:hover, .dropdown:hover .dropbtn {
     font-size: 28px;
   }
-  
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -44,7 +44,7 @@ header {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
-  
+
   .dropdown-content a {
     float: none;
     color: white;
@@ -53,11 +53,11 @@ header {
     display: block;
     text-align: left;
   }
-  
+
   .dropdown-content a:hover {
     background-color: black;
   }
-  
+
   .dropdown:hover .dropdown-content {
     display: block;
   }
@@ -77,8 +77,10 @@ header {
 }
 
 .logo {
-    width: 50%;
+  max-width: 30%;
+  height: auto;
 }
+
 a {/*flex Items*/
     color: white; /*text color*/
     text-decoration: none; /*untere linie entfernen*/
@@ -115,6 +117,12 @@ footer {
 .footer-column {
     flex: 1;
     min-width: 150px;
+}
+
+.footer-column img {
+  max-width: 30%;
+  height: auto;
+  display: block;
 }
 
 .footer-column h2, .footer-column h3 {
