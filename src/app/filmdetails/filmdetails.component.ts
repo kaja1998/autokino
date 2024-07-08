@@ -16,7 +16,6 @@ export class FilmdetailsComponent {
   filmtitel: string = "";
   film: any = {};
   veranstaltungen: any = {};
-
   constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
     
 }
