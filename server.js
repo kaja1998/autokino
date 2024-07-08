@@ -38,11 +38,11 @@ var server = app.listen(8080, function () {
 
 var io = socket(server)
 io.on('connection',(socket)=>{
-  socket.on('goUpdateTicketCounter',(counter)=>{// hier parameter du dummer hs
+  socket.on('goUpdateTicketCounter',(counter)=>{
       io.emit('updateTicketCounter',counter);
       console.log(counter)
   });
-  socket.on('createConnection',(msg)=>{// hier parameter du dummer hs
+  socket.on('createConnection',(msg)=>{
     io.emit('updateTicketCounter');
     console.log(msg)
 });
