@@ -16,8 +16,6 @@ export class FilmdetailsComponent {
   filmtitel: string = "";
   film: any = {};
   veranstaltungen: any = {};
-  trailerpfad: String = "";
-
   constructor(private route: ActivatedRoute, public filmService: FilmService ) { 
     
 }
@@ -28,6 +26,5 @@ export class FilmdetailsComponent {
     this.film = data;
     this.veranstaltungen = this.film[0].veranstaltungs_nummern;
   });
-  this.trailerpfad = this.film[0].trailerpfad;
 }
 }

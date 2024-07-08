@@ -1,11 +1,10 @@
 
 <div class="containerVideo" *ngIf="film && film.length > 0">
-  <video height="720" width="1280" controls>
+  <video autoplay height="720" width="1280" controls volume="0.2">
     <!--<source [src]="film[0].trailerpfad" type="video/mp4"> -->
     <source src="{{film[0].trailerpfad}}" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-  <p>{{film[0].trailerpfad}}</p>
 </div>
     <div class="trenner1"></div>
 
@@ -46,4 +45,3 @@
             </div>
         </div>
     </div>
-    <!-- ../../assets/videos/ChihirosReiseinsZauberlandTrailer.mp4 -->
