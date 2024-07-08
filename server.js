@@ -58,7 +58,7 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "My3qlP@ssword"
+      password: "Password1!"
 });
 
 app.post('/insertticket', function (req, res) {
@@ -95,7 +95,7 @@ app.post('/getusertickets', function (req, res) {
     const query = `
     SELECT
       t.ticket_nr, t.kinder, t.ermaessigte, t.erwachsene, t.veranstaltungs_nr,
-      v.filmtitel, v.datum
+      v.filmtitel, v.datum, v.ort
     FROM
       ticket t
     JOIN
@@ -150,7 +150,7 @@ app.get('/getfilmHighlights', function (req, res) {
     SELECT f.filmtitel, f.beschreibung, f.bildpfad, v.datum
     FROM filme f
     LEFT JOIN veranstaltungen v ON f.filmtitel = v.filmtitel
-    WHERE f.filmtitel IN ("Dune II", "Chihiros Reise ins Zauberland", "Drachenzähmen leicht gemacht")
+    WHERE f.filmtitel IN ("Dune II", "Chihiros Reise ins Zauberland", "Drachenzähmen leicht gemacht", "Minions", "Der Schuh des Manitu", "Transformers")
   `
   con.query(query,
     function (error, results, fields) {

@@ -7,10 +7,9 @@
 
 <header>
     <div class="container-left">
-        <a class="logo" routerLink="/home">HOME</a>
+      <img class="logo" src="assets/images/Autokino_logo.svg" routerLink="/home" alt="Logo">
     </div>
     <div class="container-right">
-        <!-- <a routerLink="/filmdetails">Filmdetails</a> -->
         <a routerLink ="programm">Programm</a>
 
       <div class="dropdown">
@@ -34,13 +33,14 @@
 <footer>
     <div class="footer-container">
         <div class="footer-column">
-            <h2>LOGO</h2>
+          <img src="assets/images/Autokino_logo.svg" alt="Logo">
         </div>
         <div class="footer-column">
             <h3>Information</h3>
             <ul>
                 <li><a routerLink="programm">Programm</a></li>
-                <li><a routerLink="login">Kundenkonto</a></li>
+                <li><a *ngIf="!isLoggedIn" routerLink="login">Kundenkonto</a></li>
+              <li><a *ngIf="isLoggedIn" routerLink="kundenkonto">Kundenkonto</a></li>
             </ul>
         </div>
         <div class="footer-column">
