@@ -292,6 +292,7 @@ app.post('/getFilm', function (req, res) {
                         erscheinungsdatum: row.erscheinungsdatum,
                         besetzung: row.besetzung,
                         fsk: row.fsk,
+                        trailerpfad: row.trailerpfad,
                         veranstaltungs_nummern: row.veranstaltungs_nr ? [{veranstaltungs_nr: row.veranstaltungs_nr}]  : [],
                         veranstaltungen: row.datum ? [{ datum: row.datum }] : []
                       });
