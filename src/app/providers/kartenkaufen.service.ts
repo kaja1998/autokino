@@ -12,7 +12,10 @@ export class KartenkaufenService {
      console.log(ticket_nr,kunden_id,veranstaltungs_nr,erwachsene,ermaessigte,kinder)
      return this.http.post<any>('http://127.0.0.1:8080/insertticket', {ticket_nr,kunden_id,veranstaltungs_nr,erwachsene,ermaessigte,kinder});
    }
-
+   public setplaetze(v_nr:number, platz:number): Observable<any> {
+    console.log(v_nr,platz)
+    return this.http.post<any>('http://127.0.0.1:8080/setplaetze', {v_nr,platz});
+  }
 
    public getticket(): Observable<any> {
     return new Observable(observer => {

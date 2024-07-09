@@ -75,7 +75,19 @@ app.post('/insertticket', function (req, res) {
     res.status(200);
   });
 });
-
+app.post('/setplaetze', function (req, res) {
+  const sql = "UPDATE veranstaltungen SET plaetze = ? WHERE veranstaltungs_nr = ?;";
+  const { platz,v_nr } = req.body;
+  con.query(sql, [platz, v_nr], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500);
+      return;
+    }
+    console.log("capacity changed");
+    res.status(200);
+  });
+});
 app.get('/loadticket', function (req, res) {
   const query = "SELECT * FROM ticket";
   con.query(query, function (error, results) {
