@@ -1,10 +1,11 @@
 
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
 import { WebSocketService } from '../providers/websocket.service';
+import { TicketCounterService } from '../providers/ticket-counter.service';
 
 @Component({
   selector: 'app-kartenkaufen',
@@ -41,8 +42,19 @@ export class KartenkaufenComponent implements OnInit {
   veranstaltungs_nr: string = '';
   user: any = "";
 
-  constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService, public websocketserice: WebSocketService ){
-   
+  constructor(
+    private route: ActivatedRoute,
+    public KartenkaufenService: KartenkaufenService,
+    public router: Router,
+    private authService: LoginAuthenticationService, 
+    public websocketservice: WebSocketService,
+    private ticketCounterService: TicketCounterService,
+    private cdr: ChangeDetectorRef){
+      this.ticketCounterService.plaetzeSource$.subscribe(currentIndex => {
+        this.currentIndex = currentIndex;
+        this.zerosArray[this.currentIndex] = 2;
+        this.cdr.detectChanges();
+      });
 
   }
  
@@ -141,13 +153,14 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
-      const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString(); // string mit nummer _ nummer
+      const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString();
+      console.log(`currentIndex: ${this.currentIndex}`);
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
-      this.zerosArray[this.currentIndex] = 2;
       console.log("Kaufen erfolgreich")
       this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),60-this.countTwos()).subscribe()
-      
-      this.websocketserice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
+      this.websocketservice.sendUpdatePlaetzeMessage(this.currentIndex)
+      this.zerosArray[this.currentIndex] = 2;
+      this.websocketservice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
       this.router.navigate(['/kundenkonto']);
 
     }
@@ -213,3 +226,10 @@ public fillParkSpots(indices: number[]): void {
     }
   }
 }
+
+
+/**
+ * Was muss Implementiert werden?
+ * Wenn Parkplatz gekauft -> WebSocket aktivieren um parkplatz zu aktivieren
+ * 
+ */

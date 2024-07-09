@@ -18,9 +18,14 @@ export class WebSocketService {
     });
 
     this.socket.on('updateTicketCounter', (counter: number,v_nr:number) => {
-      console.log(`send to all dev`, counter);
+      console.log(`send to all filmdetails`, counter);
       this.ticketCounterService.updateTicketCounter(counter,v_nr);
     });
+    this.socket.on('updatePlaetze', (currentIndex: number) => {
+      console.log(`send to all kartenkaufen`, currentIndex);
+      this.ticketCounterService.updatePlaetze(currentIndex);
+    });
+    
   }
 
   listenEvent<T>(eventName: string): Observable<T> {
@@ -38,5 +43,8 @@ export class WebSocketService {
 
   sendUpdateTicketCounterMessage(counter: number,v_nr:number) {
     this.socket.emit('goUpdateTicketCounter', counter,v_nr);
+  }
+  sendUpdatePlaetzeMessage(currentIndex: number) {
+    this.socket.emit('goUpdatePlaetze', currentIndex);
   }
 }

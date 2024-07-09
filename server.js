@@ -42,10 +42,16 @@ io.on('connection',(socket)=>{
       io.emit('updateTicketCounter',counter,v_nr);
       console.log(counter)
   });
+  socket.on('goUpdatePlaetze',(currentIndex)=>{
+    io.emit('updatePlaetze',currentIndex);
+    console.log(currentIndex)
+});
+  
   socket.on('createConnection',(msg)=>{
     io.emit('updateTicketCounter');
     console.log(msg)
 });
+
 });
 //END websockets
 
