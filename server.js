@@ -281,6 +281,7 @@ app.post('/getFilm', function (req, res) {
                     if (film) {
                       film.veranstaltungen.push({ datum: row.datum });
                       film.veranstaltungs_nummern.push({veranstaltungs_nr: row.veranstaltungs_nr});
+                      film.plaetze.push({plaetze: row.plaetze});
                     } else {
                       acc.push({
                         filmtitel: row.filmtitel,
@@ -294,6 +295,7 @@ app.post('/getFilm', function (req, res) {
                         fsk: row.fsk,
                         trailerpfad: row.trailerpfad,
                         veranstaltungs_nummern: row.veranstaltungs_nr ? [{veranstaltungs_nr: row.veranstaltungs_nr}]  : [],
+                        plaetze: row.plaetze ? [{plaetze: row.plaetze}]  : [],
                         veranstaltungen: row.datum ? [{ datum: row.datum }] : []
                       });
                     }

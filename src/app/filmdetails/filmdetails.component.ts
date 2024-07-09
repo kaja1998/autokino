@@ -6,6 +6,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TicketCounterService } from '../providers/ticket-counter.service';
 import { WebSocketService } from '../providers/websocket.service'; 
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-filmdetails',

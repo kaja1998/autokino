@@ -38,7 +38,7 @@
             <div >
               {{ veranstaltung.datum | date: 'dd.MM.yy' }}
               <p>20 Uhr</p>
-              <p>{{ticketanzahl}} Tickets</p>
+              <p>{{film[0].plaetze[j]?.plaetze}} Tickets</p>
               <div class="ticketbutton" *ngIf="j < film[0].veranstaltungs_nummern.length" [routerLink]="['/kartenkaufen', film[0].veranstaltungs_nummern[j]]">
                 <p>Zu den Tickets</p>
               </div>
