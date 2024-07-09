@@ -52,8 +52,9 @@ export class KartenkaufenComponent implements OnInit {
     private cdr: ChangeDetectorRef){
       this.ticketCounterService.plaetzeSource$.subscribe(currentIndex => {
         this.currentIndex = currentIndex;
-        this.zerosArray[this.currentIndex] = 2;
         this.cdr.detectChanges();
+        this.zerosArray[this.currentIndex] = 2;
+        
       });
 
   }
@@ -132,12 +133,12 @@ public fillParkSpots(indices: number[]): void {
 
 
   ticketkaufen(){
-  /*if(this.isLoggedIn === false){
+  if(this.isLoggedIn === false){
     document.getElementById('fehler_a')!.style.display = 'none';
     document.getElementById('fehler_b')!.style.display = 'none';
     document.getElementById('fehler_c')!.style.display = 'none';
     document.getElementById('fehler_d')!.style.display = 'flex';
-  }else*/ if(this.previousIndex === null){
+  }else if(this.previousIndex === null){
       document.getElementById('fehler_a')!.style.display = 'flex';
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'none';
@@ -157,7 +158,7 @@ public fillParkSpots(indices: number[]): void {
       console.log(`currentIndex: ${this.currentIndex}`);
       this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
       console.log("Kaufen erfolgreich")
-      this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),60-this.countTwos()).subscribe()
+      this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe()
       this.websocketservice.sendUpdatePlaetzeMessage(this.currentIndex)
       this.zerosArray[this.currentIndex] = 2;
       this.websocketservice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))

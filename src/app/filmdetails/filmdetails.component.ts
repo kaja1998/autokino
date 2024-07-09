@@ -49,8 +49,6 @@ export class FilmdetailsComponent implements OnInit {
       }
       this.cdr.detectChanges();
     });
-    console.log(this.ticketanzahl);
-    console.log(this.veranstaltungs_nr);
   }
 
   ngOnInit(): void {
