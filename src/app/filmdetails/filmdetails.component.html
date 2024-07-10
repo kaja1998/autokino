@@ -1,9 +1,8 @@
-
-<div *ngIf="film && film.length > 0 && film !== null">
 <div class="containerVideo" *ngIf="film && film.length > 0">
   <video autoplay height="720" width="1280" controls volume="0.2">
     <!--<source [src]="film[0].trailerpfad" type="video/mp4"> -->
-    <source  src="{{film[0].trailerpfad}}" type="video/mp4">
+    <source src="{{film[0].trailerpfad}}" type="video/mp4">
+
     Your browser does not support the video tag.
   </video>
 </div>
