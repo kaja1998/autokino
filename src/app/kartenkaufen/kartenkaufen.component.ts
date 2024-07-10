@@ -133,12 +133,12 @@ public fillParkSpots(indices: number[]): void {
 
 
   ticketkaufen(){
-  if(this.isLoggedIn === false){
+ /** if(this.isLoggedIn === false){
     document.getElementById('fehler_a')!.style.display = 'none';
     document.getElementById('fehler_b')!.style.display = 'none';
     document.getElementById('fehler_c')!.style.display = 'none';
     document.getElementById('fehler_d')!.style.display = 'flex';
-  }else if(this.previousIndex === null){
+  }else */ if(this.previousIndex === null){
       document.getElementById('fehler_a')!.style.display = 'flex';
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'none';
@@ -155,10 +155,28 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
       const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString();
-      console.log(`currentIndex: ${this.currentIndex}`);
-      this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
-      console.log("Kaufen erfolgreich")
-      this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe()
+      // console.log(`currentIndex: ${this.currentIndex}`);
+      this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe({
+    next: (response) => {
+      console.log('Kaufen erfolgreich', response);
+      // Weitere Logik hier, falls erforderlich
+    },
+    error: (error) => {
+      console.error('Error beim Kaufen', error);
+    }
+  });
+
+      // console.log("Kaufen erfolgreich")
+
+      this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe({
+        next: (response) => {
+          console.log('plaetze ', response);
+          // Weitere Logik hier, falls erforderlich
+        },
+        error: (error) => {
+          console.error('Error beim Kaufen', error);
+        }
+      });
       this.websocketservice.sendUpdatePlaetzeMessage(this.currentIndex)
       this.zerosArray[this.currentIndex] = 2;
       this.websocketservice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
