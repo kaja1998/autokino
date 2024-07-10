@@ -64,7 +64,7 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "My3qlP@ssword"
+      password: "Password1!"
 });
 app.post('/insertticket', function (req, res) {
   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES (?, ?, ?, ?, ?, ?)";
@@ -76,7 +76,6 @@ app.post('/insertticket', function (req, res) {
       res.status(500).send({error: 'Database query failed'});
       return;
     }
-    console.log("Records inserted");
     res.status(200).send({message: 'Records inserted'});
   });
 });
@@ -91,7 +90,6 @@ app.post('/setplaetze', function (req, res) {
       res.status(500).send({error: 'Database query failed'});
       return;
     }
-    console.log("Records inserted");
     res.status(200).send({message: 'Records inserted'});
   });
 });
@@ -104,7 +102,6 @@ app.get('/loadticket', function (req, res) {
       res.status(500).send("Error occurred during the query.");
       return;
     }
-    // console.log(results);
     res.status(200).json(results);
   });
 });

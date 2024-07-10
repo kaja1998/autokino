@@ -18,11 +18,9 @@ export class WebSocketService {
     });
 
     this.socket.on('updateTicketCounter', (counter: number,v_nr:number) => {
-      console.log(`send to all filmdetails`, counter);
       this.ticketCounterService.updateTicketCounter(counter,v_nr);
     });
     this.socket.on('updatePlaetze', (currentIndex: number) => {
-      console.log(`send to all kartenkaufen`, currentIndex);
       this.ticketCounterService.updatePlaetze(currentIndex);
     });
     
