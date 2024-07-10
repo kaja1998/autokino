@@ -1,24 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {KundendatenService} from "../providers/kundendaten.service";
-import {NgIf} from "@angular/common";
-import { formatDate } from '@angular/common';
+import {DatePipe, NgIf} from "@angular/common";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LoginAuthenticationService} from "../providers/login-authentication.service";
 import {Router} from "@angular/router";
-import {response} from "express";
+import {User} from "../user/user";
 
 @Component({
   selector: 'app-kundenkonto-bearbeiten',
   standalone: true,
   providers: [KundendatenService],
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [NgIf, ReactiveFormsModule, DatePipe],
   templateUrl: './kundenkonto-bearbeiten.component.html',
   styleUrl: './kundenkonto-bearbeiten.component.css'
 })
 
 export class KundenkontoBearbeitenComponent implements OnInit {
 
-  user: any = "";
+  user: User | null = null;
   isEditing: boolean = false;
   editForm!: FormGroup;
   isFormSubmitted = false;
@@ -37,32 +36,25 @@ export class KundenkontoBearbeitenComponent implements OnInit {
       zahlungsmittel: new FormControl("", [Validators.required, Validators.minLength(22)]),
     });
 
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      this.user = JSON.parse(userString);
-      this.formularBefuellen(); // Anfangswerte in das Formular setzen
-    }
+    this.user = this.loginautService.getCurrentUser();
+    this.formularBefuellen(); // Anfangswerte in das Formular setzen
   }
 
   //Setzt die aktuellen Benutzerdaten in das editForm, wenn der Benutzer bearbeiten klickt
   formularBefuellen(): void {
-    this.editForm.patchValue({
-      vorname: this.user.vorname,
-      nachname: this.user.nachname,
-      strasseUndNr: this.user.strasseUndNr,
-      plz: this.user.plz,
-      stadt: this.user.stadt,
-      geburtsdatum: this.user.geburtsdatum,
-      zahlungsmittel: this.user.zahlungsmittel,
-      email: this.user.email,
-      passwort: this.user.passwort,
-    });
-  }
-
-  formatDate(dateString: string): string {
-    if (!dateString) return ''; // Sicherstellen, dass ein Datum vorhanden ist
-    const date = new Date(dateString);
-    return formatDate(date, 'dd.MM.yyyy', 'en-US'); // Formatierung in DD.MM.YYYY
+    if (this.user) {
+      this.editForm.patchValue({
+        vorname: this.user.vorname,
+        nachname: this.user.nachname,
+        strasseUndNr: this.user.strasseUndNr,
+        plz: this.user.plz,
+        stadt: this.user.stadt,
+        geburtsdatum: this.user.geburtsdatum,
+        zahlungsmittel: this.user.zahlungsmittel,
+        email: this.user.mail,
+        passwort: this.user.passwort,
+      });
+    }
   }
 
   datenBearbeiten(): void {
@@ -70,7 +62,7 @@ export class KundenkontoBearbeitenComponent implements OnInit {
   }
 
   kontoLoeschen(): void {
-    if (confirm('Möchten Sie Ihr Konto wirklich löschen?')) {
+    if (this.user && confirm('Möchten Sie Ihr Konto wirklich löschen?')) {
       this.kundendatenService.deleteKunde(this.user.id).subscribe(response => {
         if (response.success) {
           console.error(response.message);
@@ -86,11 +78,8 @@ export class KundenkontoBearbeitenComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    const userString = localStorage.getItem('user');
-    if (userString) {
-      this.user = JSON.parse(userString);
-      this.formularBefuellen();    //wenn der Benutzer was bearbeitet, dann abbricht und dann wieder auf bearbeiten klickt, sind sonst noch die alten Eingaben des Benutzers im editform
-    }
+    this.user = this.loginautService.getCurrentUser();
+    this.formularBefuellen();    //wenn der Benutzer was bearbeitet, dann abbricht und dann wieder auf bearbeiten klickt, sind sonst noch die alten Eingaben des Benutzers im editform
     this.isEditing = false;   //das editformular wird ausgeblendet
   }
 
@@ -98,27 +87,31 @@ export class KundenkontoBearbeitenComponent implements OnInit {
     this.isFormSubmitted = true;
     if (this.editForm.valid) {
       const formData = this.editForm.value;
-      this.user = {
-        ...this.user,
-        vorname: formData.vorname,
-        nachname: formData.nachname,
-        strasseUndNr: formData.strasseUndNr,
-        plz: formData.plz,
-        stadt: formData.stadt,
-        zahlungsmittel: formData.zahlungsmittel,
-        passwort: formData.passwort,
-      };
-      this.kundendatenService.updateKundendaten(this.user).subscribe(response => {
-        if (response.success) {
-          localStorage.setItem('user', JSON.stringify(this.user));
-          this.isEditing = false;
-          console.log('Kundendaten erfolgreich aktualisiert.');
-        } else {
-          console.error(response.message);
-        }
-      }, error => {
-        console.error('Serverfehler:', error);
-      });
+      if (this.user) {
+        const updatedUser: User = {
+          ...this.user,
+          vorname: formData.vorname,
+          nachname: formData.nachname,
+          strasseUndNr: formData.strasseUndNr,
+          plz: formData.plz,
+          stadt: formData.stadt,
+          geburtsdatum: formData.geburtsdatum,
+          zahlungsmittel: formData.zahlungsmittel,
+          passwort: formData.passwort,
+        };
+        this.kundendatenService.updateKundendaten(updatedUser).subscribe(response => {
+          if (response.success) {
+            this.loginautService.setCurrentUser(updatedUser);
+            this.user = updatedUser;
+            this.isEditing = false;
+            console.log('Kundendaten erfolgreich aktualisiert.');
+          } else {
+            console.error(response.message);
+          }
+        }, error => {
+          console.error('Serverfehler:', error);
+        });
+      }
     } else {
       console.error('Formular ist nicht gültig.');
     }

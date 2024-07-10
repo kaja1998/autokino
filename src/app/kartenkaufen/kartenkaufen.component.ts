@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
+import {User} from "../user/user";
 import { WebSocketService } from '../providers/websocket.service';
 import { TicketCounterService } from '../providers/ticket-counter.service';
 
@@ -40,7 +41,7 @@ export class KartenkaufenComponent implements OnInit {
   sum: number = 0;
   isLoggedIn: Boolean = false;
   veranstaltungs_nr: string = '';
-  user: any = "";
+  user: User | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +50,7 @@ export class KartenkaufenComponent implements OnInit {
     private authService: LoginAuthenticationService, 
     public websocketservice: WebSocketService,
     private ticketCounterService: TicketCounterService,
+    private loginautService: LoginAuthenticationService,
     private cdr: ChangeDetectorRef){
       this.ticketCounterService.plaetzeSource$.subscribe(currentIndex => {
         this.currentIndex = currentIndex;
@@ -56,24 +58,16 @@ export class KartenkaufenComponent implements OnInit {
         this.zerosArray[this.currentIndex] = 2;
         
       });
-
   }
- 
+
 
   ngOnInit(): void {
     this.veranstaltungs_nr = this.route.snapshot.paramMap.get('veranstaltungs_nr') ?? '';
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
-    
-    
 
-    const userString = localStorage.getItem('user');
-    if (userString) { // wenn nicht null, dann parse String zurück in ein Objekt
-      this.user = JSON.parse(userString);
-    }
-    
-  
+    this.user = this.loginautService.getCurrentUser();
     this.KartenkaufenService.getticket().subscribe(data => {
       this.ticket = this.KartenkaufenService.tickets;
       this.ticket_nr = this.sortAndExtractTicketNr(this.ticket, this.veranstaltungs_nr);
@@ -81,6 +75,7 @@ export class KartenkaufenComponent implements OnInit {
       this.fillParkSpots(this.ticket_nr);
     });
   }
+  
   public countTwos(): number {
     let count = 0;
     for (let num of this.zerosArray) {
@@ -90,6 +85,7 @@ export class KartenkaufenComponent implements OnInit {
     }
     return count;
   }
+
   public sortAndExtractTicketNr(tickets: Array<{ ticket_nr: string; [key: string]: any }>, veranstaltungs_nr: string): Array<string> {
     return tickets
       .filter(ticket => ticket.ticket_nr.split('_')[0] === veranstaltungs_nr) // Filter nach veranstaltungs_nr
@@ -100,14 +96,14 @@ export class KartenkaufenComponent implements OnInit {
       })
       .map(ticket => ticket.ticket_nr);
   }
-  
+
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
       const numberPart = item.split('_')[1];
       return parseInt(numberPart, 10);
     });
   }
-  
+
 
 public fillParkSpots(indices: number[]): void {
   indices.forEach(index => {
@@ -154,6 +150,8 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
+
+      if(this.user) {
       const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString();
       this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe({
     next: (response) => {
@@ -164,6 +162,7 @@ public fillParkSpots(indices: number[]): void {
       console.error('Error beim Kaufen', error);
     }
   });
+      }
 
       this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe({
         next: (response) => {
@@ -177,7 +176,6 @@ public fillParkSpots(indices: number[]): void {
       this.zerosArray[this.currentIndex] = 2;
       this.websocketservice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
       this.router.navigate(['/kundenkonto']);
-
     }
   }
 
