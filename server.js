@@ -4,6 +4,7 @@ var app = express();                               // create our app w/ express
 var path = require('path');
 var mysql = require('mysql');
 var cors = require('cors');
+var socket = require('socket.io');
 const string_decoder = require("string_decoder");
 const allowCrossDomain = (req, res, next) => {
       res.header(`Access-Control-Allow-Origin`, `*`);
@@ -11,6 +12,8 @@ const allowCrossDomain = (req, res, next) => {
       res.header(`Access-Control-Allow-Headers`, `Content-Type`);
       next();
 };
+
+
 
 bodyParser = require('body-parser');
 
@@ -27,9 +30,30 @@ app.use(allowCrossDomain);
 app.use(express.static(path.join(__dirname, '/dist/auto-kino/browser')));  //TODO rename to your app-name
 
 // listen (start app with node server.js) ======================================
-app.listen(8080, function () {
+var server = app.listen(8080, function () {
       console.log("App listening on port 8080");
 });
+
+//START websockets
+
+var io = socket(server)
+io.on('connection',(socket)=>{
+  socket.on('goUpdateTicketCounter',(counter,v_nr)=>{
+      io.emit('updateTicketCounter',counter,v_nr);
+      console.log(counter)
+  });
+  socket.on('goUpdatePlaetze',(currentIndex)=>{
+    io.emit('updatePlaetze',currentIndex);
+    console.log(currentIndex)
+});
+  
+  socket.on('createConnection',(msg)=>{
+    io.emit('updateTicketCounter');
+    console.log(msg)
+});
+
+});
+//END websockets
 
 // application -------------------------------------------------------------
 app.get('/', function (req, res) {
@@ -40,9 +64,8 @@ var con = mysql.createConnection({
       host: "127.0.0.1",
       port: "3306",
       user: "root",
-      password: "Password1!"
+      password: "My3qlP@ssword"
 });
-
 app.post('/insertticket', function (req, res) {
   const sql = "INSERT INTO ticket (ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder) VALUES (?, ?, ?, ?, ?, ?)";
   const { ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder } = req.body;
@@ -50,11 +73,26 @@ app.post('/insertticket', function (req, res) {
   con.query(sql, [ticket_nr, kunden_id, veranstaltungs_nr, erwachsene, ermaessigte, kinder], function(err, result) {
     if (err) {
       console.error(err);
-      res.status(500);
+      res.status(500).send({error: 'Database query failed'});
       return;
     }
     console.log("Records inserted");
-    res.status(200);
+    res.status(200).send({message: 'Records inserted'});
+  });
+});
+
+
+app.post('/setplaetze', function (req, res) {
+  const sql = "UPDATE veranstaltungen SET plaetze = ? WHERE veranstaltungs_nr = ?;";
+  const { platz, v_nr } = req.body;
+  con.query(sql, [platz, v_nr], function(err, result) {
+    if (err) {
+      console.error(err);
+      res.status(500).send({error: 'Database query failed'});
+      return;
+    }
+    console.log("Records inserted");
+    res.status(200).send({message: 'Records inserted'});
   });
 });
 
@@ -263,6 +301,7 @@ app.post('/getFilm', function (req, res) {
                     if (film) {
                       film.veranstaltungen.push({ datum: row.datum });
                       film.veranstaltungs_nummern.push({veranstaltungs_nr: row.veranstaltungs_nr});
+                      film.plaetze.push({plaetze: row.plaetze});
                     } else {
                       acc.push({
                         filmtitel: row.filmtitel,
@@ -276,6 +315,7 @@ app.post('/getFilm', function (req, res) {
                         fsk: row.fsk,
                         trailerpfad: row.trailerpfad,
                         veranstaltungs_nummern: row.veranstaltungs_nr ? [{veranstaltungs_nr: row.veranstaltungs_nr}]  : [],
+                        plaetze: row.plaetze ? [{plaetze: row.plaetze}]  : [],
                         veranstaltungen: row.datum ? [{ datum: row.datum }] : []
                       });
                     }
