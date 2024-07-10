@@ -40,16 +40,13 @@ var io = socket(server)
 io.on('connection',(socket)=>{
   socket.on('goUpdateTicketCounter',(counter,v_nr)=>{
       io.emit('updateTicketCounter',counter,v_nr);
-      console.log(counter)
   });
   socket.on('goUpdatePlaetze',(currentIndex)=>{
     io.emit('updatePlaetze',currentIndex);
-    console.log(currentIndex)
 });
   
   socket.on('createConnection',(msg)=>{
     io.emit('updateTicketCounter');
-    console.log(msg)
 });
 
 });
