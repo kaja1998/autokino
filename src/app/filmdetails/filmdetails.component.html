@@ -1,4 +1,3 @@
-
 <div class="containerVideo" *ngIf="film && film.length > 0">
   <video autoplay height="720" width="1280" controls volume="0.2">
     <!--<source [src]="film[0].trailerpfad" type="video/mp4"> -->
@@ -7,8 +6,7 @@
   </video>
 </div>
     <div class="trenner1"></div>
-
-    <div class="container">
+    <div class="container" *ngIf="film && film.length > 0">
         <h2 class="filmtitel">{{filmtitel}}</h2>
         <div class="filmInformation">
             <div class="spalte1"><img src="{{film[0].bildpfad}}" alt="Nichts Gefunden" height="450" length="300"><p class = "fsk">FSK {{film[0].fsk}}</p></div>
@@ -32,13 +30,13 @@
         <div></div>
     </div>
 
-    <div class="vorstellungszeiten">
+    <div class="vorstellungszeiten" *ngIf="film && film.length > 0">
 
         <div class="vorstellung" *ngFor="let veranstaltung of film[0].veranstaltungen; let j = index">
             <div >
               {{ veranstaltung.datum | date: 'dd.MM.yy' }}
               <p>20 Uhr</p>
-              <p>60 Tickets</p>
+              <p>{{film[0].plaetze[j]?.plaetze}} Tickets</p>
               <div class="ticketbutton" *ngIf="j < film[0].veranstaltungs_nummern.length" [routerLink]="['/kartenkaufen', film[0].veranstaltungs_nummern[j]]">
                 <p>Zu den Tickets</p>
               </div>

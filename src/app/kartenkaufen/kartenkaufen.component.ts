@@ -1,10 +1,12 @@
 
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
 import {User} from "../user/user";
+import { WebSocketService } from '../providers/websocket.service';
+import { TicketCounterService } from '../providers/ticket-counter.service';
 
 @Component({
   selector: 'app-kartenkaufen',
@@ -23,7 +25,7 @@ export class KartenkaufenComponent implements OnInit {
   public currentIndex: number = 0;
   public ticket: Array<{ ticket_nr: string; veranstaltungs_nr: string; [key: string]: any }> = [];
   public ticket_nr: Array<any> = [];
-
+  
 
   adultTickets: number = 0;
   adultPrice: number = 13;
@@ -41,28 +43,47 @@ export class KartenkaufenComponent implements OnInit {
   veranstaltungs_nr: string = '';
   user: User | null = null;
 
-
-  constructor(private route: ActivatedRoute, private loginautService: LoginAuthenticationService, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
-
-
+  constructor(
+    private route: ActivatedRoute,
+    public KartenkaufenService: KartenkaufenService,
+    public router: Router,
+    private authService: LoginAuthenticationService, 
+    public websocketservice: WebSocketService,
+    private ticketCounterService: TicketCounterService,
+    private loginautService: LoginAuthenticationService,
+    private cdr: ChangeDetectorRef){
+      this.ticketCounterService.plaetzeSource$.subscribe(currentIndex => {
+        this.currentIndex = currentIndex;
+        this.cdr.detectChanges();
+        this.zerosArray[this.currentIndex] = 2;
+        
+      });
   }
 
 
   ngOnInit(): void {
     this.veranstaltungs_nr = this.route.snapshot.paramMap.get('veranstaltungs_nr') ?? '';
-    console.log(this.veranstaltungs_nr+"a")
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
 
     this.user = this.loginautService.getCurrentUser();
-
     this.KartenkaufenService.getticket().subscribe(data => {
       this.ticket = this.KartenkaufenService.tickets;
       this.ticket_nr = this.sortAndExtractTicketNr(this.ticket, this.veranstaltungs_nr);
       this.ticket_nr = this.cutTicket_nr(this.ticket_nr);
       this.fillParkSpots(this.ticket_nr);
     });
+  }
+  
+  public countTwos(): number {
+    let count = 0;
+    for (let num of this.zerosArray) {
+      if (num === 2) {
+        count++;
+      }
+    }
+    return count;
   }
 
   public sortAndExtractTicketNr(tickets: Array<{ ticket_nr: string; [key: string]: any }>, veranstaltungs_nr: string): Array<string> {
@@ -129,13 +150,32 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
-      if (this.user) {
-        const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' + this.currentIndex.toString(); // string mit nummer _ nummer
-        this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe()
-        this.zerosArray[this.currentIndex] = 2;
-        console.log("Kaufen erfolgreich")
-        this.router.navigate(['/kundenkonto']);
+
+      if(this.user) {
+      const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString();
+      this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe({
+    next: (response) => {
+      console.log('Kaufen erfolgreich', response);
+      // Weitere Logik hier, falls erforderlich
+    },
+    error: (error) => {
+      console.error('Error beim Kaufen', error);
+    }
+  });
       }
+
+      this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe({
+        next: (response) => {
+          console.log('plaetze ', response);
+        },
+        error: (error) => {
+          console.error('Error beim Kaufen', error);
+        }
+      });
+      this.websocketservice.sendUpdatePlaetzeMessage(this.currentIndex)
+      this.zerosArray[this.currentIndex] = 2;
+      this.websocketservice.sendUpdateTicketCounterMessage(60-this.countTwos(),parseInt(this.veranstaltungs_nr))
+      this.router.navigate(['/kundenkonto']);
     }
   }
 
@@ -145,7 +185,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.adultPriceDisplay = this.adultTickets * this.adultPrice;
       this.sum = this.sum + this.adultPrice;
-      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
+      // console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
     }
   }
 
@@ -155,7 +195,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets--;
       this.adultPriceDisplay = this.adultPriceDisplay - this.adultPrice;
       this.sum = this.sum - this.adultPrice;
-      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -165,7 +205,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.discountedPriceDisplay = this.discountedTickets * this.discountedPrice;
       this.sum = this.sum + this.discountedPrice;
-      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -175,7 +215,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets--;
       this.discountedPriceDisplay = this.discountedPriceDisplay - this.discountedPrice;
       this.sum = this.sum - this.discountedPrice;
-      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -185,7 +225,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.childPriceDisplay = this.childTickets * this.childPrice;
       this.sum = this.sum + this.childPrice;
-      console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -201,15 +241,8 @@ public fillParkSpots(indices: number[]): void {
 }
 
 
-
 /**
- *   -- Brainstorm --
- * 1. Fehlermeldungen unter der Parkplatzauswahl / Push notification ?
- * 2. MySql Ticket_nr zu String oder varchar.
- * 3. Ticket_nr .toString erstellen
- * 4. Check Kunde eingeloggt -> if false = login weiterleiten
- * 5. Kauf erfolgreich -> neue Seite (Kauf erfolgreich message)
- * 6. besetzte Parkplätze auslesen bei aufruf
- * 7. veranstaltungs_nr mit kartenkaufen verknüpfen (Isabelle oder Kaja oder Lasse fragen)
- * 8. web sockets
+ * Was muss Implementiert werden?
+ * Wenn Parkplatz gekauft -> WebSocket aktivieren um parkplatz zu aktivieren
+ * 
  */

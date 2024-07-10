@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {LoginAuthenticationService} from "./providers/login-authentication.service";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {Observable} from "rxjs";
+import { WebSocketService } from './providers/websocket.service'; 
 
 
 
@@ -20,12 +21,19 @@ import {Observable} from "rxjs";
 export class AppComponent implements OnInit {
   title = 'auto-kino';
   isLoggedIn: Boolean = false;
-
+  messages: string[] = [];
+  message: string = '';
   //Wenn ein Link geklickt wird, scrollt die Website bis nach oben, im Footer sonst mega nervig
-  constructor(private router: Router, private authService: LoginAuthenticationService) {
+  constructor(private router: Router, private authService: LoginAuthenticationService, private websocketserice: WebSocketService ) {
   }
 
   ngOnInit() {
+    
+    this.websocketserice.listenEvent<string>('message').subscribe((message) => {
+      this.messages.push(message);
+    });
+
+
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
