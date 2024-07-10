@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {KundendatenService} from "../providers/kundendaten.service";
+import {User} from "../user/user";
+import {LoginAuthenticationService} from "../providers/login-authentication.service";
 
 @Component({
   selector: 'app-kundenkonto',
@@ -10,27 +12,25 @@ import {KundendatenService} from "../providers/kundendaten.service";
   templateUrl: './kundenkonto.component.html',
   styleUrl: './kundenkonto.component.css'
 })
+
 export class KundenkontoComponent implements OnInit {
 
-  user: any = "";
+  user: User | null = null;
   tickets: any[] = [];
 
-  constructor(private kundendatenService: KundendatenService) {}
+  constructor(private kundendatenService: KundendatenService, private loginautService: LoginAuthenticationService) {}
 
   ngOnInit(): void {
-    const userString = localStorage.getItem('user');
-    if (userString) {     //wenn nicht null, dann parse String zurück in ein Objekt
-      this.user = JSON.parse(userString);
-    }
+    this.user = this.loginautService.getCurrentUser();
 
     if (this.user && this.user.id) {  //stellt sicher, dass user und die id existieren
       this.kundendatenService.getUserTickets(this.user.id).subscribe(
-          (data: any[]) => {
-            this.tickets = data;
-          },
-          error => {
-            console.error('Error beim Laden der Tickets:', error);
-          }
+        (data: any[]) => {
+          this.tickets = data;
+        },
+        error => {
+          console.error('Error beim Laden der Tickets:', error);
+        }
       );
     } else {
       console.error('User or user ID nicht gefunden.');

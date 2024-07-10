@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { KartenkaufenService } from '../providers/kartenkaufen.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginAuthenticationService } from '../providers/login-authentication.service';
+import {User} from "../user/user";
 
 @Component({
   selector: 'app-kartenkaufen',
@@ -38,14 +39,14 @@ export class KartenkaufenComponent implements OnInit {
   sum: number = 0;
   isLoggedIn: Boolean = false;
   veranstaltungs_nr: string = '';
-  user: any = "";
+  user: User | null = null;
 
 
-  constructor(private route: ActivatedRoute, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
-   
+  constructor(private route: ActivatedRoute, private loginautService: LoginAuthenticationService, public KartenkaufenService: KartenkaufenService,public router: Router,private authService: LoginAuthenticationService){
+
 
   }
- 
+
 
   ngOnInit(): void {
     this.veranstaltungs_nr = this.route.snapshot.paramMap.get('veranstaltungs_nr') ?? '';
@@ -53,12 +54,9 @@ export class KartenkaufenComponent implements OnInit {
     this.authService.isUserLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
-  
-    const userString = localStorage.getItem('user');
-    if (userString) { // wenn nicht null, dann parse String zurück in ein Objekt
-      this.user = JSON.parse(userString);
-    }
-  
+
+    this.user = this.loginautService.getCurrentUser();
+
     this.KartenkaufenService.getticket().subscribe(data => {
       this.ticket = this.KartenkaufenService.tickets;
       this.ticket_nr = this.sortAndExtractTicketNr(this.ticket, this.veranstaltungs_nr);
@@ -66,7 +64,7 @@ export class KartenkaufenComponent implements OnInit {
       this.fillParkSpots(this.ticket_nr);
     });
   }
-  
+
   public sortAndExtractTicketNr(tickets: Array<{ ticket_nr: string; [key: string]: any }>, veranstaltungs_nr: string): Array<string> {
     return tickets
       .filter(ticket => ticket.ticket_nr.split('_')[0] === veranstaltungs_nr) // Filter nach veranstaltungs_nr
@@ -77,14 +75,14 @@ export class KartenkaufenComponent implements OnInit {
       })
       .map(ticket => ticket.ticket_nr);
   }
-  
+
   public cutTicket_nr(inputArray: string[]): number[] {
     return inputArray.map(item => {
       const numberPart = item.split('_')[1];
       return parseInt(numberPart, 10);
     });
   }
-  
+
 
 public fillParkSpots(indices: number[]): void {
   indices.forEach(index => {
@@ -131,11 +129,13 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_c')!.style.display = 'flex';
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
-      const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString(); // string mit nummer _ nummer
-      this.KartenkaufenService.setticket(jointTicket_nr,this.user.id,parseInt(this.veranstaltungs_nr),this.adultTickets,this.discountedTickets,this.childTickets).subscribe()
-      this.zerosArray[this.currentIndex] = 2;
-      console.log("Kaufen erfolgreich")
-      this.router.navigate(['/kundenkonto']);
+      if (this.user) {
+        const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' + this.currentIndex.toString(); // string mit nummer _ nummer
+        this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe()
+        this.zerosArray[this.currentIndex] = 2;
+        console.log("Kaufen erfolgreich")
+        this.router.navigate(['/kundenkonto']);
+      }
     }
   }
 
