@@ -133,12 +133,12 @@ public fillParkSpots(indices: number[]): void {
 
 
   ticketkaufen(){
- /** if(this.isLoggedIn === false){
+  if(this.isLoggedIn === false){
     document.getElementById('fehler_a')!.style.display = 'none';
     document.getElementById('fehler_b')!.style.display = 'none';
     document.getElementById('fehler_c')!.style.display = 'none';
     document.getElementById('fehler_d')!.style.display = 'flex';
-  }else */ if(this.previousIndex === null){
+  }else if(this.previousIndex === null){
       document.getElementById('fehler_a')!.style.display = 'flex';
       document.getElementById('fehler_b')!.style.display = 'none';
       document.getElementById('fehler_c')!.style.display = 'none';
@@ -155,7 +155,6 @@ public fillParkSpots(indices: number[]): void {
       document.getElementById('fehler_d')!.style.display = 'none';
     }else{
       const jointTicket_nr: string = this.veranstaltungs_nr.toString() + '_' +  this.currentIndex.toString();
-      // console.log(`currentIndex: ${this.currentIndex}`);
       this.KartenkaufenService.setticket(jointTicket_nr, this.user.id, parseInt(this.veranstaltungs_nr), this.adultTickets, this.discountedTickets, this.childTickets).subscribe({
     next: (response) => {
       console.log('Kaufen erfolgreich', response);
@@ -166,12 +165,9 @@ public fillParkSpots(indices: number[]): void {
     }
   });
 
-      // console.log("Kaufen erfolgreich")
-
       this.KartenkaufenService.setplaetze(parseInt(this.veranstaltungs_nr),59-this.countTwos()).subscribe({
         next: (response) => {
           console.log('plaetze ', response);
-          // Weitere Logik hier, falls erforderlich
         },
         error: (error) => {
           console.error('Error beim Kaufen', error);
@@ -191,7 +187,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.adultPriceDisplay = this.adultTickets * this.adultPrice;
       this.sum = this.sum + this.adultPrice;
-      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
+      // console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}, ${this.sum}`);
     }
   }
 
@@ -201,7 +197,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets--;
       this.adultPriceDisplay = this.adultPriceDisplay - this.adultPrice;
       this.sum = this.sum - this.adultPrice;
-      console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Erwachsene: ${this.adultTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -211,7 +207,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.discountedPriceDisplay = this.discountedTickets * this.discountedPrice;
       this.sum = this.sum + this.discountedPrice;
-      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -221,7 +217,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets--;
       this.discountedPriceDisplay = this.discountedPriceDisplay - this.discountedPrice;
       this.sum = this.sum - this.discountedPrice;
-      console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Ermäßigt: ${this.discountedTickets}, Total: ${this.totalTickets}`);
     }
   }
 
@@ -231,7 +227,7 @@ public fillParkSpots(indices: number[]): void {
       this.totalTickets++;
       this.childPriceDisplay = this.childTickets * this.childPrice;
       this.sum = this.sum + this.childPrice;
-      console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
+      // console.log(`Kinder: ${this.childTickets}, Total: ${this.totalTickets}`);
     }
   }
 
