@@ -239,10 +239,3 @@ public fillParkSpots(indices: number[]): void {
     }
   }
 }
-
-
-/**
- * Was muss Implementiert werden?
- * Wenn Parkplatz gekauft -> WebSocket aktivieren um parkplatz zu aktivieren
- * 
- */
