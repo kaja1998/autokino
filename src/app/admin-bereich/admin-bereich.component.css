@@ -1,0 +1,43 @@
+hr {/*Trennlinie*/
+    border: 0;
+    border-top: 1px solid white;
+    width: 20%; /* Adjust the width as needed */
+    margin-left: 0px;
+}
+
+.dashboard-title {
+    font-size: 32px;
+    margin-left: 2%;
+    margin-top: 5%;
+}
+
+.optionen{
+    display: flex;
+    flex-direction: column;
+}
+
+#filmeBearbeiten{
+    border-radius: 2%;
+    border-color: white;
+    border: solid;
+    justify-content: space-evenly;
+    padding: 1%;
+}
+
+#ticketStornieren{
+    border-radius: 2%;
+    border-color: white;
+    border: solid;
+    justify-content: space-evenly;
+    padding: 1%;
+}
+
+#accountErstellen{
+    border-radius: 2%;
+    border-color: white;
+    border: solid;
+    justify-content: space-evenly;
+    padding: 1%;
+}
+
+
