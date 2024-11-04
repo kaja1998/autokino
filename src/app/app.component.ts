@@ -3,7 +3,6 @@ import {NavigationEnd, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {LoginAuthenticationService} from "./providers/login-authentication.service";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {Observable} from "rxjs";
 import { WebSocketService } from './providers/websocket.service'; 
 
 
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit {
   isLoggedIn: Boolean = false;
   messages: string[] = [];
   message: string = '';
-  //Wenn ein Link geklickt wird, scrollt die Website bis nach oben, im Footer sonst mega nervig
   constructor(private router: Router, private authService: LoginAuthenticationService, private websocketserice: WebSocketService ) {
   }
 
@@ -38,6 +36,8 @@ export class AppComponent implements OnInit {
       this.isLoggedIn = loggedIn;
     });
 
+    
+//Wenn ein Link geklickt wird, scrollt die Website bis nach oben, im Footer 
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

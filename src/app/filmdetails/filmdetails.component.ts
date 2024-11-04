@@ -5,14 +5,9 @@ import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TicketCounterService } from '../providers/ticket-counter.service';
 import { WebSocketService } from '../providers/websocket.service'; 
-import { combineLatest } from 'rxjs';
 
 interface Veranstaltung {
   veranstaltungs_nr: number;
-}
-
-interface Platz {
-  plaetze: number;
 }
 
 @Component({
